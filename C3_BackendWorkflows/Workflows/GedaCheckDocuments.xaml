@@ -1,0 +1,742 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GedaCheckDocuments"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="In_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="Ín_GedaBrowser" Type="InArgument(ui:Browser)" />
+    <x:Property Name="In_GedaURL" Type="InArgument(x:String)" />
+    <x:Property Name="In_TrackingNo" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>GedaCheckDocuments_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Database</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="GedaCheckDocuments" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="IsTrackingNoExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsDocsExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsDocsWindowExist" />
+      <Variable x:TypeArguments="x:String" Name="TrackingNo" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTrackingNo" />
+      <Variable x:TypeArguments="x:String" Name="DocsURL" />
+      <Variable x:TypeArguments="ui:Browser" Name="GedaBrwsr" />
+    </Flowchart.Variables>
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+        <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Geda Check Documents started.&quot;]" />
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_17">
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[TrackingNo]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[In_TrackingNo]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                <ui:UiElementExists DisplayName="Element Exists 'TrackingNumber'" Exists="[IsTrackingNoExist]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fe859f09b448ed180b25fe170cf856d4" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='INPUT' rowName=' Tracking Number' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <FlowStep.Next>
+                  <FlowDecision x:Name="__ReferenceID4" Condition="[IsTrackingNoExist]" DisplayName="Flow Decision" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+                    <FlowDecision.True>
+                      <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into 'Tracking Number'" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="True" Text="[TrackingNo]">
+                          <ui:TypeInto.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fe859f09b448ed180b25fe170cf856d4" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='INPUT' rowName=' Tracking Number' /&gt;" WaitForReady="COMPLETE" />
+                          </ui:TypeInto.Target>
+                        </ui:TypeInto>
+                        <FlowStep.Next>
+                          <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Get Tracking Number'" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="9d23f06bc1aa3fca33d6e511a052392d" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='INPUT' aaname='Get Tracking Number' /&gt;" WaitForReady="COMPLETE" />
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <FlowStep.Next>
+                              <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                                <ui:UiElementExists DisplayName="Element Exists 'Docs'" Exists="[IsDocsExist]" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="0eb3bbc38d6e1d7e929c414aac786227" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='A' aaname='Docs' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                                <FlowStep.Next>
+                                  <FlowDecision x:Name="__ReferenceID7" Condition="[IsDocsExist]" DisplayName="Flow Decision" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                                    <FlowDecision.True>
+                                      <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Docs'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="0eb3bbc38d6e1d7e929c414aac786227" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='A' aaname='Docs' /&gt;" WaitForReady="COMPLETE" />
+                                          </ui:Click.Target>
+                                        </ui:Click>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_10">
+                                            <ui:UiElementExists DisplayName="Element Exists 'Docs Window'" Exists="[IsDocsWindowExist]" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                                              <ui:UiElementExists.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fc3457425de4fd685ba54ddd8c399ae7" Selector="&lt;wnd app='iexplore.exe' cls='IEFrame' title='Docs*' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
+                                              </ui:UiElementExists.Target>
+                                            </ui:UiElementExists>
+                                            <FlowStep.Next>
+                                              <FlowDecision x:Name="__ReferenceID12" Condition="[IsDocsWindowExist]" DisplayName="Flow Decision" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+                                                <FlowDecision.True>
+                                                  <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_11">
+                                                    <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'Docs Window URL'" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                                                      <ui:GetValue.Target>
+                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="73d082327a9634233c6dfb89a6cede93" Selector="&lt;wnd app='iexplore.exe' title='Docs*' /&gt;&lt;wnd title='Navigation Bar' aaname='Navigation Bar' /&gt;&lt;wnd title='Address Bar' aaname='Address Bar' /&gt;&lt;wnd cls='AddressDisplay Control' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
+                                                      </ui:GetValue.Target>
+                                                      <ui:GetValue.Value>
+                                                        <OutArgument x:TypeArguments="x:String">[DocsURL]</OutArgument>
+                                                      </ui:GetValue.Value>
+                                                    </ui:GetValue>
+                                                    <FlowStep.Next>
+                                                      <FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_19">
+                                                        <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Insert into Tracking Table - Execute Non Query" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" ProviderName="System.Data.SqlClient" Sql="INSERT INTO [dbo].[geda_notifications] ([case_id],[notifications],[creation_date],[modification_date],[retrieveurl]) VALUES(@var1,@var2,@var3,@var4,@var5)" ConnectionString="[In_ConnectionString]">
+                                                          <ui:ExecuteNonQuery.Parameters>
+                                                            <InArgument x:TypeArguments="x:String" x:Key="var1">[In_TransactionItem("case_id").ToString]</InArgument>
+                                                            <InArgument x:TypeArguments="x:String" x:Key="var2">Docs checked successfully.</InArgument>
+                                                            <InArgument x:TypeArguments="s:DateTime" x:Key="var3">[DateTime.Now]</InArgument>
+                                                            <InArgument x:TypeArguments="s:DateTime" x:Key="var4">[DateTime.Now]</InArgument>
+                                                            <InArgument x:TypeArguments="x:String" x:Key="var5">[DocsURL]</InArgument>
+                                                          </ui:ExecuteNonQuery.Parameters>
+                                                        </ui:ExecuteNonQuery>
+                                                        <FlowStep.Next>
+                                                          <FlowStep x:Name="__ReferenceID17" sap2010:WorkflowViewState.IdRef="FlowStep_20">
+                                                            <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Geda Check Documents - Execute Non Query" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" ProviderName="System.Data.SqlClient" Sql="update bot_trigger SET flag='1' WHERE case_id=@var1 AND bot_trigger=@var2" ConnectionString="[In_ConnectionString]">
+                                                              <ui:ExecuteNonQuery.Parameters>
+                                                                <InArgument x:TypeArguments="x:String" x:Key="var1">[In_TransactionItem("case_id").ToString]</InArgument>
+                                                                <InArgument x:TypeArguments="x:String" x:Key="var2">[In_TransactionItem("bot_trigger").ToString]</InArgument>
+                                                              </ui:ExecuteNonQuery.Parameters>
+                                                            </ui:ExecuteNonQuery>
+                                                            <FlowStep.Next>
+                                                              <FlowStep x:Name="__ReferenceID21" sap2010:WorkflowViewState.IdRef="FlowStep_27">
+                                                                <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'iexplore.exe Docs'" sap2010:WorkflowViewState.IdRef="CloseWindow_1" InformativeScreenshot="e22114ac9c8fbc293a5cb12151b2f79a" Selector="&lt;wnd app='iexplore.exe' cls='IEFrame' title='Docs - Internet Explorer' /&gt;" WaitForReady="COMPLETE" />
+                                                                <FlowStep.Next>
+                                                                  <FlowStep x:Name="__ReferenceID20" sap2010:WorkflowViewState.IdRef="FlowStep_25">
+                                                                    <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Browser="[Ín_GedaBrowser]" BrowserType="IE" DisplayName="Attach Browser" sap2010:WorkflowViewState.IdRef="BrowserScope_1" UiBrowser="[GedaBrwsr]">
+                                                                      <ui:BrowserScope.Body>
+                                                                        <ActivityAction x:TypeArguments="x:Object">
+                                                                          <ActivityAction.Argument>
+                                                                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                                          </ActivityAction.Argument>
+                                                                          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                                                                            <ui:NavigateTo Browser="[GedaBrwsr]" DisplayName="Navigate To" sap2010:WorkflowViewState.IdRef="NavigateTo_2" Url="[In_GedaURL]" />
+                                                                          </Sequence>
+                                                                        </ActivityAction>
+                                                                      </ui:BrowserScope.Body>
+                                                                    </ui:BrowserScope>
+                                                                    <FlowStep.Next>
+                                                                      <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_13">
+                                                                        <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Geda Check Documents ended.&quot;]" />
+                                                                      </FlowStep>
+                                                                    </FlowStep.Next>
+                                                                  </FlowStep>
+                                                                </FlowStep.Next>
+                                                              </FlowStep>
+                                                            </FlowStep.Next>
+                                                          </FlowStep>
+                                                        </FlowStep.Next>
+                                                      </FlowStep>
+                                                    </FlowStep.Next>
+                                                  </FlowStep>
+                                                </FlowDecision.True>
+                                                <FlowDecision.False>
+                                                  <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                                                    <Throw DisplayName="Throw - Docs Window not exist" Exception="[new Exception(&quot;Docs Window not exist.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                                                  </FlowStep>
+                                                </FlowDecision.False>
+                                              </FlowDecision>
+                                            </FlowStep.Next>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowDecision.True>
+                                    <FlowDecision.False>
+                                      <FlowStep x:Name="__ReferenceID18" sap2010:WorkflowViewState.IdRef="FlowStep_24">
+                                        <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Geda Check Documents - Execute Non Query" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" ProviderName="System.Data.SqlClient" Sql="update bot_trigger SET flag='1' WHERE case_id=@var1 AND bot_trigger=@var2" ConnectionString="[In_ConnectionString]">
+                                          <ui:ExecuteNonQuery.Parameters>
+                                            <InArgument x:TypeArguments="x:String" x:Key="var1">[In_TransactionItem("case_id").ToString]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="var2">[In_TransactionItem("bot_trigger").ToString]</InArgument>
+                                          </ui:ExecuteNonQuery.Parameters>
+                                        </ui:ExecuteNonQuery>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID19" sap2010:WorkflowViewState.IdRef="FlowStep_23">
+                                            <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Insert into Tracking Table - Execute Non Query" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_5" ProviderName="System.Data.SqlClient" Sql="INSERT INTO [dbo].[geda_notifications] ([case_id],[notifications],[creation_date],[modification_date]) VALUES(@var1,@var2,@var3,@var4)" ConnectionString="[In_ConnectionString]">
+                                              <ui:ExecuteNonQuery.Parameters>
+                                                <InArgument x:TypeArguments="x:String" x:Key="var1">[In_TransactionItem("case_id").ToString]</InArgument>
+                                                <InArgument x:TypeArguments="x:String" x:Key="var2">Docs not available.</InArgument>
+                                                <InArgument x:TypeArguments="s:DateTime" x:Key="var3">[DateTime.Now]</InArgument>
+                                                <InArgument x:TypeArguments="s:DateTime" x:Key="var4">[DateTime.Now]</InArgument>
+                                              </ui:ExecuteNonQuery.Parameters>
+                                            </ui:ExecuteNonQuery>
+                                            <FlowStep.Next>
+                                              <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                                <Throw DisplayName="Throw - Docs link not exist" Exception="[new Exception(&quot;Docs link not exist.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                              </FlowStep>
+                                            </FlowStep.Next>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowDecision.False>
+                                  </FlowDecision>
+                                </FlowStep.Next>
+                              </FlowStep>
+                            </FlowStep.Next>
+                          </FlowStep>
+                        </FlowStep.Next>
+                      </FlowStep>
+                    </FlowDecision.True>
+                    <FlowDecision.False>
+                      <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+                        <Throw DisplayName="Throw - Tracking Number field not exist" Exception="[new Exception(&quot;Tracking Number field not exist.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                      </FlowStep>
+                    </FlowDecision.False>
+                  </FlowDecision>
+                </FlowStep.Next>
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
+    <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID10</x:Reference>
+    <x:Reference>__ReferenceID11</x:Reference>
+    <x:Reference>__ReferenceID12</x:Reference>
+    <x:Reference>__ReferenceID13</x:Reference>
+    <x:Reference>__ReferenceID14</x:Reference>
+    <x:Reference>__ReferenceID15</x:Reference>
+    <x:Reference>__ReferenceID16</x:Reference>
+    <x:Reference>__ReferenceID17</x:Reference>
+    <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_21">
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtTrackingNo]" DisplayName="Get Tracking No -Execute Query" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" ProviderName="System.Data.SqlClient" Sql="Select tracking_number from case_details where case_id=@var" ConnectionString="[In_ConnectionString]">
+        <ui:ExecuteQuery.Parameters>
+          <InArgument x:TypeArguments="x:String" x:Key="var">[In_TransactionItem("case_id").ToString]</InArgument>
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+    </FlowStep>
+    <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_22">
+      <ui:NavigateTo Browser="[Ín_GedaBrowser]" DisplayName="Navigate To" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[In_GedaURL]" />
+    </FlowStep>
+    <x:Reference>__ReferenceID18</x:Reference>
+    <x:Reference>__ReferenceID19</x:Reference>
+    <x:Reference>__ReferenceID20</x:Reference>
+    <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_26">
+      <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" ContinueOnError="True" DisplayName="Activating GEDA" sap2010:WorkflowViewState.IdRef="Activate_1">
+        <ui:Activate.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="49a07bbb332670291a4d38cb8ce69972" Selector="&lt;html title='Search' /&gt;&lt;webctrl tag='BODY' /&gt;" TimeoutMS="5000" WaitForReady="COMPLETE" />
+        </ui:Activate.Target>
+      </ui:Activate>
+    </FlowStep>
+    <x:Reference>__ReferenceID21</x:Reference>
+    <sads:DebugSymbol.Symbol>dzxDOlxSUEFcQzNfQmFja2VuZFdvcmtmbG93c1xXb3JrZmxvd3NcR2VkYUNoZWNrRG9jdW1lbnRzLnhhbWxOUAPLAg8CAQFcCVymAQIBYF8NZhYCAVtpEW0mAgFWb0NvWAIBVJgCGZgCzAECAVJyGXYnAgFOeR2HASgCAUyKASGOATYCAUeQAVOQAWICAUX1ASn6AT4CAT79AS2EAkICATWHAjGHAswBAgEzkwEpoQE0AgExpAEtqAFCAgEsqgFgqgF1AgEq6gE16gHUAQIBKK0BNbQBQwIBI7cBOb8BTgIBGMIBPccBUgIBEcoBQcoBiAMCAQ/NAUXYAVcCAQTbAUnbAeQBAgECXHZcowECAWFkOGRHAgFeYTlhRQIBXGuPAWvmAQIBWmvxAWv4AQIBWWlaaW8CAVeYAmCYAp8BAgFTdKwBdIMCAgFRcrICcsACAgFPhQGwAYUBiQICAU2MAZ8BjAHlAQIBS4wB8AGMAfcBAgFKigFgigFvAgFI9QGzAvUBygICAUT1AawD9QHDAwIBQvgBYfgBjQECAUH3AWH3AYkBAgFA9QHPAvUBmgMCAT/9Ab0C/QHUAgIBPf0B8wP9AYoEAgE7gAJlgAJ4AgE6gQJngQJ1AgE5/wFl/wGNAQIBOP0B2QL9AeEDAgE3ggJnggJ1AgE2hwJshwKfAQIBNJ8BvAGfAYICAgEypgGrAaYB6QECATCmAfQBpgH7AQIBL6QBc6QBiAECAS3qAXLqAacBAgEpsgFhsgFqAgEkrwGzAa8B/wICASevAYoDrwGRAwIBJrcByQK3AeACAgEitwGTBLcBqgQCASC6AXG6AYsBAgEfuwFzuwGBAQIBHrkBcbkBmQECAR23AeUCtwGBBAIBHLwBc7wBgQECARu9AXG9AXoCARnCAccCwgHeAgIBF8IBwAPCAdcDAgEVxQF1xQGhAQIBFMQBdcQBnQECARPCAeMCwgGuAwIBEsoBnALKAe0CAgEQzQGaAs0BpwICAQ3NAZ4BzQGwAQIBC9MBS9UBVgIBBdsBtgHbAeEBAgED1AFN1AHQAQIBBtQBvwHUAc0BAgEJ1AFk1AFxAgEH</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_3" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetValue_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteNonQuery_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteNonQuery_3" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CloseWindow_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="NavigateTo_2" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,183">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_13">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,1167.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,95.02 300,155.02</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_25">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,1089.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,1140.58 350.641666666667,1167.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_27">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,999.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,1050.58 350.641666666667,1089.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_20">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,908.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,959.58 350.641666666667,999.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_19">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,827.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,878.58 350.641666666667,908.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,744.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,795.58 350.641666666667,827.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">629.641666666667,759.08</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_3" sap:VirtualizedContainerService.HintSize="79,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">500.641666666667,726.58</av:Point>
+            <av:Size x:Key="ShapeSize">79,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">579.641666666667,770.08 629.641666666667,770.08</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">500.641666666667,770.08 470.641666666667,770.08 470.641666666667,770.58 450.641666666667,770.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_10">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,654.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">450.641666666667,680.58 540.141666666667,680.58 540.141666666667,726.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">250.641666666667,553.58</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">350.641666666667,605.58 350.641666666667,654.58</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteNonQuery_4" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteNonQuery_5" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">629.641666666667,716.06</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_23">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">629.641666666667,635.06</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">729.641666666667,686.06 729.641666666667,716.06</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_24">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">629.641666666667,554.06</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">729.641666666667,605.06 729.641666666667,635.06</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_2" sap:VirtualizedContainerService.HintSize="79,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">500.641666666667,536.06</av:Point>
+            <av:Size x:Key="ShapeSize">79,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">500.641666666667,579.56 470.641666666667,579.56 470.641666666667,579.58 450.641666666667,579.58</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">579.641666666667,579.56 629.641666666667,579.56</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">440,435.06</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">540,487.06 540,517.06 540.141666666667,517.06 540.141666666667,536.06</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">190,435.54</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">390,461.54 420,461.54 420,461.06 440,461.06</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">190,334.54</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">290,385.54 290,435.54</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">569,349.52</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_1" sap:VirtualizedContainerService.HintSize="79,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">440,317.02</av:Point>
+            <av:Size x:Key="ShapeSize">79,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">519,360.52 569,360.52</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">440,360.52 410,360.52 410,360.04 390,360.04</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">190,235.02</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">390,260.52 479.5,260.52 479.5,317.02</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_17">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">119,135.5</av:Point>
+            <av:Size x:Key="ShapeSize">242,60</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">240,195.5 240,225.5 290,225.5 290,235.02</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">140,34.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">240,85.5 240,135.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteQuery_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">630,54.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="NavigateTo_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">530,1084.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Activate_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_26">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">390,34.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="886,1262">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">30,22.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <x:Double x:Key="Width">872</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">90,60 140,60</av:PointCollection>
+            <x:Double x:Key="Height">1226.5</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GedaCheckDocuments_1" sap:VirtualizedContainerService.HintSize="926,1342" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

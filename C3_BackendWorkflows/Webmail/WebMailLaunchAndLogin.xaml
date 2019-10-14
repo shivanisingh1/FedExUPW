@@ -1,0 +1,737 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="WebMailLaunchAndLogin" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_Webmail_URL" Type="InArgument(x:String)" />
+    <x:Property Name="In_Webmail_Username" Type="InArgument(x:String)" />
+    <x:Property Name="In_Webmail_Password" Type="InArgument(x:String)" />
+    <x:Property Name="In_MicrosoftEmail" Type="InArgument(x:String)" />
+    <x:Property Name="In_microsoftoutlookbrowser" Type="InArgument(ui:Browser)" />
+  </x:Members>
+  <this:WebMailLaunchAndLogin.In_MicrosoftEmail>
+    <InArgument x:TypeArguments="x:String" />
+  </this:WebMailLaunchAndLogin.In_MicrosoftEmail>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>660,696</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>WebMailLaunchAndLogin_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="21">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="22">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
+      <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Flowchart DisplayName="WebMailLaunchAndLogin" sap:VirtualizedContainerService.HintSize="640,636" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="outlookSuccess" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsInboxExist" />
+      <Variable x:TypeArguments="ui:Browser" Name="WebmailBrowser" />
+      <Variable x:TypeArguments="ui:Browser" Name="GedaBrowser" />
+    </Flowchart.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,117.5</av:PointCollection>
+        <x:Double x:Key="Width">605.5</x:Double>
+        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <x:Reference>__ReferenceID11</x:Reference>
+    </Flowchart.StartNode>
+    <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_13">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,217.5</av:Point>
+          <av:Size x:Key="ShapeSize">200,51</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,268.5 300,318.5</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:UiElementExists DisplayName="Element Exists 'Inbox'" Exists="[IsInboxExist]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+        <ui:UiElementExists.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="083a918811d47693759b2008f90693e3" Selector="&lt;html app='chrome.exe' htmlwindowname='mail_07416761-7f0e-7972-64d2-5e596870603f' title='Mail - Elder Garcia (OSV) - Outlook' /&gt;&lt;webctrl aaname='Inbox' idx='1' parentid='app' tag='SPAN' /&gt;" TimeoutMS="6000" WaitForReady="COMPLETE" />
+        </ui:UiElementExists.Target>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:UiElementExists>
+      <FlowStep.Next>
+        <FlowDecision x:Name="__ReferenceID6" Condition="[IsInboxExist]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <av:Point x:Key="ShapeLocation">260.5,318.5</av:Point>
+              <av:Size x:Key="ShapeSize">79,87</av:Size>
+              <av:PointCollection x:Key="FalseConnector">339.5,362 389.5,362</av:PointCollection>
+              <av:PointCollection x:Key="TrueConnector">260.5,362 230.5,362 230.5,460 210,460</av:PointCollection>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <FlowDecision.True>
+            <FlowStep x:Name="__ReferenceID10">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <av:Point x:Key="ShapeLocation">10,434.5</av:Point>
+                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Webmail launch and login ended.&quot;]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:LogMessage>
+            </FlowStep>
+          </FlowDecision.True>
+          <FlowDecision.False>
+            <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <av:Point x:Key="ShapeLocation">389.5,336.5</av:Point>
+                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">489.5,387.5 489.5,437.5</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <TryCatch DisplayName="Launch and Login WebMail - TryCatch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <TryCatch.Try>
+                  <Sequence sap:VirtualizedContainerService.HintSize="792,968" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" Browser="[In_microsoftoutlookbrowser]" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe Correo:'" sap:VirtualizedContainerService.HintSize="750,876" sap2010:WorkflowViewState.IdRef="BrowserScope_1">
+                      <ui:BrowserScope.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="716,728" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Flowchart sap:VirtualizedContainerService.HintSize="674,636" sap2010:WorkflowViewState.IdRef="Flowchart_3">
+                              <Flowchart.Variables>
+                                <Variable x:TypeArguments="x:Boolean" Name="IsUserNameExist" />
+                                <Variable x:TypeArguments="x:Boolean" Name="IsTrackingNoExist" />
+                                <Variable x:TypeArguments="x:Boolean" Name="FedXLoginExists" />
+                              </Flowchart.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                  <av:Point x:Key="ShapeLocation">20,12.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">60,75</av:Size>
+                                  <x:Double x:Key="Width">639.5</x:Double>
+                                  <av:PointCollection x:Key="ConnectorLocation">80,50 110,50 110,33</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Flowchart.StartNode>
+                                <x:Reference>__ReferenceID5</x:Reference>
+                              </Flowchart.StartNode>
+                              <FlowStep x:Name="__ReferenceID0">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <av:Point x:Key="ShapeLocation">400,219</av:Point>
+                                    <av:Size x:Key="ShapeSize">200,22</av:Size>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Throw DisplayName="Throw - Webmail Login Failed" Exception="[new Exception(&quot;Geda : Home page not found after login.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_3">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </Throw>
+                              </FlowStep>
+                              <FlowDecision x:Name="__ReferenceID3" Condition="[outlookSuccess]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <av:Point x:Key="ShapeLocation">270.5,126.5</av:Point>
+                                    <av:Size x:Key="ShapeSize">79,87</av:Size>
+                                    <av:PointCollection x:Key="FalseConnector">349.5,170 400,170</av:PointCollection>
+                                    <av:PointCollection x:Key="TrueConnector">270.5,170 230,170</av:PointCollection>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <FlowDecision.True>
+                                  <FlowStep x:Name="__ReferenceID2">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">30,144.5</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Webmail : Login Successful&quot;]">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:LogMessage>
+                                  </FlowStep>
+                                </FlowDecision.True>
+                                <FlowDecision.False>
+                                  <FlowStep x:Name="__ReferenceID1">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">400,144.5</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                        <av:PointCollection x:Key="ConnectorLocation">500,195.5 500,219</av:PointCollection>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:CommentOut DisplayName="CommentOut -  Mail" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="336,211" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SendEmail workflow" sap:VirtualizedContainerService.HintSize="314,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Workflows\SendEmail.xaml">
+                                            <ui:InvokeWorkflowFile.Arguments>
+                                              <InArgument x:TypeArguments="x:Int32" x:Key="In_EmailPort">[Convert.ToInt32(In_Config("EmailPort"))]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_EmailServer">[In_Config("EmailServer").ToString]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_EmailFrom">[In_Config("EmailFrom").ToString]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_EmailTo">[In_Config("EmailTo").ToString]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_EmailCC">[In_Config("EmailCC").ToString]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_EmailBody">[In_Config("EmailGedaLoginBody").ToString]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="In_Subject">[In_Config("EmailGedaLoginSubject").ToString]</InArgument>
+                                            </ui:InvokeWorkflowFile.Arguments>
+                                          </ui:InvokeWorkflowFile>
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                    <FlowStep.Next>
+                                      <x:Reference>__ReferenceID0</x:Reference>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowDecision.False>
+                              </FlowDecision>
+                              <x:Reference>__ReferenceID1</x:Reference>
+                              <x:Reference>__ReferenceID2</x:Reference>
+                              <FlowStep x:Name="__ReferenceID5">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <av:Point x:Key="ShapeLocation">110,0</av:Point>
+                                    <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                    <av:PointCollection x:Key="ConnectorLocation">310,33 360,33</av:PointCollection>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Sequence DisplayName="MicrosoftLogin" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="x:Boolean" Name="isSigninExists" />
+                                    <Variable x:TypeArguments="x:Boolean" Name="isEnterEmailExists" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:UiElementExists DisplayName="Is Sign in Element Exists" Exists="[isSigninExists]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="UiElementExists_11">
+                                    <ui:UiElementExists.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="659c2a95a4479d6484f9e519a629676d" Selector="&lt;webctrl id='otherTileText' tag='DIV' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                    </ui:UiElementExists.Target>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:UiElementExists>
+                                  <If Condition="[isSigninExists]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_5">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <If.Then>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="242,325" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'DIV  otherTileText'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="659c2a95a4479d6484f9e519a629676d" Selector="&lt;webctrl id='otherTileText' tag='DIV' /&gt;" WaitForReady="INTERACTIVE" />
+                                          </ui:Click.Target>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:Click>
+                                        <ui:TypeInto DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayBefore="300" DelayMS="200" DisplayName="Type Into 'INPUT  i0116'" EmptyField="True" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TypeInto_12" SendWindowMessages="False" SimulateType="True" Text="[In_MicrosoftEmail]">
+                                          <ui:TypeInto.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="95e989e67516475790b584d83c1801a3" Selector="&lt;html app='chrome.exe' title='Sign in to your account' /&gt;&lt;webctrl id='i0116' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                                          </ui:TypeInto.Target>
+                                        </ui:TypeInto>
+                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'DIV  otherTileText'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b5c39aba302dcbd79a80290682732e80" Selector="&lt;html app='chrome.exe' title='Sign in to your account' /&gt;&lt;webctrl id='idSIButton9' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                                          </ui:Click.Target>
+                                        </ui:Click>
+                                      </Sequence>
+                                    </If.Then>
+                                  </If>
+                                  <ui:UiElementExists DisplayName="Is Sign in Element Exists" Exists="[isEnterEmailExists]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="UiElementExists_12">
+                                    <ui:UiElementExists.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="659c2a95a4479d6484f9e519a629676d" Selector="&lt;webctrl id='otherTileText' tag='DIV' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                    </ui:UiElementExists.Target>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:UiElementExists>
+                                  <If Condition="[isEnterEmailExists]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_6">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <If.Then>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="242,234" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:TypeInto DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayBefore="300" DelayMS="200" DisplayName="Type Into 'DIV'" EmptyField="True" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TypeInto_13" SendWindowMessages="False" SimulateType="True" Text="[In_MicrosoftEmail]">
+                                          <ui:TypeInto.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="95e989e67516475790b584d83c1801a3" Selector="&lt;html app='chrome.exe' title='Sign in to your account' /&gt;&lt;webctrl id='i0116' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                                          </ui:TypeInto.Target>
+                                        </ui:TypeInto>
+                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'DIV  otherTileText'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cb4815265b4577a5973e599257fce0f3" Selector="&lt;html app='chrome.exe' title='Sign in to your account' /&gt;&lt;webctrl id='idSIButton9' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                                          </ui:Click.Target>
+                                        </ui:Click>
+                                      </Sequence>
+                                    </If.Then>
+                                  </If>
+                                </Sequence>
+                                <FlowStep.Next>
+                                  <FlowStep x:Name="__ReferenceID4">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">360,0</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                        <av:PointCollection x:Key="ConnectorLocation">460,66 460,96 310,96 310,126.5</av:PointCollection>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="526,1137" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                      <Sequence.Variables>
+                                        <Variable x:TypeArguments="x:Boolean" Name="outlookExists" />
+                                      </Sequence.Variables>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[FedXLoginExists]" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="UiElementExists_13">
+                                        <ui:UiElementExists.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fedd8ffe3f2adcbd5cfcf00e9f41df94" Selector="&lt;html app='chrome.exe' title='FedEx Sign On' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div' idx='2' tag='DIV' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                        </ui:UiElementExists.Target>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:UiElementExists>
+                                      <If Condition="[FedXLoginExists]" sap:VirtualizedContainerService.HintSize="484,473" sap2010:WorkflowViewState.IdRef="If_7">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="242,325" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'Username'" EmptyField="True" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TypeInto_14" SendWindowMessages="False" SimulateType="True" Text="[In_Webmail_Username.Trim]">
+                                              <ui:TypeInto.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cb99eec0e8516699c77c4621777f2517" Selector="&lt;webctrl id='username' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                                              </ui:TypeInto.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:TypeInto>
+                                            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'Password'" EmptyField="True" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TypeInto_15" SendWindowMessages="False" SimulateType="True" Text="[In_Webmail_Password.Trim.ToString]">
+                                              <ui:TypeInto.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="dde738efdde6f9f0b370f33a550ec9c3" Selector="&lt;webctrl id='password' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                                              </ui:TypeInto.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:TypeInto>
+                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Submit'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fbe2ee37f3a0bacbf8c218c4971c552e" Selector="&lt;html app='chrome.exe' title='FedEx Sign On' /&gt;&lt;webctrl aaname='                         Sign On                     ' tag='A' /&gt;" WaitForReady="COMPLETE" />
+                                              </ui:Click.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:Click>
+                                          </Sequence>
+                                        </If.Then>
+                                      </If>
+                                      <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[outlookExists]" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="UiElementExists_14">
+                                        <ui:UiElementExists.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fedd8ffe3f2adcbd5cfcf00e9f41df94" Selector="&lt;html app='chrome.exe' title='Microsoft Office Home' /&gt;&lt;webctrl parentid='ShellMail_link_text' tag='DIV' innertext=' Outlook ' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                        </ui:UiElementExists.Target>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:UiElementExists>
+                                      <If Condition="[outlookExists]" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="If_8">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cbcf252a62e90d827f33f8bd4027ddf0" Selector="&lt;html app='chrome.exe' title='Microsoft Office Home' /&gt;&lt;webctrl parentid='ShellMail_link_text' tag='DIV' innertext=' Outlook ' /&gt;" WaitForReady="INTERACTIVE" />
+                                              </ui:Click.Target>
+                                            </ui:Click>
+                                          </Sequence>
+                                        </If.Then>
+                                      </If>
+                                      <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                      <ui:ImageFound DisplayName="Image Exists 'chrome.exe Correo:'" Found="[outlookSuccess]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="ImageFound_1">
+                                        <ui:ImageFound.Image>
+                                          <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAACcAAAAdCAYAAAApQnX+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI/SURBVFhH7ZNPSNNhGMeF6BBUUARRkBchqA4duhVFt4i6iQQGEYVgUpTRH5BJ1EG0g6SHsqRBVBAVTlpzczpStmzSprXSTd0wNGumlUVknr79vs/a27Js8u6yw3v4wvvn+z7P533e5y2IT88hX2XgdGXgdGXgdGXgdGXgdKXgIhPfsftyQMRxpmkhld4Io+i8F8HRr//cz1UGTlcLwjEhE5dcC6GqJYZl5Y+w6rgLte44RqZSZ9Jw9sA4tlT7sOSoA9tr/PDFPqkEHO+98kzOc3/rhSe4H0pKjPLbEayseAzHiw/ivdv7DsuPOdHoeyPzrHArKpywOYbgjExhh5V4XaUHndFUcsIxKc88CCfR1D2GtafcKoY/MYPNNh+2XerCHSsxPRzT43o1jZ7EF7lU8dXnCI99k3McRyd/LA5uT30PBt7PiqfZP46CIw7Yn75VcEzUPvi7UpX3BrDmZBvcrz/ionP4j8pQ9PIMfZyz6qtPuHDgeggbzrTD++viVFY4AqQ9hJoPR09mz1W3DkkyVvrQzb6/9ufHHUzOYl9DUOKeexhVPipnuELrtt0jn2XOPiq79VI9/f8qx0tITKtynO+sDWBjVQf88RnlzRmOTb6/MSiVqmmLS4+WNIUQs/qGT7T+tEf1XEv/pPQt17iX7klWmBfcZOvEwea+xfdcNjh6CMWfvLSsVRq6N+MZO6xK7aoLyB7FMdcIcNjej8KzXnQNpypf50nIB+PH4lzB5aMMnK4MnK4MnK7yGG4OPwELrc5rgS/7UwAAAABJRU5ErkJggg==" />
+                                        </ui:ImageFound.Image>
+                                        <ui:ImageFound.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                        </ui:ImageFound.Target>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ImageFound>
+                                      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+                                        <ui:CommentOut.Body>
+                                          <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                            <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[outlookSuccess]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_15">
+                                              <ui:UiElementExists.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b665c9001018d4030a6db19c79b0f3e6" Selector="&lt;html app='chrome.exe' omit:htmlwindowname='mail_c2e61754-f161-c859-1fba-c2804c9af815' omit:title='Correo: Leonel Oliva (OSV) - Outlook' /&gt;&lt;webctrl omit:css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;button&amp;gt;div' parentid='app' tag='DIV' innertext='Mensaje nuevo' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                                              </ui:UiElementExists.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:UiElementExists>
+                                          </Sequence>
+                                        </ui:CommentOut.Body>
+                                      </ui:CommentOut>
+                                    </Sequence>
+                                    <FlowStep.Next>
+                                      <x:Reference>__ReferenceID3</x:Reference>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowStep.Next>
+                              </FlowStep>
+                              <x:Reference>__ReferenceID4</x:Reference>
+                              <FlowStep>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <av:Point x:Key="ShapeLocation">0,364.5</av:Point>
+                                    <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:CommentOut sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+                                  <ui:CommentOut.Body>
+                                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="418,424" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="376,332" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="C:\Users\kjain\Documents\UiPath\MicrosoftLogin\MicrosoftLoginBDL.xaml">
+                                          <ui:InvokeWorkflowFile.Arguments>
+                                            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                          </ui:InvokeWorkflowFile.Arguments>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:InvokeWorkflowFile>
+                                        <Throw DisplayName="Throw - Username not exist" Exception="[new Exception(&quot;Username not exist.&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_5">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </Throw>
+                                        <ui:CommentOut DisplayName="CommentOut - Mail" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                                          <ui:CommentOut.Body>
+                                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SendEmail workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Workflows\SendEmail.xaml">
+                                                <ui:InvokeWorkflowFile.Arguments>
+                                                  <InArgument x:TypeArguments="x:Int32" x:Key="In_EmailPort">[Convert.ToInt32(In_Config("EmailPort"))]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_EmailServer">[In_Config("EmailServer").ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_EmailFrom">[In_Config("EmailFrom").ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_EmailTo">[In_Config("EmailTo").ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_EmailCC">[In_Config("EmailCC").ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_EmailBody">[In_Config("EmailGedaLaunchBody").ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="In_Subject">[In_Config("EmailGedaLaunchSubject").ToString]</InArgument>
+                                                </ui:InvokeWorkflowFile.Arguments>
+                                              </ui:InvokeWorkflowFile>
+                                            </Sequence>
+                                          </ui:CommentOut.Body>
+                                        </ui:CommentOut>
+                                      </Sequence>
+                                    </Sequence>
+                                  </ui:CommentOut.Body>
+                                </ui:CommentOut>
+                              </FlowStep>
+                            </Flowchart>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:BrowserScope.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:BrowserScope>
+                  </Sequence>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,245" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Webmail : &quot;+exception.ToString]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                        <Rethrow sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                      </Sequence>
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+              <FlowStep.Next>
+                <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_15">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">389.5,437.5</av:Point>
+                      <av:Size x:Key="ShapeSize">200,51</av:Size>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Webmail launch and login ended.&quot;]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:LogMessage>
+                </FlowStep>
+              </FlowStep.Next>
+            </FlowStep>
+          </FlowDecision.False>
+        </FlowDecision>
+      </FlowStep.Next>
+    </FlowStep>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
+    <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_16">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,117.5</av:Point>
+          <av:Size x:Key="ShapeSize">200,51</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,168.5 300,217.5</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Webmail launch and login started&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <FlowStep.Next>
+        <x:Reference>__ReferenceID8</x:Reference>
+      </FlowStep.Next>
+    </FlowStep>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID10</x:Reference>
+  </Flowchart>
+</Activity>
