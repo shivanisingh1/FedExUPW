@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="63a5ebdb056042838f0d361835f84566" Name="Diagram1">
+        <EntityTypeShape EntityType="Incedo_DEVModel.add_case_notes" Width="1.5" PointX="3" PointY="35.625" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.agent_case_attempts_made" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.agent_case_details" Width="1.5" PointX="3" PointY="17.125" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.agent_details" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.bot_trigger" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.case_details" Width="1.5" PointX="0.75" PointY="23" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.case_notes" Width="1.5" PointX="3" PointY="13.375" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.folder_details" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.folder_ids" Width="1.5" PointX="3" PointY="28.375" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.location_details_dest" Width="1.5" PointX="3" PointY="23.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.location_details_origion" Width="1.5" PointX="3" PointY="40.375" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.login" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.package_details" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.primary_case_details" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.primary_rep_details" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.primary_requirements" Width="1.5" PointX="3" PointY="20.375" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.recipient_details" Width="1.5" PointX="3" PointY="45.25" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.shipper_details" Width="1.5" PointX="3" PointY="30.875" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__add_case___case___36470DEF" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__agent_cas__case___373B3228" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__agent_cas__case___382F5661" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__case_note__case___39237A9A" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__folder_id__case___3A179ED3" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__location___case___3B0BC30C" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__location___case___3BFFE745" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__location___case___42ACE4D4" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__package_d__case___3CF40B7E" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__primary_c__case___3EDC53F0" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__primary_r__case___3FD07829" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__recipient__case___40C49C62" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__shipper_d__case___41B8C09B" />
+        <EntityTypeShape EntityType="Incedo_DEVModel.package_scan_details" Width="1.5" PointX="3" PointY="50.625" />
+        <AssociationConnector Association="Incedo_DEVModel.FK__package_s__case___3DE82FB7" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

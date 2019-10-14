@@ -1,0 +1,245 @@
+﻿
+
+@{
+    ViewBag.Title = "c3_fedex";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C3i</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+</head>
+<body>
+
+    <style>
+        label.required { color: red; }
+        body {
+            background: white;
+            background-image: url(/images/loginpic.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #8e8378;
+            font-family: sans-serif;
+        }
+
+        h2 {
+            color: #8e8378;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #8e8378;
+            text-decoration: none;
+        }
+
+
+        .login {
+            width: 350px;
+            position: absolute;
+            height: auto;
+            top: 40%;
+            left: 20%;
+            float: left;
+            margin: -184px 0px 0px -155px;
+            background: rgba(250, 248, 248, 0.863);
+            padding: 20px 30px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 0px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07);
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 250px;
+            padding: 25px 0px;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid #ff9800;
+            outline: none;
+            color: #8e8378;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        label[for=remember] {
+            display: block;
+            position: absolute;
+            margin-top: 2px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #8e8378;
+            content: "";
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: 3px solid #ff9800;
+            box-shadow: 0px 0px 0px 2px #ff9800;
+            ;
+        }
+
+        #remember:checked ~ label[for=remember] {
+            background: #8e8378;
+            ;
+            border: 3px solid #8e8378;
+            ;
+            box-shadow: 0px 0px 0px 2px #8e8378;
+            ;
+        }
+
+
+        input[type="submit"] {
+            background: #ff9800;
+            border: 0;
+            width: 250px;
+            height: 40px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+            input[type="submit"]:hover {
+                background: #16aa56;
+            }
+
+        .forgot {
+            margin-top: 30px;
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+            .forgot:hover {
+                margin-top: 30px;
+                display: block;
+                font-size: 11px;
+                text-align: center;
+                font-weight: bold;
+                color: #ff9800;
+            }
+
+        .remember {
+            padding: 30px 0px;
+            font-size: 12px;
+            text-indent: 25px;
+            line-height: 15px;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #8e8378;
+        }
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            transition: all 0.2s linear;
+            transform: translate(10px, 0);
+            opacity: 0;
+        }
+        /*placeholder to label*/
+
+        form fieldset {
+            border: 0;
+            position: relative;
+            border-bottom: 1px solid #ff9800;
+        }
+
+
+
+            form fieldset input {
+                padding: 25px 12px 6px 12px !important;
+                height: 50px !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-bottom: solid 1px #dedede !important;
+            }
+
+            form fieldset label {
+                position: absolute;
+                top: 13px;
+                left: 13px;
+                color: #909090;
+                font-weight: 300;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+
+            form fieldset input:valid + label, form fieldset input:focus + label {
+                color: #8e8378;
+                font-weight: 700;
+                font-size: 12px;
+                -webkit-transform: translate3d(0, -10px, 0);
+                transform: translate3d(0, -10px, 0);
+            }
+
+        input#username.form-control, input#password.form-control {
+            background: transparent;
+        }
+    </style>
+    @using (@Html.BeginForm())
+
+    {
+        <div class='login'>
+            <form method="post" action="index" id="form">
+                <img src="/images/logo.png" alt="C3i" width="80" style="display: block;margin-left: auto;margin-right: auto;" />
+                <br />
+                <h2>Agent Login</h2>
+                <br />
+                <fieldset>
+                    <input id="username" name='username' type="text" required="" class="form-control">
+                    <label for="username">Username</label>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <input id="password" name="password" type="password" required="" class="form-control">
+                    <label for="password">Password</label>
+                </fieldset>
+                <br />
+                <div class='remember'>
+                    <input checked='' id='remember' name='remember' type='checkbox' />
+                    <label for='remember'></label>Remember Me
+
+               
+                </div>
+                @if (@ViewBag.NotValidUser != null)
+                {  
+
+                    <label class='required'> @ViewBag.NotValidUser</label>
+                }
+                
+                <input type='submit' value='Sign In' />
+                @*<a class='forgot' href='#'>Forgot Your Password?</a>*@
+
+
+              
+            </form>
+
+        </div>
+        <div class="form-group error">
+           
+            
+        </div>
+
+
+    <!--js files-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    }
+</body>
+</html>

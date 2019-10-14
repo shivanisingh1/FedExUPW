@@ -1,0 +1,1409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Incedo_DEVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="add_case_notes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="trigger_phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="spoke_to" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="left_vmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="info_req" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="info_rec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="tracking" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="deadline" Type="datetime" />
+          <Property Name="attempts_made" Type="nvarchar(max)" />
+          <Property Name="follow_up_date" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="agent_case_attempts_made">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="agent_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="attempts_made" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="attempts_Date" Type="datetime" />
+          <Property Name="case_priority" Type="bit" />
+        </EntityType>
+        <EntityType Name="agent_case_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="agent_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Reassigned" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="agent_details">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="fedex_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="date_assigned" Type="datetime" />
+          <Property Name="queue_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="loc_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="alt_title" Type="nvarchar(max)" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="login_id" Type="nvarchar" MaxLength="15" />
+          <Property Name="agent_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supervisor" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="bot_trigger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="bot_trigger" Type="nvarchar" MaxLength="50" />
+          <Property Name="creationdate" Type="datetime" />
+          <Property Name="modificationdate" Type="datetime" />
+          <Property Name="flag" Type="bit" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="case_details">
+          <Key>
+            <PropertyRef Name="case_id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="alternate_title" Type="nvarchar(max)" />
+          <Property Name="title" Type="nvarchar(max)" />
+          <Property Name="case_notes" Type="nvarchar(max)" />
+          <Property Name="tracking_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="commitment_date" Type="date" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="attempts_made" Type="int" />
+          <Property Name="follow_up_date" Type="datetime" />
+          <Property Name="shipper_local_time" Type="datetime" />
+          <Property Name="assignment" Type="datetime" />
+          <Property Name="case_priority" Type="bit" />
+        </EntityType>
+        <EntityType Name="case_notes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="case_notes" Type="nvarchar(max)" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="send_to" Type="bit" />
+          <Property Name="email_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Deadline" Type="datetime" />
+        </EntityType>
+        <EntityType Name="folder_details">
+          <Key>
+            <PropertyRef Name="folder_id" />
+          </Key>
+          <Property Name="folder_id" Type="int" Nullable="false" />
+          <Property Name="folder_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="folder_description" Type="nvarchar" MaxLength="50" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="folder_ids">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="folder_id" Type="int" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="location_details_dest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="loc_id" Type="nvarchar" MaxLength="30" />
+          <Property Name="loc_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="local_time" Type="time" Precision="7" />
+          <Property Name="express_holidays_date" Type="date" />
+          <Property Name="local_date" Type="date" />
+          <Property Name="express_holidays_description" Type="nvarchar(max)" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="location_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="3" />
+          <Property Name="dst" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="location_details_origion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="loc_id" Type="nvarchar" MaxLength="30" />
+          <Property Name="loc_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="local_time" Type="time" Precision="7" />
+          <Property Name="express_holidays_date" Type="date" />
+          <Property Name="local_date" Type="date" />
+          <Property Name="express_holidays_description" Type="nvarchar(max)" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="location_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="3" />
+          <Property Name="dst" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="flag" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="package_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ship_date" Type="date" />
+          <Property Name="pieces" Type="nvarchar" MaxLength="15" />
+          <Property Name="commodity" Type="nvarchar(max)" />
+          <Property Name="origin" Type="nvarchar(max)" />
+          <Property Name="weight(KG)" Type="nvarchar" MaxLength="10" />
+          <Property Name="dest" Type="nvarchar" MaxLength="50" />
+          <Property Name="customs_value(USD)" Type="nvarchar" MaxLength="15" />
+          <Property Name="view_airbill" Type="nvarchar" MaxLength="10" />
+          <Property Name="declared_value" Type="nvarchar" MaxLength="15" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="package_scan_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="scan_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="psd_date" Type="datetime" />
+          <Property Name="code_description" Type="nvarchar" MaxLength="100" />
+          <Property Name="psd_time" Type="time" Precision="7" />
+          <Property Name="location_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="primary_case_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="primary_rep_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="primary_rep_details">
+          <Key>
+            <PropertyRef Name="primary_rep_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="fedex_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="date_assigned" Type="datetime" />
+          <Property Name="queue_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="loc_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="email_id" Type="nvarchar" MaxLength="80" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="primary_rep_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="primary_requirements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="case_requirements" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="is_received" Type="bit" Nullable="false" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recipient_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address1" Type="nvarchar(max)" />
+          <Property Name="address2" Type="nvarchar(max)" />
+          <Property Name="company_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city_state_prov" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="postal_country" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="shipper_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address1" Type="nvarchar(max)" />
+          <Property Name="address2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="company_name" Type="nvarchar(max)" />
+          <Property Name="city_state_prov" Type="nvarchar(max)" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="postal_country" Type="nvarchar" MaxLength="30" />
+          <Property Name="alternate_phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="creation_date" Type="datetime" />
+          <Property Name="modification_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__add_case___case___36470DEF">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="add_case_notes" Type="Self.add_case_notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="add_case_notes">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent_cas__case___373B3228">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="agent_case_attempts_made" Type="Self.agent_case_attempts_made" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="agent_case_attempts_made">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent_cas__case___382F5661">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="agent_case_details" Type="Self.agent_case_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="agent_case_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__case_note__case___39237A9A">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="case_notes" Type="Self.case_notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="case_notes">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__folder_id__case___3A179ED3">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="folder_ids" Type="Self.folder_ids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="folder_ids">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___3B0BC30C">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="0..1" />
+          <End Role="location_details_origion" Type="Self.location_details_origion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_origion">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___3BFFE745">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="0..1" />
+          <End Role="location_details_origion" Type="Self.location_details_origion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_origion">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___42ACE4D4">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="0..1" />
+          <End Role="location_details_dest" Type="Self.location_details_dest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_dest">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__package_d__case___3CF40B7E">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="package_details" Type="Self.package_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="package_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__package_s__case___3DE82FB7">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="package_scan_details" Type="Self.package_scan_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="package_scan_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__primary_c__case___3EDC53F0">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="0..1" />
+          <End Role="primary_case_details" Type="Self.primary_case_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="primary_case_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__primary_r__case___3FD07829">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="primary_requirements" Type="Self.primary_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="primary_requirements">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recipient__case___40C49C62">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="recipient_details" Type="Self.recipient_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="recipient_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shipper_d__case___41B8C09B">
+          <End Role="case_details" Type="Self.case_details" Multiplicity="1" />
+          <End Role="shipper_details" Type="Self.shipper_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="shipper_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Incedo_DEVModelStoreContainer">
+          <EntitySet Name="add_case_notes" EntityType="Self.add_case_notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="agent_case_attempts_made" EntityType="Self.agent_case_attempts_made" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="agent_case_details" EntityType="Self.agent_case_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="agent_details" EntityType="Self.agent_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bot_trigger" EntityType="Self.bot_trigger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="case_details" EntityType="Self.case_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="case_notes" EntityType="Self.case_notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="folder_details" EntityType="Self.folder_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="folder_ids" EntityType="Self.folder_ids" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="location_details_dest" EntityType="Self.location_details_dest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="location_details_origion" EntityType="Self.location_details_origion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="package_details" EntityType="Self.package_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="package_scan_details" EntityType="Self.package_scan_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="primary_case_details" EntityType="Self.primary_case_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="primary_rep_details" EntityType="Self.primary_rep_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="primary_requirements" EntityType="Self.primary_requirements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="recipient_details" EntityType="Self.recipient_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shipper_details" EntityType="Self.shipper_details" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__add_case___case___36470DEF" Association="Self.FK__add_case___case___36470DEF">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="add_case_notes" EntitySet="add_case_notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent_cas__case___373B3228" Association="Self.FK__agent_cas__case___373B3228">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="agent_case_attempts_made" EntitySet="agent_case_attempts_made" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent_cas__case___382F5661" Association="Self.FK__agent_cas__case___382F5661">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="agent_case_details" EntitySet="agent_case_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__case_note__case___39237A9A" Association="Self.FK__case_note__case___39237A9A">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="case_notes" EntitySet="case_notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__folder_id__case___3A179ED3" Association="Self.FK__folder_id__case___3A179ED3">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="folder_ids" EntitySet="folder_ids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___3B0BC30C" Association="Self.FK__location___case___3B0BC30C">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_origion" EntitySet="location_details_origion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___3BFFE745" Association="Self.FK__location___case___3BFFE745">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_origion" EntitySet="location_details_origion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___42ACE4D4" Association="Self.FK__location___case___42ACE4D4">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_dest" EntitySet="location_details_dest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__package_d__case___3CF40B7E" Association="Self.FK__package_d__case___3CF40B7E">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="package_details" EntitySet="package_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__package_s__case___3DE82FB7" Association="Self.FK__package_s__case___3DE82FB7">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="package_scan_details" EntitySet="package_scan_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__primary_c__case___3EDC53F0" Association="Self.FK__primary_c__case___3EDC53F0">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="primary_case_details" EntitySet="primary_case_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__primary_r__case___3FD07829" Association="Self.FK__primary_r__case___3FD07829">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="primary_requirements" EntitySet="primary_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recipient__case___40C49C62" Association="Self.FK__recipient__case___40C49C62">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="recipient_details" EntitySet="recipient_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shipper_d__case___41B8C09B" Association="Self.FK__shipper_d__case___41B8C09B">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="shipper_details" EntitySet="shipper_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Incedo_DEVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Incedo_DEVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="add_case_notes" EntityType="Incedo_DEVModel.add_case_notes" />
+          <EntitySet Name="agent_case_attempts_made" EntityType="Incedo_DEVModel.agent_case_attempts_made" />
+          <EntitySet Name="agent_case_details" EntityType="Incedo_DEVModel.agent_case_details" />
+          <EntitySet Name="agent_details" EntityType="Incedo_DEVModel.agent_details" />
+          <EntitySet Name="bot_trigger" EntityType="Incedo_DEVModel.bot_trigger" />
+          <EntitySet Name="case_details" EntityType="Incedo_DEVModel.case_details" />
+          <EntitySet Name="case_notes" EntityType="Incedo_DEVModel.case_notes" />
+          <EntitySet Name="folder_details" EntityType="Incedo_DEVModel.folder_details" />
+          <EntitySet Name="folder_ids" EntityType="Incedo_DEVModel.folder_ids" />
+          <EntitySet Name="location_details_dest" EntityType="Incedo_DEVModel.location_details_dest" />
+          <EntitySet Name="location_details_origion" EntityType="Incedo_DEVModel.location_details_origion" />
+          <EntitySet Name="logins" EntityType="Incedo_DEVModel.login" />
+          <EntitySet Name="package_details" EntityType="Incedo_DEVModel.package_details" />
+          <EntitySet Name="primary_case_details" EntityType="Incedo_DEVModel.primary_case_details" />
+          <EntitySet Name="primary_rep_details" EntityType="Incedo_DEVModel.primary_rep_details" />
+          <EntitySet Name="primary_requirements" EntityType="Incedo_DEVModel.primary_requirements" />
+          <EntitySet Name="recipient_details" EntityType="Incedo_DEVModel.recipient_details" />
+          <EntitySet Name="shipper_details" EntityType="Incedo_DEVModel.shipper_details" />
+          <AssociationSet Name="FK__add_case___case___36470DEF" Association="Incedo_DEVModel.FK__add_case___case___36470DEF">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="add_case_notes" EntitySet="add_case_notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent_cas__case___373B3228" Association="Incedo_DEVModel.FK__agent_cas__case___373B3228">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="agent_case_attempts_made" EntitySet="agent_case_attempts_made" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent_cas__case___382F5661" Association="Incedo_DEVModel.FK__agent_cas__case___382F5661">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="agent_case_details" EntitySet="agent_case_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__case_note__case___39237A9A" Association="Incedo_DEVModel.FK__case_note__case___39237A9A">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="case_notes" EntitySet="case_notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__folder_id__case___3A179ED3" Association="Incedo_DEVModel.FK__folder_id__case___3A179ED3">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="folder_ids" EntitySet="folder_ids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___3B0BC30C" Association="Incedo_DEVModel.FK__location___case___3B0BC30C">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_origion" EntitySet="location_details_origion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___3BFFE745" Association="Incedo_DEVModel.FK__location___case___3BFFE745">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_origion" EntitySet="location_details_origion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__location___case___42ACE4D4" Association="Incedo_DEVModel.FK__location___case___42ACE4D4">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="location_details_dest" EntitySet="location_details_dest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__package_d__case___3CF40B7E" Association="Incedo_DEVModel.FK__package_d__case___3CF40B7E">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="package_details" EntitySet="package_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__primary_c__case___3EDC53F0" Association="Incedo_DEVModel.FK__primary_c__case___3EDC53F0">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="primary_case_details" EntitySet="primary_case_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__primary_r__case___3FD07829" Association="Incedo_DEVModel.FK__primary_r__case___3FD07829">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="primary_requirements" EntitySet="primary_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recipient__case___40C49C62" Association="Incedo_DEVModel.FK__recipient__case___40C49C62">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="recipient_details" EntitySet="recipient_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shipper_d__case___41B8C09B" Association="Incedo_DEVModel.FK__shipper_d__case___41B8C09B">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="shipper_details" EntitySet="shipper_details" />
+          </AssociationSet>
+          <EntitySet Name="package_scan_details" EntityType="Incedo_DEVModel.package_scan_details" />
+          <AssociationSet Name="FK__package_s__case___3DE82FB7" Association="Incedo_DEVModel.FK__package_s__case___3DE82FB7">
+            <End Role="case_details" EntitySet="case_details" />
+            <End Role="package_scan_details" EntitySet="package_scan_details" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="add_case_notes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="trigger_phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="spoke_to" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="left_vmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="info_req" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="info_rec" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tracking" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="deadline" Type="DateTime" Precision="3" />
+          <Property Name="attempts_made" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="follow_up_date" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__add_case___case___36470DEF" FromRole="add_case_notes" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="agent_case_attempts_made">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="agent_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="attempts_made" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="attempts_Date" Type="DateTime" Precision="3" />
+          <Property Name="case_priority" Type="Boolean" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__agent_cas__case___373B3228" FromRole="agent_case_attempts_made" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="agent_case_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="agent_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Reassigned" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__agent_cas__case___382F5661" FromRole="agent_case_details" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="agent_details">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fedex_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="date_assigned" Type="DateTime" Precision="3" />
+          <Property Name="queue_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="loc_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="alt_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="login_id" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="agent_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supervisor" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="bot_trigger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bot_trigger1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="creationdate" Type="DateTime" Precision="3" />
+          <Property Name="modificationdate" Type="DateTime" Precision="3" />
+          <Property Name="flag" Type="Boolean" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="case_details">
+          <Key>
+            <PropertyRef Name="case_id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="alternate_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="case_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tracking_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="commitment_date" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="attempts_made" Type="Int32" />
+          <Property Name="follow_up_date" Type="DateTime" Precision="3" />
+          <Property Name="shipper_local_time" Type="DateTime" Precision="3" />
+          <Property Name="assignment" Type="DateTime" Precision="3" />
+          <Property Name="case_priority" Type="Boolean" />
+          <NavigationProperty Name="add_case_notes" Relationship="Incedo_DEVModel.FK__add_case___case___36470DEF" FromRole="case_details" ToRole="add_case_notes" />
+          <NavigationProperty Name="agent_case_attempts_made" Relationship="Incedo_DEVModel.FK__agent_cas__case___373B3228" FromRole="case_details" ToRole="agent_case_attempts_made" />
+          <NavigationProperty Name="agent_case_details" Relationship="Incedo_DEVModel.FK__agent_cas__case___382F5661" FromRole="case_details" ToRole="agent_case_details" />
+          <NavigationProperty Name="case_notes1" Relationship="Incedo_DEVModel.FK__case_note__case___39237A9A" FromRole="case_details" ToRole="case_notes" />
+          <NavigationProperty Name="folder_ids" Relationship="Incedo_DEVModel.FK__folder_id__case___3A179ED3" FromRole="case_details" ToRole="folder_ids" />
+          <NavigationProperty Name="location_details_origion" Relationship="Incedo_DEVModel.FK__location___case___3B0BC30C" FromRole="case_details" ToRole="location_details_origion" />
+          <NavigationProperty Name="location_details_origion1" Relationship="Incedo_DEVModel.FK__location___case___3BFFE745" FromRole="case_details" ToRole="location_details_origion" />
+          <NavigationProperty Name="location_details_dest" Relationship="Incedo_DEVModel.FK__location___case___42ACE4D4" FromRole="case_details" ToRole="location_details_dest" />
+          <NavigationProperty Name="package_details" Relationship="Incedo_DEVModel.FK__package_d__case___3CF40B7E" FromRole="case_details" ToRole="package_details" />
+          <NavigationProperty Name="primary_case_details" Relationship="Incedo_DEVModel.FK__primary_c__case___3EDC53F0" FromRole="case_details" ToRole="primary_case_details" />
+          <NavigationProperty Name="primary_requirements" Relationship="Incedo_DEVModel.FK__primary_r__case___3FD07829" FromRole="case_details" ToRole="primary_requirements" />
+          <NavigationProperty Name="recipient_details" Relationship="Incedo_DEVModel.FK__recipient__case___40C49C62" FromRole="case_details" ToRole="recipient_details" />
+          <NavigationProperty Name="shipper_details" Relationship="Incedo_DEVModel.FK__shipper_d__case___41B8C09B" FromRole="case_details" ToRole="shipper_details" />
+          <NavigationProperty Name="package_scan_details" Relationship="Incedo_DEVModel.FK__package_s__case___3DE82FB7" FromRole="case_details" ToRole="package_scan_details" />
+        </EntityType>
+        <EntityType Name="case_notes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="case_notes1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="send_to" Type="Boolean" />
+          <Property Name="email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__case_note__case___39237A9A" FromRole="case_notes" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="folder_details">
+          <Key>
+            <PropertyRef Name="folder_id" />
+          </Key>
+          <Property Name="folder_id" Type="Int32" Nullable="false" />
+          <Property Name="folder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="folder_description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="folder_ids">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="folder_id" Type="Int32" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__folder_id__case___3A179ED3" FromRole="folder_ids" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="location_details_dest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="loc_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="loc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="local_time" Type="Time" Precision="7" />
+          <Property Name="express_holidays_date" Type="DateTime" Precision="0" />
+          <Property Name="local_date" Type="DateTime" Precision="0" />
+          <Property Name="express_holidays_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="location_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeZone" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="dst" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__location___case___42ACE4D4" FromRole="location_details_dest" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="location_details_origion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="loc_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="loc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="local_time" Type="Time" Precision="7" />
+          <Property Name="express_holidays_date" Type="DateTime" Precision="0" />
+          <Property Name="local_date" Type="DateTime" Precision="0" />
+          <Property Name="express_holidays_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="location_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeZone" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="dst" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__location___case___3B0BC30C" FromRole="location_details_origion" ToRole="case_details" />
+          <NavigationProperty Name="case_details1" Relationship="Incedo_DEVModel.FK__location___case___3BFFE745" FromRole="location_details_origion" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="flag" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="package_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ship_date" Type="DateTime" Precision="0" />
+          <Property Name="pieces" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="commodity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="origin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="weight_KG_" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="dest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customs_value_USD_" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="view_airbill" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="declared_value" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__package_d__case___3CF40B7E" FromRole="package_details" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="primary_case_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="primary_rep_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="case_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__primary_c__case___3EDC53F0" FromRole="primary_case_details" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="primary_rep_details">
+          <Key>
+            <PropertyRef Name="primary_rep_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fedex_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="date_assigned" Type="DateTime" Precision="3" />
+          <Property Name="queue_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="loc_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email_id" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="primary_rep_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="primary_requirements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="case_requirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="is_received" Type="Boolean" Nullable="false" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__primary_r__case___3FD07829" FromRole="primary_requirements" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="recipient_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="company_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city_state_prov" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="postal_country" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__recipient__case___40C49C62" FromRole="recipient_details" ToRole="case_details" />
+        </EntityType>
+        <EntityType Name="shipper_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address2" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="company_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="city_state_prov" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="postal_country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="alternate_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__shipper_d__case___41B8C09B" FromRole="shipper_details" ToRole="case_details" />
+        </EntityType>
+        <Association Name="FK__add_case___case___36470DEF">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.add_case_notes" Role="add_case_notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="add_case_notes">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent_cas__case___373B3228">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.agent_case_attempts_made" Role="agent_case_attempts_made" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="agent_case_attempts_made">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent_cas__case___382F5661">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.agent_case_details" Role="agent_case_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="agent_case_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__case_note__case___39237A9A">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.case_notes" Role="case_notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="case_notes">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__folder_id__case___3A179ED3">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.folder_ids" Role="folder_ids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="folder_ids">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___3B0BC30C">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="0..1" />
+          <End Type="Incedo_DEVModel.location_details_origion" Role="location_details_origion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_origion">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___3BFFE745">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="0..1" />
+          <End Type="Incedo_DEVModel.location_details_origion" Role="location_details_origion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_origion">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__location___case___42ACE4D4">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="0..1" />
+          <End Type="Incedo_DEVModel.location_details_dest" Role="location_details_dest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="location_details_dest">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__package_d__case___3CF40B7E">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.package_details" Role="package_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="package_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__primary_c__case___3EDC53F0">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="0..1" />
+          <End Type="Incedo_DEVModel.primary_case_details" Role="primary_case_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="primary_case_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__primary_r__case___3FD07829">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.primary_requirements" Role="primary_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="primary_requirements">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recipient__case___40C49C62">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.recipient_details" Role="recipient_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="recipient_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shipper_d__case___41B8C09B">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.shipper_details" Role="shipper_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="shipper_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="package_scan_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="case_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="scan_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="psd_date" Type="DateTime" Precision="3" />
+          <Property Name="code_description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="psd_time" Type="Time" Precision="7" />
+          <Property Name="location_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="creation_date" Type="DateTime" Precision="3" />
+          <Property Name="modification_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="case_details" Relationship="Incedo_DEVModel.FK__package_s__case___3DE82FB7" FromRole="package_scan_details" ToRole="case_details" />
+        </EntityType>
+        <Association Name="FK__package_s__case___3DE82FB7">
+          <End Type="Incedo_DEVModel.case_details" Role="case_details" Multiplicity="1" />
+          <End Type="Incedo_DEVModel.package_scan_details" Role="package_scan_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="case_details">
+              <PropertyRef Name="case_id" />
+            </Principal>
+            <Dependent Role="package_scan_details">
+              <PropertyRef Name="case_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Incedo_DEVModelStoreContainer" CdmEntityContainer="Incedo_DEVEntities">
+          <EntitySetMapping Name="add_case_notes">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.add_case_notes">
+              <MappingFragment StoreEntitySet="add_case_notes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="follow_up_date" ColumnName="follow_up_date" />
+                <ScalarProperty Name="attempts_made" ColumnName="attempts_made" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="tracking" ColumnName="tracking" />
+                <ScalarProperty Name="info_rec" ColumnName="info_rec" />
+                <ScalarProperty Name="info_req" ColumnName="info_req" />
+                <ScalarProperty Name="left_vmail" ColumnName="left_vmail" />
+                <ScalarProperty Name="spoke_to" ColumnName="spoke_to" />
+                <ScalarProperty Name="trigger_phone" ColumnName="trigger_phone" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="agent_case_attempts_made">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.agent_case_attempts_made">
+              <MappingFragment StoreEntitySet="agent_case_attempts_made">
+                <ScalarProperty Name="case_priority" ColumnName="case_priority" />
+                <ScalarProperty Name="attempts_Date" ColumnName="attempts_Date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="attempts_made" ColumnName="attempts_made" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="agent_case_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.agent_case_details">
+              <MappingFragment StoreEntitySet="agent_case_details">
+                <ScalarProperty Name="Reassigned" ColumnName="Reassigned" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="agent_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.agent_details">
+              <MappingFragment StoreEntitySet="agent_details">
+                <ScalarProperty Name="supervisor" ColumnName="supervisor" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="alt_title" ColumnName="alt_title" />
+                <ScalarProperty Name="loc_id" ColumnName="loc_id" />
+                <ScalarProperty Name="queue_type" ColumnName="queue_type" />
+                <ScalarProperty Name="date_assigned" ColumnName="date_assigned" />
+                <ScalarProperty Name="fedex_id" ColumnName="fedex_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bot_trigger">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.bot_trigger">
+              <MappingFragment StoreEntitySet="bot_trigger">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="modificationdate" ColumnName="modificationdate" />
+                <ScalarProperty Name="creationdate" ColumnName="creationdate" />
+                <ScalarProperty Name="bot_trigger1" ColumnName="bot_trigger" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="case_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.case_details">
+              <MappingFragment StoreEntitySet="case_details">
+                <ScalarProperty Name="case_priority" ColumnName="case_priority" />
+                <ScalarProperty Name="assignment" ColumnName="assignment" />
+                <ScalarProperty Name="shipper_local_time" ColumnName="shipper_local_time" />
+                <ScalarProperty Name="follow_up_date" ColumnName="follow_up_date" />
+                <ScalarProperty Name="attempts_made" ColumnName="attempts_made" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="commitment_date" ColumnName="commitment_date" />
+                <ScalarProperty Name="tracking_number" ColumnName="tracking_number" />
+                <ScalarProperty Name="case_notes" ColumnName="case_notes" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="alternate_title" ColumnName="alternate_title" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="case_notes">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.case_notes">
+              <MappingFragment StoreEntitySet="case_notes">
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="send_to" ColumnName="send_to" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="case_notes1" ColumnName="case_notes" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="folder_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.folder_details">
+              <MappingFragment StoreEntitySet="folder_details">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="folder_description" ColumnName="folder_description" />
+                <ScalarProperty Name="folder_name" ColumnName="folder_name" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="folder_ids">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.folder_ids">
+              <MappingFragment StoreEntitySet="folder_ids">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="location_details_dest">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.location_details_dest">
+              <MappingFragment StoreEntitySet="location_details_dest">
+                <ScalarProperty Name="dst" ColumnName="dst" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="location_type" ColumnName="location_type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="express_holidays_description" ColumnName="express_holidays_description" />
+                <ScalarProperty Name="local_date" ColumnName="local_date" />
+                <ScalarProperty Name="express_holidays_date" ColumnName="express_holidays_date" />
+                <ScalarProperty Name="local_time" ColumnName="local_time" />
+                <ScalarProperty Name="loc_name" ColumnName="loc_name" />
+                <ScalarProperty Name="loc_id" ColumnName="loc_id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="location_details_origion">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.location_details_origion">
+              <MappingFragment StoreEntitySet="location_details_origion">
+                <ScalarProperty Name="dst" ColumnName="dst" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="location_type" ColumnName="location_type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="express_holidays_description" ColumnName="express_holidays_description" />
+                <ScalarProperty Name="local_date" ColumnName="local_date" />
+                <ScalarProperty Name="express_holidays_date" ColumnName="express_holidays_date" />
+                <ScalarProperty Name="local_time" ColumnName="local_time" />
+                <ScalarProperty Name="loc_name" ColumnName="loc_name" />
+                <ScalarProperty Name="loc_id" ColumnName="loc_id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logins">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="package_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.package_details">
+              <MappingFragment StoreEntitySet="package_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="declared_value" ColumnName="declared_value" />
+                <ScalarProperty Name="view_airbill" ColumnName="view_airbill" />
+                <ScalarProperty Name="customs_value_USD_" ColumnName="customs_value(USD)" />
+                <ScalarProperty Name="dest" ColumnName="dest" />
+                <ScalarProperty Name="weight_KG_" ColumnName="weight(KG)" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="commodity" ColumnName="commodity" />
+                <ScalarProperty Name="pieces" ColumnName="pieces" />
+                <ScalarProperty Name="ship_date" ColumnName="ship_date" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="primary_case_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.primary_case_details">
+              <MappingFragment StoreEntitySet="primary_case_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+                <ScalarProperty Name="primary_rep_id" ColumnName="primary_rep_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="primary_rep_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.primary_rep_details">
+              <MappingFragment StoreEntitySet="primary_rep_details">
+                <ScalarProperty Name="primary_rep_id" ColumnName="primary_rep_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="loc_id" ColumnName="loc_id" />
+                <ScalarProperty Name="queue_type" ColumnName="queue_type" />
+                <ScalarProperty Name="date_assigned" ColumnName="date_assigned" />
+                <ScalarProperty Name="fedex_id" ColumnName="fedex_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="primary_requirements">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.primary_requirements">
+              <MappingFragment StoreEntitySet="primary_requirements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="is_received" ColumnName="is_received" />
+                <ScalarProperty Name="case_requirements" ColumnName="case_requirements" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recipient_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.recipient_details">
+              <MappingFragment StoreEntitySet="recipient_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="postal_country" ColumnName="postal_country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city_state_prov" ColumnName="city_state_prov" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shipper_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.shipper_details">
+              <MappingFragment StoreEntitySet="shipper_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="alternate_phone" ColumnName="alternate_phone" />
+                <ScalarProperty Name="postal_country" ColumnName="postal_country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city_state_prov" ColumnName="city_state_prov" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="package_scan_details">
+            <EntityTypeMapping TypeName="Incedo_DEVModel.package_scan_details">
+              <MappingFragment StoreEntitySet="package_scan_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="modification_date" ColumnName="modification_date" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="psd_time" ColumnName="psd_time" />
+                <ScalarProperty Name="code_description" ColumnName="code_description" />
+                <ScalarProperty Name="psd_date" ColumnName="psd_date" />
+                <ScalarProperty Name="scan_code" ColumnName="scan_code" />
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

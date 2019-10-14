@@ -1,0 +1,2553 @@
+﻿@model c3i_fedex.Models.ViewModel
+
+@using c3i_fedex.Models
+@{
+    ViewBag.Title = "caseview";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C3i</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <script src="/js/sorting.js"></script>
+    <script src="/js/mainjsfile.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <link href="/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <!-- <script src="/js/alertify.js-0.3.11/lib/alertify.min.js"></script>
+    <link rel="stylesheet" href="/js/alertify.js-0.3.11/themes/alertify.core.css" />
+     <link rel="stylesheet" href="/js/alertify.js-0.3.11/themes/alertify.default.css" id="toggleCSS" />-->
+    <script type="text/javascript"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('table.fixed tr td.text').find(":input").attr('disabled', 'disable');
+            // first row checkboxes
+            $('.check').click(function () {
+
+                //enable/disable all exceptcheckboxes, based on the row is checked or not
+                $('table.fixed tr td.text').find(":input").attr('disabled', !this.checked);
+            });
+        });
+       /* $(document).ready(function () {
+            $('.MyCheckboxCSSClass').click(function () {
+                alert("hello");
+                //enable/disable all except checkboxes, based on the row is checked or not
+                $(this).closest('.fixed').find("td").attr('disabled', !this.checked);
+            });
+        });*/
+
+        Deadline1.oninput = function () {
+            txtdeadline.innerHTML = Deadline1.value;
+  };
+
+
+        function FillBilling(f) {
+           // if (f.billingtoo.checked == true) {
+
+           // var result = confirm("Are you sure, you want to  changes?")
+
+            //if (result)
+            //{
+                f.txtdeadline.value = f.Deadline1.value;
+               // return true;
+            //}// else {
+              //  return false;
+            //}
+
+            }
+
+//function sync()
+//{
+//    var n1 = document.getElementById('Deadline');
+//  var n2 = document.getElementById('txtdeadline');
+//  n2.value = n1.value;
+//}
+    </script>
+    <script>
+        function myviewretrieve() {
+            // alert("hai")
+
+            // var amount = txtamount.value;
+           // var usclient = document.getElementById('retrieve').value;
+
+
+            // var usclient = usclient.value;
+             //alert(usclient)
+            //var client = document.getElementById('client').value;
+            if (document.getElementById('retrieve').value != '') {
+                //alert("hi");
+                document.getElementById('retrieve').disabled = false;
+                window.open(document.getElementById('retrieve').value,
+       '_blank' // <- This is what makes it open in a new window.
+     );
+            }
+            else
+            {
+                alert("hello");
+                document.getElementById('retrieve').disabled = true;
+
+
+            }
+
+            return false;
+
+}
+    </script>
+
+    <script>
+        function sendtemplatemessage() {
+
+            //  var result = alertify.confirm("Do your want to submit form?");txtemail
+            var result = confirm("Are you sure, you want to Send the template?")
+            //document.getElementById('txtemail').value != null
+            if (document.getElementById('txtemail').value == '') {
+                alert("please enter  email id")
+                document.getElementById('txtemail').focus();
+                return false;
+            }
+            if ($("#send_template option:selected").val() == null) {
+                alert("please select template  ")
+                return false;
+            }
+            //$('#send_template').validate({ // initialize the plugin
+            //    rules: {
+            //        send_template: {
+            //            selectcheck: true
+            //        }
+            //    }
+            //});
+
+            //jQuery.validator.addMethod('selectcheck', function (value) {
+            //    return (value != '0');
+            //}, "template required");
+
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+    @*<script>
+        function openWindow() {
+            var win = window.open('https://www.xe.com//');
+            alert(win.toString())
+            win.focus();
+        }
+        </script>*@
+    <script>
+
+
+        function myConvertcurrency() {
+           // alert("hai")
+             var amount = txtamount.value;
+             var _form = document.getElementById('_from').value;
+
+
+            // var usclient = usclient.value;
+            //alert(_form)
+             var _to = document.getElementById('_to').value;
+             window.open(
+   "https://www.xe.com/currencyconverter/convert/?Amount=" + amount + "&From=" + _form + "&To=" + _to,
+   '_blank' // <- This is what makes it open in a new window.
+ );
+            //location.href="https://www.xe.com/currencyconverter/convert/?Amount=" + amount + "&From=" + usclient + "&To=" + client;
+            //alert("https://www.xe.com/currencyconverter/convert/?Amount=" + amount + "&From=" + usclient + "&To=" + client);
+            return false;
+
+}
+    </script>
+
+    <script>
+        function myviewretrieve() {
+            // alert("hai")
+
+            // var amount = txtamount.value;
+           // var usclient = document.getElementById('retrieve').value;
+
+
+            // var usclient = usclient.value;
+             //alert(usclient)
+            //var client = document.getElementById('client').value;
+            if (document.getElementById('retrieve').value != '') {
+                //alert("hi");
+                document.getElementById('retrieve').disabled = false;
+                window.open(document.getElementById('retrieve').value,
+       '_blank' // <- This is what makes it open in a new window.
+     );
+            }
+            else
+            {
+                alert("hello");
+                document.getElementById('retrieve').disabled = true;
+
+
+            }
+
+            return false;
+
+}
+    </script>
+
+
+    <script>
+        function myviewairbill() {
+            // alert("hai")
+
+            // var amount = txtamount.value;
+            var usclient = document.getElementById('airbill').value;
+
+
+
+            // var usclient = usclient.value;
+
+            //var client = document.getElementById('client').value;
+            if (document.getElementById('airbill').value != '') {
+               // alert("hi")
+                document.getElementById('airbill').disabled = false;
+                window.open(document.getElementById('airbill').value ,
+       '_blank' // <- This is what makes it open in a new window.
+     );
+
+            } else
+            {
+                document.getElementById('airbill').disabled = true;
+            }
+            //location.href="https://www.xe.com/currencyconverter/convert/?Amount=" + amount + "&From=" + usclient + "&To=" + client;
+            //alert("https://www.xe.com/currencyconverter/convert/?Amount=" + amount + "&From=" + usclient + "&To=" + client);
+            return false;
+
+}
+    </script>
+
+    <script>
+        var $j = jQuery.noConflict();
+        $(function () {
+            $j(".datepicker").datepicker();
+
+        });
+        function ShowMessage() {
+
+          //  var result = alertify.confirm("Do your want to submit form?");
+            var result = confirm("Are you sure, you want to save the changes?")
+            if ($('#txtremarks').val() == "") {
+                alert("Please Enter Remarks")
+                document.getElementById('txtremarks').focus();
+                return false;
+            }
+
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+
+        //    // if (e) {
+
+        //    alertify.confirm("Are you sure, you want to save the changes?", function (e) {
+        //        if (e) {
+        //            return true;
+        //        }
+        //        else {
+        //            return false;
+        //        }
+        //});
+            //if (result) {
+            //    return true;
+            //} else {
+            //    return false;
+            //}
+        }
+
+        if ('@TempData["Success"]'.Count==1) {
+            alert("Form successfully submitted");
+            // handle refreshing the view, or redirect to another View (window.location.href = "")
+        }
+
+
+                      var $k = jQuery.noConflict();
+                      $k(document).ready(function () {
+
+	                    $(".trigger_popup").click(function(){
+                           $('.hover_bkgr').show();
+	                    });
+	                    $(".trigger_popup1").click(function () {
+	                        $('.hover_bkgr').show();
+	                    });
+                        $('.hover_bkgr').click(function(){
+                            $('.hover_bkgr').hide();
+                        });
+                        $('.popupCloseButton').click(function(){
+                            $('.hover_bkgr').hide();
+                        });
+	                    //********* ******//
+	                    $(".hidediv").click(function () {
+                         $(".td1").toggle();
+	                    });
+	                    $(".hidediv1").click(function () {
+	                        $(".td11").toggle();
+	                    });
+	                    $(".hidediv2").click(function () {
+	                        $(".td12").toggle();
+	                    });
+	                    $(".showhidediv").click(function () {
+                         $(".td2").toggle();
+                        });
+                          //********* ******//
+
+	                    var modal = document.getElementById('myModal');
+                          var btn = document.getElementById("myBtn");
+                          var span = document.getElementsByClassName("close")[0];
+
+                          btn.onclick = function() {
+                              modal.style.display = "block";
+                          }
+
+
+                          span.onclick = function() {
+                              modal.style.display = "none";
+                          }
+
+
+                          window.onclick = function(event) {
+                              if (event.target == modal) {
+                                  modal.style.display = "none";
+                              }
+                          }
+
+                    });
+                    function myFunction() {
+                        var table = document.getElementById("myTable");
+                        var checkboxcount = document.getElementById("checkboxcount").value.trim();
+                        //checkboxcount
+
+                        var row = table.insertRow(-1);
+                        var cell1 = row.insertCell(0);
+                        var checkboxVal = parseInt(checkboxcount);
+
+                        cell1.innerHTML = "<tr><td style='text-align:left'>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input type='checkbox' value='" + checkboxVal + "' name='box1' ></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td><input type='text' name='input1' size='50'></td><input type='image' src='/images/cross.png' value='remove' onclick='deleteRow(this)' width='20' height='20'/></tr>";
+                        document.getElementById("checkboxcount").value = checkboxVal + 1;
+                        cell1.scrollIntoView(false);
+                    }
+                    function deleteRow(src) {
+                        var oRow = src.parentElement.parentElement;
+                        document.all("myTable").deleteRow(oRow.rowIndex);
+                        var checkboxAll = $('[name="box1"]');
+
+                        for (var i = 0 ; i < checkboxAll.length ; i++) {
+                            checkboxAll[i].value = i;
+                        }
+                        document.getElementById("checkboxcount").value = checkboxAll.length;
+                    }
+                    var count = 4;
+                    function myFunction1() {
+                        var table = document.getElementById("myTable1");
+                        var row = table.insertRow(-1);
+                        row.innerHTML = '<tr><td style="text-align: center;" ><input  type="checkbox" name="box1" value="">&nbsp;&nbsp;Attempt' + " " + count + '</td><td style="text-align: center;" ><input type="date" /></span></td><td style="text-align: center;" ><input type="time" /></td><td style="text-align: center;" ><input type="radio" name="set4" value="set4"> Set All Time High Priority</td><input type="image" src="/images/cross.png" style="padding-left:5px" value="remove" onclick="deleteRow1(this)" width="25" height="20"/></tr>';
+                        row.scrollIntoView(true);
+                        count++;
+                    }
+                    function deleteRow1(src) {
+                        var oRow1 = src.parentElement.parentElement;
+                        document.all("myTable1").deleteRow(-1);
+                    }
+
+
+
+                    ///function JSalert() {
+                        // A confirm dialog
+                       // alertify.confirm("Are you sure, you want to save the changes?", function (e) {
+                         //   if (e) {
+                                // Let the user download the file he/she requested
+                                @*var url = "@Url.Action("caseview")";
+                                return url;*@
+                                //$.ajax({
+                                //    type: "POST",
+                                //    url: url, // the URL of the controller action method
+                                //    //data: "{queryString:'" + searchVal + "'}",
+                                //    data: { queryString: searchVal },
+                                //   // data:, // optional data
+                                //    success: function (data) {
+                                //        // do something with result
+                                //    },
+                                //    error: function (req, status, error) {
+                                //        // do something with error
+                                //    }
+                                //});
+
+
+                                //$.ajax({
+                                //    //data: { 'txtspoke': txtspoke },
+                                //    url: url,
+                                //    type: "POST",
+                                //    dataType: "html",
+                                //    data: { 'txtspoke': $("#txtspoke").valueOf() },
+
+
+                                //    success: function (data) {
+                                //        $("#container").html(data);
+                                //        alert("Local success callback.");
+                                //    },
+                                //})
+                                // alertify.alert("Saved Successfully!");
+
+
+                        //    } else {
+                        //        return false;
+                        //    }
+                        //});
+
+
+
+
+    </script>
+    <style>
+        textarea {
+            width: 100%;
+            -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
+            -moz-box-sizing: border-box; /* FF1+ */
+            box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .pos{
+            float:right;
+        }
+            .overlay:target {
+                visibility: visible;
+                opacity: 1;
+            }
+            .line td{
+                border:1px solid #dddddd;
+            }
+             .line th{
+                border:1px solid #dddddd;
+            }
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 50%;
+            height: auto;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+            .popup h2 {
+                margin-top: 0;
+                color: #333;
+                font-family: Tahoma, Arial, sans-serif;
+            }
+            .table
+            {
+                border:0px;
+            }
+
+            .popup .close {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                transition: all 200ms;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+            }
+
+                .popup .close:hover {
+                    color: #4D148C;
+                }
+
+            .popup .content {
+                max-height: 30%;
+                overflow: auto;
+            }
+
+        .overlay2 {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+            .overlay2:target {
+                visibility: visible;
+                opacity: 1;
+            }
+
+        .popup2 {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+            .popup2 h2 {
+                margin-top: 0;
+                color: #333;
+                font-family: Tahoma, Arial, sans-serif;
+            }
+
+            .popup2 .close2 {
+                position: absolute;
+                top: 10px;
+                right: 30px;
+                transition: all 200ms;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+            }
+
+                .popup2 .close2:hover {
+                    color: #4D148C;
+                }
+
+            .popup2 .content2 {
+                max-height: 30%;
+                overflow: auto;
+            }
+
+        .overlay3 {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+            .overlay3:target {
+                visibility: visible;
+                opacity: 1;
+            }
+
+        .popup3 {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+            .popup3 h2 {
+                margin-top: 0;
+                color: #333;
+                font-family: Tahoma, Arial, sans-serif;
+            }
+
+            .popup3 .close3 {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                transition: all 200ms;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+            }
+
+                .popup3 .close3:hover {
+                    color: #4D148C;
+                }
+
+            .popup3 .content3 {
+                max-height: 30%;
+                overflow: auto;
+            }
+
+        tr.notable td {
+            border: 0;
+            background-color: white;
+            border-style: hidden;
+            padding: 2px;
+        }
+
+        /*pop up ui*/
+        .modal-content h1 {
+            width: auto;
+            height: 40px;
+            position: relative;
+            color: #fff;
+            font: 15px/40px Roboto,sans-serif;
+            text-align: center;
+            margin: 0px;
+            padding: 0px;
+            background: #4D148C;
+            border-radius: 0.2rem;
+        }
+
+        .modal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.4);
+            opacity: 1;
+            visibility: hidden;
+            transform: scale(1.1);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: 0px;
+            padding: 0px;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 0.2rem;
+            width: auto;
+            height: auto;
+        }
+
+        .t {
+            margin: 0px;
+            color: #58595B;
+            font-size: 14px;
+        }
+
+        table.t td {
+            min-width: 150px;
+            width: auto;
+        }
+
+        .close-button {
+            float: right;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            background-color: #4D148C;
+        }
+
+            .close-button:hover {
+                background-color: #ff9800;
+            }
+
+        .show-modal {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.0);
+            transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+        }
+        /*for desyination pop up*/
+        .modal-content1 h1 {
+            width: auto;
+            height: 40px;
+            position: relative;
+            color: #fff;
+            font: 15px/40px Roboto,sans-serif;
+            text-align: center;
+            margin: 0px;
+            padding: 0px;
+            background: #4D148C;
+            border-radius: 0.2rem;
+        }
+
+        .modal1 {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.4);
+            opacity: 1;
+            visibility: hidden;
+            transform: scale(1.1);
+        }
+
+        .modal-content1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: 0px;
+            padding: 0px;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 0.2rem;
+            width: auto;
+            height: auto;
+        }
+
+        .t1 {
+             border:0px;
+            margin: 0px;
+            color: #58595B;
+            font-size: 14px;
+        }
+
+        table.t1 td {
+            border:0px;
+            min-width: 150px;
+            width: auto;
+        }
+
+        .close-button1 {
+            float: right;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            background-color: #4D148C;
+        }
+
+            .close-button1:hover {
+                background-color: #ff9800;
+            }
+
+        .show-modal1 {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.0);
+            transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+        }
+
+        .column-left {
+            float: left;
+            width: 20%;
+            padding: 5px;
+        }
+
+        .column {
+            float: left;
+            width: 40%;
+            padding: 5px;
+        }
+
+        .column-right {
+            float: left;
+            width: 40%;
+            padding: 5px;
+        }
+
+        .column-l {
+            float: left;
+            width: 50%;
+            padding-top: 5px;
+            padding-left:0px;
+            padding-right:2px;
+           
+        }
+
+        .column-r {
+            float: left;
+            width: 50%;
+            padding-top: 5px;
+            padding-left:2px;
+            padding-right:0px;
+            
+        }
+
+        .inputSelectsize {
+            width: 195px;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+        }
+
+        table.fixed {
+            table-layout: fixed;
+        }
+
+            table.fixed td {
+                overflow: hidden;
+            }
+            .table-responsive
+            {
+             border:0px solid white;
+            }
+    </style>
+</head>
+<body>
+    <header class="header-container py-3">
+        <div class="breadcrumbs col-12 py-2">
+            <div class="row d-flex align-items-center justify-content-center justify-content-md-between text-center text-md-left">
+                <div class="col-md-6 mb-2">
+                    @if (Session["supervisor"] != null)
+                    {
+                        <a class="logo" href="supervisor"><img src="/images/logo.png" alt="C3i" width="80" height="auto" /></a>
+                    }
+                    else
+                    {
+                        <a class="logo" href="index"><img src="/images/logo.png" alt="C3i" width="80" height="auto" /></a>
+                    }
+                </div><!-- logo -->
+                <div class="col-md-6 text-md-right mb-2">
+                    <div class="dropdown d-inline-block">
+                        <a href="javascript:void(0)" class="" data-toggle="dropdown">
+                            <img src="/images/mark.png" alt="Mark Anthony" width="46" height="46" class="rounded-circle" /><span class="ml-2 welcome-message">@ViewData["userName"].ToString()</span>
+                        </a>
+                        <input type="button" value="logout" class="btn btn-secondary"
+                               onclick="location.href='@Url.Action("logout", "C3_Fedex")'" />
+                        <div class="dropdown-menu col-12">
+                            <a class="dropdown-item" href="#">My Account</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </div><!-- drop down account-->
+                </div>
+            </div>
+        </div>
+    </header><!--.header-container-->
+    <section class="content-container bglight-gray">
+        <!--<div class="breadcrumbs col-12 py-2" style="background-color:'#1D5288'">
+            <ul class="pl-0 mb-0" ><li >Home</li></ul>
+        </div>//breadcrumbs-->
+
+        <div class="container-fluid">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                <div class="table-responsive">
+                    <table style="table-layout:fixed;width: 100%;" class="table table-sm line">
+                        <thead>
+                            <tr>
+                                @*<th style="text-align: center;" id="select">Select Id</th>*@
+                                <th style="text-align: center;" id="Case_ID">Case ID</th>
+                                <th style="text-align: center;" id="Tracking">Tracking #</th>
+                                <th style="text-align: center;" id="Title">Title</th>
+                                <th style="text-align: center;" id="Alternate">Alternate Title</th>
+                                <th style="text-align: center;" id="Commitment">Commitment Date </th>
+                                <th style="text-align: center;" id="Commitment">Follow-Up Date and Time</th>
+                                <th style="text-align: center;" id="Shipper">Shipper's Local Time</th>
+                                <th style="text-align: center;" id="Attempts">Attempts Made</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in @Model.indexmodel.ToList())
+                            {
+                                <tr>
+                                    @*<td> <input type="checkbox" name="departments" id="chck" value="@item.case_id" /></td>*@
+                                    @if (Session["supervisor"] != null)
+                                    {
+                                        <td> @Html.ActionLink(@item.case_id, "supervisor", new { @item.case_id })</td>
+                                    }
+                                    else
+                                    {
+                                        <td> @Html.ActionLink(@item.case_id, "index", new { @item.case_id })</td>
+                                    }
+                                    @*<td>@item.case_id  </td>*@
+                                    <td>@item.tracking  </td>
+                                    <td>@item.title  </td>
+                                    <td>@item.alternate_title  </td>
+                                    <td>@item.commitment_date.ToString("MM/dd/yyyy")  </td>
+                                    <td>@item.follow_up_date   </td>
+                                    <td>@item.shippers_local_time.ToString("hh:mm tt")</td>
+                                    <td>@item.attempts_made </td>
+                                    @*<td>@Html.CheckBox  </td>*@
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div><!--all-->
+
+                <div style="height:420px;width:100%;max-height:420px;">
+                    <table style="table-layout:fixed;height:150px;" class="table table-sm">
+
+                        <tbody>
+                            <tr>
+                                @*<div class="table-responsive">*@
+                                <td width="50%">
+                                    <table style="table-layout:fixed;height:150px;" class="table table-sm ">
+                                        <thead>
+                                            <tr>
+                                                <th class="colo" width="60%" colspan="5" style="text-align:center;">
+                                                    Case Notes
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+
+
+                                                <td style="text-align: center;background-color:white" rowspan="9" colspan="5" class="line" >
+
+
+                                                    <table style="table-layout:fixed;width: 100%;" class="table table-sm table-scroll">
+                                                        <tr style="display:block;"> <td colspan="3"><span style="text-align:left;"> @Html.Raw(Model.casenote) </span></td> </tr>
+                                                         @foreach (var itm in Model.agentCaseDetails.ToList())
+                                                        {
+                                                            <tr class="notable"><td width="100px"><b>Reassigned :</b> </td><td>  :@itm.agent_id <b> @itm.modification_date <b></td><td></td></tr>
+                                                        }
+                                                        @foreach (var item2 in Model.addcasenotes.ToList())
+                                                        {
+                                                            <tr class="notable">
+                                                                <td width="100px">
+                                                                    <b>  ***@item2.modification_date.Value.ToString("MM/dd/yyyy hh:mm")** @item2.agent_id**********</b>
+                                                                </td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+
+                                                            if (@item2.trigger_phone !=null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>TriggerPhone</b></td><td>:@item2.trigger_phone</td><td></td></tr>
+
+                                                            }
+                                                            if (item2.spoke_to != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>SpokeTo </b>  </td><td>     :@item2.spoke_to</td><td></td></tr>
+                                                            }
+                                                            if (@item2.left_vmail != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>LeftVMail</b> </td><td>     :@item2.left_vmail</td><td></td></tr>
+
+                                                            }
+                                                            if (@item2.info_rec != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>InfoReq</b>   </td><td>     :@item2.info_rec</td><td></td></tr>
+
+                                                            }
+                                                            if (@item2.info_req != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>InfoRec</b>  </td><td>      :@item2.info_req</td><td></td></tr>
+
+                                                            }
+                                                            if (@item2.tracking != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>Tracking</b>  </td><td>     :@item2.tracking</td><td></td></tr>
+
+                                                                @*<tr class="notable"><td width="100px"><b>Deadline</b>  </td><td>     :@item2.deadline</td><td></td></tr>*@
+                                                            }
+                                                            if (@item2.attempts_made != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>AttemptsMade</b> </td><td>  :@item2.attempts_made</td><td></td></tr>
+                                                            }
+                                                            if (@item2.follow_up_date != null)
+                                                            {
+                                                                <tr class="notable"><td width="100px"><b>FollowUpDate</b> </td><td>  :@item2.follow_up_date.Value.ToString("MM/dd/yyyy hh:mm")</td><td></td></tr>
+                                                            }
+
+                                                                <tr class="notable" >
+                                                                    <td width="100px" >
+                                                                        <b>  Remarks</b>
+                                                                    </td>
+                                                                    <td >
+                                                                        :@item2.Remarks
+                                                                    </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+
+                                                        }
+                                                       
+                                                    </table>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                @*</div>*@
+
+                                <td width="50%">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm" style="">
+                                            <thead>
+                                                <tr>
+                                                    <th width="40%" colspan="2" style="text-align: center;">
+                                                        Primary Requirements
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th width="40%" style="text-align: left;" colspan="2">
+                                                        Documents Received? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+                                                        Requirements
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div style="overflow:scroll;height:120px;width:100%;overflow:auto;">
+                                                            <table id="myTable" style="">
+                                                                @*@foreach (var itm in Model.primaryrequirements.ToList())*@
+                                                                @if (Model.primaryrequirements.Count != 0)
+                                                                {
+                                                                    <input type="hidden" id="checkboxcount" value=@Model.primaryrequirements.Count />
+                                                                    int i = 0;
+                                                                    foreach (var itm in Model.primaryrequirements.ToList())
+                                                                    {
+
+                                                                        <tr>
+
+                                                                            <td style="text-align: left" colspan="2">
+                                                                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                                @if (@itm.is_received)
+                                                                                {
+
+                                                                                    <input type="checkbox" name="box1" id="checkbox" @i checked value=@i>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="checkbox" name="box1" id="checkbox" @i value=@i>
+
+                                                                                }
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <input type="text" name="input1" value="@itm.case_requirements " size="50">
+                                                                            </td>
+                                                                        </tr>
+                                                                        i = i + 1;
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="hidden" id="checkboxcount" value="3" />
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                            <input type="checkbox" name="box1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <input type="text" name="input1" size="50">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                            <input type="checkbox" name="box1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <input type="text" name="input1" size="50">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr id="newlink">
+                                                                        <td colspan="2">
+                                                                            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                            <input type="checkbox" name="box1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <input type="text" name="input1" size="50">
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </table>
+                                                        </div>
+                                                        <div style="text-align: center"><a href="javascript:void(0)"><input type="button" class="btn btn-secondary" onclick="myFunction()" value="Add Another Field" /></a></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table>
+                                                            @if (Model.casenotesmail != null)
+                                                            {
+                                                                foreach (var item2 in Model.casenotesmail.ToList())
+                                                                {
+                                                                    <tr>
+                                                                        <td style="text-align: left">
+                                                                            <span>Email ID to revert :</span>
+                                                                        </td>
+                                                                        <td style="text-align: left">
+                                                                            <input type="email"  name="emailid" value="@item2.email_id " size="50" />
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align: left">
+                                                                        <span>Email ID to revert :</span>
+                                                                    </td>
+                                                                    <td style="text-align: left">
+                                                                        <input type="email" name="emailid" size="50" />
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                            <tr>
+                                                                <td style="text-align: left">
+                                                                    <span>Deadline :</span>
+                                                                </td>
+                                                                <td style="text-align: left">
+                                                                    @foreach (var item in Model.indexmodel)
+                                                                    {
+                                                                    <input type="text" class="datepicker" id="Deadline1" name="Deadline1" value="@item.assignment.AddDays(4).ToString("MM/dd/yyyy")" onchange="FillBilling(this.form)">@*<i class="fa fa-calendar" style="font-size:18px;color:grey"></i>*@
+                                                                    }
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td style="text-align: center" colspan="2">
+
+                                                                    @* <input type="submit"  name="btnsave" formaction ==@Url.Action("caseview") value="Save" class=" btn btn-secondary">*@
+                                                                    @*<input type="button"  name="btnsave" value="Save" onclick="JSalert()" formaction=@Url.Action("caseview") formmethod="post" class="btn btn-secondary"  />*@
+                                                                    <input type="submit" name="btnsave" value="Save" class="btn btn-secondary" />
+                                                                    @* <input type="submit" value="Save & Update" class="btn btn-secondary" formaction="caseview"/>
+                                                                            <input type="button" class=" btn btn-secondary" name="butt1" formaction =@Url.Action("caseview") value="Save">
+
+                                                                        <input type="button" class="btn btn-secondary" name="butt1" forma
+                                                                        <input type="submit" name="btnsave" value="Save" class="btn btn-secondary" />
+                                                                        @* <input type="submit" value="Save & Update" class="btn btn-secondary" formaction="caseview"/>
+                                                                                <input type="button" class=" btn btn-secondary" name="butt1" formaction =@Url.Action("caseview") value="Save">
+
+                                                                            <input type="button" class="btn btn-secondary" name="butt1" formaction =@Url.Action("caseview") value="Save">*@
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    From:
+                                                                    <select id="_from" name="_from" style="width: 180px">
+<option value="USD">USD - US Dollar</option>
+    @foreach (var item in Model.currencycodes)
+    {
+        <option value=@item.code>@item.code_currency </option>
+    }
+    @*<option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+        <option value="AUD">AUD</option>
+        <option value="EUR">EUR</option>
+        <option value="CAD">CAD</option>*@
+                                                                    </select>
+                                                                    To:
+                                                                    <select id="_to" name="_to" style="width: 180px">
+                                                                        <option value="USD">USD - US Dollar</option>
+                                                                        @foreach (var item in Model.currencycodes)
+                                                                        {
+                                                                            <option value=@item.code>@item.code_currency </option>
+                                                                        }
+                                                                    </select>
+
+                                                                    @*<select id="client" name="client">
+                                                                        <option value="EUR">EUR</option>
+                                                                        <option value="USD">USD</option>
+                                                                        <option value="GBP">GBP</option>
+                                                                        <option value="INR">INR</option>
+                                                                        <option value="AUD">AUD</option>*@
+                                                                    @*<option value="EUR">EUR</option>*@
+                                                                    @*<option value="CAD">CAD</option>*@
+
+                                                                    Amount:
+
+                                                                    <input type="text" name="txtamount" id="txtamount" placeholder="Enter Amount">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center" colspan="2">
+                                                                    @*<input type="button"   id="myBtn" class="btn btn-secondary" name="butt1" value="Convert Currency"/>*@
+                                                                    <button class="btn btn-secondary" name="butt1" onclick="javascript: myConvertcurrency(); return false;">Convert Currency</button>
+                                                                    @*<a href="https://www.xe.com" target="_blank" >*@
+                                                                    @*<input type="button" class="btn btn-secondary rounded-0"name="butt1" value="Convert Currency" onclick="myConvertcurrency()">*@
+                                                                    @*</a>*@
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                 <!-- convert content start -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                Amount
+                                <input type="text" name="amount" id="">
+                                From
+                                <input type="text" name="input">
+                                To
+                                <input type="text" name="output">
+                                <input type="button" class="btn btn-secondary" name="butt1" value="Convert">
+                            </div>
+                        </div>
+                            <!-- convert content end -->
+                        <div class="table-responsive">
+                            <table style="table-layout: fixed;width:100%" class="table table-sm">
+                                <tbody>
+
+                                    <tr>
+                                        <th style="text-align: center" colspan="2">
+                                            Package Details
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="table-responsive">
+                                                <table style="table-layout:fixed;width:100%" id="origin">
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            Ship Date
+                                                        </td>
+                                                        @foreach (var item in Model.packageDetails.ToList())
+                                                        {
+                                                            <td style="text-align: left;">
+                                                                @if (@item.ship_date != null)
+                                                                {
+                                                                    @item.ship_date.Value.ToString("MM/dd/yyyy")
+                                                                }
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align: center;">
+                                                            Origin Details
+                                                        </th>
+                                                        <th style="text-align: center;">
+                                                            Destination Details
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: center;">
+                                                            @Model.origin
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            @Model.dest
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width:50%">
+                                                            <table style="table-layout:fixed;width:100%">
+
+                                                                <tr>
+                                                                    <td>
+                                                                        Time
+                                                                    </td>
+                                                                    @if (Model.origindatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                    {
+                                                                        <td>
+                                                                            <strong>@Model.origindatetime.ToString("hh:mm tt")</strong>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        DateTime
+                                                                    </td>
+                                                                    @if (Model.origindatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                    {
+                                                                        <td>
+                                                                            <strong>@Model.origindatetime.ToString("MM/dd/yyyy")</strong>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Day Of Week
+                                                                    </td>
+                                                                    @if (Model.origindatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                    {
+                                                                        <td>
+                                                                            <strong> @Model.origindatetime.DayOfWeek</strong>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="text-align:center">
+                                                                        <a class="btn btn-secondary" href="#popup2" style="color:white">Holidays</a>
+                                                                        <div id="popup2" class="overlay2 table-responsive">
+                                                                            <div class="popup2">
+                                                                                <h5 style="text-align:center">Details</h5>
+                                                                                <a class="close2" href="#origin">&times;</a>
+                                                                                <div class="content2" style="overflow-y:scroll;height:200px;">
+                                                                                    <table style="table-layout: fixed;width: 100%;">
+
+                                                                                        <tr>
+                                                                                            <th style="text-align: center;">
+                                                                                                Date
+                                                                                            </th>
+                                                                                            <th style="text-align: center;">
+                                                                                                Description
+                                                                                            </th>
+
+                                                                                        </tr>
+                                                                                        @foreach (var item in Model.locationdetailsorigion)
+                                                                                        {
+                                                                                            <tr>
+                                                                                                <td style="text-align: center;">@item.express_holidays_date </td>
+                                                                                                <td style="text-align: center;">@item.express_holidays_description </td>
+
+                                                                                            </tr>
+                                                                                        }
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td style="width:50%">
+                                                            <table style="table-layout:fixed;width:100%" id="dest">
+
+                                                                <tr>
+                                                                    <td>
+                                                                        Time
+                                                                    </td>
+                                                                    
+                                                                        <td>                                                                            
+                                                                            <a href="https://time.is/@Model.locttime" target="_blank">Check Time</a>
+                                                                        </td>
+                                                                    
+                                                                    @*@if (Model.destdatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                        {
+                                                                        <td>
+                                                                            <strong>@Model.destdatetime.ToString("hh:mm tt")</strong>
+                                                                        </td>
+                                                                        }*@
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        DateTime
+                                                                    </td>
+                                                                    @if (Model.destdatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                    {
+                                                                        <td>
+                                                                            <strong>@Model.destdatetime.ToString("MM/dd/yyyy")</strong>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Day Of Week
+                                                                    </td>
+                                                                    @if (Model.destdatetime != Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                                                                    {
+                                                                        <td>
+                                                                            <strong> @Model.destdatetime.DayOfWeek</strong>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="text-align:center">
+                                                                        <a class="btn btn-secondary" href="#popup3" style="color:white">Holidays</a>
+                                                                        <div id="popup3" class="overlay3">
+                                                                            <div class="popup3">
+                                                                                <h5 style="text-align:center">Details</h5>
+                                                                                <a class="close3" href="#dest">&times;</a>
+                                                                                <div class="content3 " style="overflow-y:scroll;height:200px;">
+                                                                                    <table class="td11" style="table-layout: fixed">
+
+                                                                                        <tr>
+                                                                                            <th style="text-align: center;">
+                                                                                                Date
+                                                                                            </th>
+                                                                                            <th style="text-align: center;">
+                                                                                                Description
+                                                                                            </th>
+
+                                                                                        </tr>
+                                                                                        @*Date = {1/1/0001 12:00:00 AM}*@
+                                                                                        @foreach (var item in Model.locationdetailsdest)
+                                                                                        {
+                                                                                            <tr>
+                                                                                                <td style="text-align: center;">@item.express_holidays_date </td>
+                                                                                                <td style="text-align: center;">@item.express_holidays_description </td>
+
+                                                                                            </tr>
+                                                                                        }
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </td>
+
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            @*<div class="modal1 table-responsive">
+                                                    <div class="modal-content1 table-responsive">
+                                                        <h1>Destination Details<span class="close-button1">&times;</span></h1>
+                                                        <table class="t1" style="table-layout:fixed;width:auto">
+                                                            <tr>
+                                                                <td>
+                                                                    Destination
+                                                                </td>
+                                                                <td>
+                                                                    : @item.origin
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Time
+                                                                </td>
+                                                                <td>
+                                                                    : @DateTime.Now.ToString("hh:mm tt")
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    DateTime
+                                                                </td>
+                                                                <td>
+                                                                    : @DateTime.Now
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Day Of Week
+                                                                </td>
+                                                                <td>
+                                                                    : @DateTime.Now.DayOfWeek
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>*@
+
+
+                                        </td>
+                                        <td width="50%">
+                                            <table style="table-layout: fixed;">
+                                                @foreach (var item in Model.packageDetails.ToList())
+                                                {
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            Commodity
+                                                        </td>
+                                                        <td style="text-align: left;">
+                                                            @item.commodity
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            No. of Pieces
+                                                        </td>
+                                                        <td style="text-align: left;">
+                                                            @item.pieces
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            Weight
+                                                        </td>
+                                                        <td style="text-align: left;">
+                                                            @item.weight_KG_
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            Declared Value
+                                                        </td>
+                                                        <td style="text-align: left;">
+                                                            @item.declared_value
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left;">
+                                                            Customs Value
+                                                        </td>
+                                                        <td style="text-align: left;">
+                                                            @item.customs_value_USD_
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                       
+                                                        <td td style="text-align: center;">
+                                                            @*<button class="btn btn-secondary rounded-0" name="butt1" onclick="javascript: myConvertcurrency(); return false;">Convert Currency</button>*@
+                                                            <input type="hidden" name="airbill" id="airbill" value=@item.view_airbill>
+                                                           
+                                                           
+                                                            <button class="btn btn-secondary" name="butn" onclick="javascript: myviewairbill(); return false;">View Airway Bill</button>
+                                                           
+                                                           
+
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <input type="submit" class="btn btn-secondary" name="btnreverserate" value="Reverse Rate">
+                                                            @item.reverse_rate
+
+                                                        </td>
+                                                    </tr>
+                                                    @*<tr>
+                                                            @*<td style="text-align: left;">
+                                                                @item.reverse_rate
+                                                            </td>
+                                                        </tr>*@
+                                                }
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <p style="text-align: center">
+                                                <input type="button" class="hidediv btn btn-secondary" name="butt1" value="Package Scan details">
+                                                <input type="submit"  class="hidediv btn btn-secondary" name="PackageScandetailsrefresh" value="Refresh">
+                                                <div class="td1" style="overflow-y:scroll;height:160px;width:100%;display:none">
+                                                    <table>
+
+                                                        <tr>
+                                                            <th style="text-align: center;">
+                                                                Scan Code
+                                                            </th>
+                                                            <th style="text-align: center;">
+                                                                Code Description
+                                                            </th>
+                                                            <th style="text-align: center;">
+                                                                Date Time
+                                                            </th>
+                                                            <th style="text-align: center;">
+                                                                Location ID
+                                                            </th>
+                                                        </tr>
+                                                        @foreach (var item1 in Model.packagescandetails.ToList())
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: center;">
+                                                                    @item1.scan_code
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    @item1.code_description
+
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    @item1.psd_date
+
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    @item1.location_id
+
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div><!--tab-content-->
+            <!--code for original details popup-->
+            <!--code for original details popup-->
+                        <div class="table-responsive">
+                            <table style="table-layout: fixed;width: 100%;" class="line">
+                                <tbody>
+                                    @foreach (var item in Model.ShipperDetails.ToList())
+                                    {
+                                        <tr>
+                                            <th colspan="4" style="text-align: center;">
+                                                Shipper Information
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Account Number
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.account_number
+                                            </td>
+
+                                            <td style="text-align: left;">
+                                                Address 1
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.address1
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Company Name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.company_name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                Address 2
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.address2
+                                            </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <td style="text-align: left;">
+                                                Name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                City, State/Prov.
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.city_state_prov
+                                            </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <td style="text-align: left;">
+                                                Phone Number
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.phone
+                                            </td>
+                                            <td style="text-align: left;">
+                                                Postal/Country
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.postal_country
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;">
+                                            <input type="button" class="showhidediv btn btn-secondary" name="btnalternatephone" value="Alternate Phone Numbers" />
+                                        </td>
+                                    </tr>
+                                    <tr class="td2" style="display:none">
+                                        <th style="text-align: center;">
+                                            Name
+                                        </th>
+                                        <th style="text-align: center;">
+                                            Company Name
+                                        </th>
+                                        <th style="text-align: center;">
+                                            Address
+                                        </th>
+                                        <th style="text-align: center;">
+                                            Phone Number
+                                        </th>
+                                    </tr>
+                                    @foreach (var ite in Model.alternatephonenumbers.ToList())
+                                    {
+                                        <tr class="td2" style="display:none;">
+                                            <td style="text-align: left;">
+                                                @ite.first_name   @ite.last_name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @ite.company_name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @ite.address1
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @ite.phone_number
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div><!--all-->
+                        <div class="table-responsive">
+                            <table style="table-layout: fixed;width: 100%;" class="line">
+                                <tbody>
+                                    @foreach (var item in Model.RecipientDetails.ToList())
+                                    {
+                                        <tr>
+                                            <th style="text-align: center;" colspan="4">
+                                                Recipient Information
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Account Number
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.account_number
+                                            </td>
+                                            <td style="text-align: left;">
+                                                Address 1
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.address1
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Company Name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.company_name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                Address 2
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.address2
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.name
+                                            </td>
+                                            <td style="text-align: left;">
+                                                City, State/Prov.
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.city_state_prov
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Phone Number
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.phone
+                                            </td>
+                                            <td style="text-align: left;">
+                                                Postal/Country
+                                            </td>
+                                            <td style="text-align: left;">
+                                                @item.postal_country
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div><!--all-->
+                        <div class="flex-container">
+                            <div class="table-responsive column-l">
+                                <table style="table-layout: fixed;width: 100%;" class="line">
+                                    <tbody>
+                                        <col width="10px" />
+                                        <col width="20px" />
+                                        <col width="20px" />
+                                        <col width="40px" />
+                                        @foreach (var item in Model.PrimaryRepDetails.ToList())
+                                        {
+                                            <tr>
+                                                <th style="text-align: center;" colspan="4">
+                                                    Primary Rep Information
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Name
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.name
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    Date Assigned
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.date_assigned
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    FedEx ID
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.fedex_id
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    Queue Type
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.queue_type
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Loc ID
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.loc_id
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    Alternate Email ID's
+                                                </td>
+                                                <td style="text-align: left;overflow:hidden">
+                                                    @item.email_id
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div><!--all-->
+                            <div class="table-responsive column-r">
+                                <table style="table-layout: fixed;width: 100%;" class="line">
+                                    <tbody>
+                                        <col width="14px" />
+                                        <col width="20px" />
+                                        <col width="20px" />
+                                        <col width="40px" />
+                                        @foreach (var item in Model.agentDetails.ToList())
+                                        {
+                                            <tr>
+                                                <th style="text-align: center;" colspan="4">
+                                                    Secondary Rep Information
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Name
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.name
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    Date Assigned
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.date_assigned
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    FedEx ID
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.fedex_id
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    Queue Type
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.queue_type
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Loc ID
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    @item.loc_id
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    &nbsp;
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div><!--all-->
+                        </div>
+                        <div style="display:inline-block;text-align:center;margin-top:10px;color:white;background-color:grey;margin-bottom:2px;padding-top:4px;"><h5><b>File Transfer</b></h5></div>
+                        
+                            <div id="popup1" class="overlay">
+                                <div class="popup">
+                                    <h5 style="text-align:center">Details</h5>
+                                    <a class="close" href="#send">&times;</a>
+                                    <div class="content">
+                                        <table style="table-layout:fixed;">
+                                            <tr>
+                                                <td>
+                                                    Name
+                                                </td>
+                                                <td><input class="inputSelectsize" type="text" name="txtempname" id="txtempname"></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Company
+                                                </td>
+                                                <td><input class="inputSelectsize" type="text" name="txtcompany" id="txtcompany"></td>
+                                            </tr>
+                                            <tr>
+                                                @{
+                                                    string str = @"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+                                                }
+                                                <td>
+                                                    Email ID / Fax
+                                                </td>
+                                                <td><input class="inputSelectsize" type="email" name="txtemail" id="txtemail"></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Forms
+                                                </td>
+                                                <td>
+                                                    <select name="send_template" id="send_template" size="5" class="inputSelectsize">
+                                                        @foreach (var item in Model.sendtemp)
+                                                    {
+                                                    <option value="@item.send_temp1">@item.send_temp1</option>
+                                                    }
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align: center;">
+                                                    <input type="reset" value="Clear" class="btn btn-secondary" />
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <input type="submit" name="btnsend" value="Send" class="btn btn-secondary" onclick="return sendtemplatemessage();">
+                                                    @*<button class="btn btn-secondary">Send</button>*@
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="flex-container">
+                            <div class="table-responsive column-left" >
+
+                               
+                                                <div id="send" style="text-align:center">
+                                                    <a class="button btn btn-secondary" href="#popup1" style="color:white;">Send Template</a>
+                                                </div>
+                                           
+                            </div><!--all-->
+                            <div class="table-responsive column">
+                                <table style="table-layout:fixed">
+                                    <tbody>
+                                        <tr>
+                                            <th style="text-align: center;" colspan="3">
+                                                GEDA
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                <input type="submit" name="btnactivatetracking" id="btnactivatetracking" value="Activate Tracking" class="btn btn-secondary">
+                                                @*<button class="btn btn-secondary">Activate Tracking</button>*@
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @foreach (var item in Model.gedanotifications.ToList())
+                                                {
+                                                    if (@item.retrieveurl != null)
+                                                    {
+
+                                                        <input type="hidden" name="retrieve" id="retrieve" value="@item.retrieveurl">
+                                                    }
+
+
+                                                }
+                                                
+                                                <button class="btn btn-secondary" name="btnretrieve" onclick="javascript: myviewretrieve(); return false;">Retrieve</button>
+                                                
+                                                @*<button class="btn btn-secondary">Retrieve</button> btnreactivatetracking  btnactivatetracking btnretrieve*@
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input type="submit" name="btnreactivatetracking" id="btnreactivatetracking" value="Reactivate Tracking" class="btn btn-secondary">
+                                                @*<button class="btn btn-secondary">Reactivate Tracking</button>*@
+                                            </td>
+                                        </tr>
+
+                                        @*<tr>
+                                                <td style="text-align: center" colspan="6">
+                                                    <input type="checkbox" name="box1" >
+                                                </td>
+                                                <td colspan="6" style="text-align: center;">
+                                                    Receive on FAXCOM
+                                                </td>
+                                            </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive column-right" >
+                                <p style="border: 1px solid #dddddd;text-align:center;background-color:#c2c2c2;padding-bottom:2px;padding-top:2px;padding-left:2px;padding-right:2px;margin-bottom:0px" >Notifications</p>
+                                        <div style="overflow-y:scroll;height:42px">
+                                    <table>
+                                        
+                                        <tbody>
+                                            @foreach (var item in Model.gedanotifications.ToList())
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.notifications ***** @item.creation_date 
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!--tab-content-->
+                        </div>
+                        <div class="table-responsive" style="width:100%">
+                            <!-- <input type="checkbox" class="MyCheckboxCSSClass"/>-->
+                            <table>
+                               
+                                <thead>
+                                  
+                                    <tr>
+                                        <th style="text-align: center;" colspan="4">
+                                            Add Case Notes
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="4" style="background-color:white; font-weight:normal;text-align:left">
+                                            <input type="checkbox" name="atemtcount" value="atemtcount" class="check" > <label><strong>Insert Attempt Details</strong></label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                </table>
+                         <table class="fixed">
+                                
+                                   
+                                    <col width="15px" />
+                                    <col width="30px" />
+                                    <col width="10px" />
+                                    <col width="40px" />
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Trigger Phone
+                                        </td>
+                                        @foreach (var item in Model.RecipientDetails.ToList())
+                                        {
+                                            <td style="text-align: left;" class="text">
+
+
+                                                <input type="text" name="txtphone" size="50" value=@item.phone>
+                                            </td>
+                                        }
+                                        <td style="text-align: center;vertical-align:top;" class="required" rowspan="9">
+                                            Remarks <span style="color:red">*</span>
+                                        </td>
+                                        <td style="text-align: left; max-width: 100%;vertical-align:top;" rowspan="9">
+                                            <textarea rows="15" name="txtremarks" id="txtremarks"  ></textarea>
+                                            <!--input type="text" -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Spoke To
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            <input type="text" name="txtspoke" size="50">
+                                            @*<input type="text" class="form-control" placeholder="Search" name="txtSearch">*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Left VMail
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            <input type="text" name="txtvmail" id="txtvmail" size="50">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Info Req.
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            <input type="text" name="txtinforeq" id="txtinforeq" size="50">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Info Rec.
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            <input type="text" name="txtinforec" id="txtinforec" size="50">
+                                        </td>
+                                    </tr>
+                                    @foreach (var itm in Model.casedatils.ToList())
+                                    {
+                                        <tr>
+                                            <td style="text-align: left;" class="text">
+                                                Tracking
+                                            </td>
+                                            <td style="text-align: left;" class="text">
+                                                @itm.tracking_number
+                                            </td>
+                                        </tr>
+                                    }
+                                    @*<tr>
+                                            <td style="text-align: left;">
+                                                Deadline
+                                            </td>
+                                            <td style="text-align: left;">
+                                                <input type="date" name="txtdeadline" id="txtdeadline" size="50">
+
+                                            </td>
+                                        </tr>*@
+                                    @*<tr>
+                                        <td style="text-align: left;" class="text">
+                                            Attempts Made
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            @*<input type="text" name="txtattemptsmade" id="txtattemptsmade" size="50">*@
+                                            @*<select name="txtattemptsmade" id="txtattemptsmade">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+
+                                            </select>*@
+                                        @*</td>
+                                    </tr>*@
+                                    <tr>
+                                        <td style="text-align: left;" class="text">
+                                            Follow-Up Date
+                                        </td>
+                                        <td style="text-align: left;" class="text">
+                                            @*2019-01-18T05:51*@
+                                            @*<input type="datetime-local" name="txtfollowupdate" id="txtfollowupdate" value=@DateTime.Now.AddHours(24).ToString("yyyy-MM-ddThh:mm") size="50">*@
+                                            <input type="text" class="datepicker" id="txtfollowupdate" name="txtfollowupdate" value="@DateTime.Now.AddDays(1)" onchange="FillBilling(this.form)">&nbsp;&nbsp;<i class="fa fa-calendar" style="font-size:18px;color:grey"></i>
+
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+
+                               
+                            </table>
+                        </div><!--tab-content-->
+                                                <!--  <div style="overflow:scroll;height:120px;width:100%;overflow:auto" class="table-responsive">
+                                                    <table style="table-layout: fixed;width: 100%;" id="myTable1">
+                                                        <tbody>
+                                                            @if (Model.agentcaseattemptsmade.Count == 0)
+                                                            {
+                                                                <tr>
+                                                                    <th style="text-align: center;" colspan="5">
+                                                                        Attempts and Follow-Up
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt1" id="cheattempt1">&nbsp;&nbsp;
+
+                                                                        Attempt 1
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker1" value="" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name="timer1" placeholder="Time" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority1" value="1"> Set All Time High Priority
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt2" id="cheattempt2">&nbsp;&nbsp;
+
+                                                                        Attempt 2
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker2" />@*</span>*@
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name=" timer2" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority2" value="1"> Set All Time High Priority
+
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="newlink2">
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt3" id="cheattempt3">&nbsp;&nbsp;
+
+                                                                        Attempt 3
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker3" />@*</span>*@
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name=" timer3" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority3" value="1"> Set All Time High Priority
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                foreach (var itm in Model.agentcaseattemptsmade.ToList())
+                                                                {
+
+                                                                    if (itm.attempts_made == "1")
+                                                                    {
+                                                                        <tr>
+                                                                            <th style="text-align: center;" colspan="5">
+                                                                                Attempts and Follow-Up
+                                                                            </th>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td style="text-align: center;">
+                                                                                <input type="checkbox" name="cheattempt1" id="cheattempt1" disabled="disabled" checked>&nbsp;&nbsp;
+
+                                                                                Attempt 1
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("MM/dd/yyyy")
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("hh:mm tt")
+
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @if (@itm.case_priority == true)
+                                                                                {
+                                                                                    <input type="radio" name="setpriority1" value="1" checked>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="radio" name="setpriority1" value="1">
+                                                                                }
+                                                                                Set All Time High Priority
+                                                                            </td>
+
+                                                                            <td style="text-align: center;">
+                                                                                &nbsp;
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                    else if (itm.attempts_made == "2")
+                                                                    {
+                                                                        <tr>
+                                                                            <td style="text-align: center;">
+                                                                                <input type="checkbox" name="cheattempt2" id="cheattempt2" disabled="disabled" checked>&nbsp;&nbsp;
+
+                                                                                Attempt 2
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("MM/dd/yyyy")
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("hh:mm tt")
+
+                                                                            </td>
+
+                                                                            <td style="text-align: center;">
+                                                                                @if (@itm.case_priority == true)
+                                                                                {
+                                                                                    <input type="radio" name="setpriority2" value="1" checked>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="radio" name="setpriority2" value="1">
+                                                                                }
+                                                                                Set All Time High Priority
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                &nbsp;
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                    else if (itm.attempts_made == "3")
+                                                                    {
+                                                                        <tr id="newlink2">
+                                                                            <td style="text-align: center;">
+                                                                                <input type="checkbox" name="cheattempt3" id="cheattempt3" disabled="disabled" checked>&nbsp;&nbsp;
+
+                                                                                Attempt 3
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("MM/dd/yyyy")
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @itm.attempts_Date.Value.ToString("hh:mm tt")
+
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                @if (@itm.case_priority == true)
+                                                                                {
+                                                                                    <input type="radio" name="setpriority3" value="1" checked>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="radio" name="setpriority3" value="1">
+                                                                                }
+                                                                                Set All Time High Priority
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                &nbsp;
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+
+                                                                }
+
+                                                                <tr></tr>
+                                                            }
+                                                            @if (Model.agentcaseattemptsmade.Count == 1)
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt2" id="cheattempt2">&nbsp;&nbsp;
+
+                                                                        Attempt 2
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker2" />@*</span>*@
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name="timer2" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority2" value="1"> Set All Time High Priority
+
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="newlink2">
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt3" id="cheattempt3">&nbsp;&nbsp;
+
+                                                                        Attempt 3
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker3" />@*</span>*@
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name="timer3" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority3" value="1"> Set All Time High Priority
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                            else if (Model.agentcaseattemptsmade.Count == 2)
+                                                            {
+
+                                                                <tr id="newlink2">
+                                                                    <td style="text-align: center;">
+                                                                        <input type="checkbox" name="cheattempt3" id="cheattempt3">&nbsp;&nbsp;
+
+                                                                        Attempt 3
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="date" name="datepicker3" />@*</span>*@
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="time" name="timer3" />
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="radio" name="setpriority3" value="1"> Set All Time High Priority
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        &nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>-->
+                                                @*<div style="text-align: center"><a href="javascript:void(0)"><input type="button" class="btn btn-secondary" onclick="myFunction1()" value="Add More Checkboxes" /></a></div>*@
+                                                <div style="padding:5px"><label><strong>Add Alternate Title</strong></label>&nbsp;&nbsp;<input type="text" name="alternatetitle" value="" size="50"></div>
+                                                <div style="padding:5px">
+                                                    @foreach (var item in Model.indexmodel)
+                                                    {
+                                                        if (item.attempts_made == "UTL")
+                                                        {
+
+                                                            <input type="checkbox" name="CasetoUtl" checked="checked" disabled="disabled"> <label><strong>Move Case to UTL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="checkbox" name="CasetoUtl"> <label><strong>Move Case to UTL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                            break;
+                                                        }
+                                                    }
+                                                    <span class="pos">
+                                                    @foreach (var item in Model.folderids)
+                                                    {
+                                                        if (item.folder_id == 7)
+                                                        {
+                                                            <input type="radio"  name="chkSupervisor" value="Supervisor" checked="checked"> <label><strong>Move Case to Supervisor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="chkSupervisor" value="Supervisor"> <label><strong>Move Case to Supervisor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                        }
+                                                    }
+                                                   
+                                                        @foreach (var item in Model.folderids)
+                                                        {
+                                                            if (item.folder_id == 8)
+                                                            {
+                                                                <input type="radio"  name="chkSupervisor" value="Blockedaccounts" checked="checked"> <label><strong>Move Case to Block Accounts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="radio"  name="chkSupervisor" value="Blockedaccounts"> <label><strong>Move Case to Block Accounts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                            }
+                                                        }
+                                                        @foreach (var item in Model.folderids)
+                                                        {
+                                                            if (item.folder_id == 9)
+                                                            {
+                                                                <input type="radio" name="chkSupervisor" value="Hours" checked="checked"> <label><strong>Move Case to 24 Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="radio"   name="chkSupervisor" value="Hours"> <label><strong>Move Case to 24 Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                            }
+                                                        }
+                                                        <input type="radio"  name="chkSupervisor" value="Clear Selection"/><label><strong>Clear Selection</strong></label></span>
+</div>
+                                                <div><input type="checkbox"  name="setpriority" value="1"> Set All Time High Priority</div>
+
+                        <!-- form goes here -->
+                                                @*<input type="submit" value="Sign Up" />*@
+                                                <div align="center">
+                                                    <input type="submit" name="btnsave" value="Save & Update" class="btn btn-secondary" onclick="return ShowMessage();" />&nbsp;&nbsp;&nbsp;
+                                                    @*<input type="submit"   name="btnsave" value="Save & Update" class="btn btn-secondary" formaction=@Url.Action("caseview") formmethod="post" ); />&nbsp;&nbsp;&nbsp;*@
+                                                    @*<input type="submit" name="btnsave" value="Save & Update" class="btn btn-secondary"  ); />&nbsp;&nbsp;&nbsp;*@
+                                                    @*<button class=" btn btn-secondary">Save & Update</button>*@
+                                                    <input type="submit" name="btnsaveandreturn" class="btn btn-secondary" value="Save & Return" onclick="return ShowMessage();" />
+
+                                                </div>
+                                                }
+
+
+        </div><!-- main-content-->
+
+    </section><!--.content-container-->
+
+    <footer class="footer-container text-center p-2">
+        <!--<a href="javascript:void(0)" class="arrow prev rounded"><i class="fas fa-location-arrow"></i></a><span>Executive view</span> <a href="javascript:void(0)" class="arrow next rounded"><i class="fas fa-location-arrow"></i></a>-->
+    </footer>
+
+    <!--js files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script>
+jQuery('.toggle').on('click', function(){
+jQuery('.fixed-sidebar').toggleClass('close')
+jQuery('.main-container').toggleClass('full').toggleClass('col-9')
+})
+var modal = document.querySelector(".modal");
+var trigger = document.querySelector(".trigger");
+var closeButton = document.querySelector(".close-button");
+trigger.onclick = function () {
+    modal.style.display = "block";
+}
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+trigger.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+/*var modal1 = document.querySelector(".modal1");
+var trigger1 = document.querySelector(".trigger1");
+var closeButton1 = document.querySelector(".close-button");
+trigger1.onclick = function () {
+    modal1.style.display = "block";
+}
+function toggleModal1() {
+    modal1.classList.toggle("show-modal1");
+
+}
+
+function windowOnClick1(event) {
+    if (event.target === modal1) {
+        toggleModal();
+    }
+}
+
+trigger1.addEventListener("click", toggleModal1);
+closeButton1.addEventListener("click", toggleModal1);
+window.addEventListener("click", windowOnClick1);*/
+
+
+var modal1 = document.getElementById('myModal1');
+var myBtn1 = document.getElementById("myBtn1");
+var span1 = document.getElementsByClassName("close-button1")[0];
+
+myBtn1.onclick = function () {
+    modal1.style.display = "block";
+}
+
+
+function toggleModal1() {
+    modal1.classList.toggle("show-modal1");
+
+}
+
+function windowOnClick1(event) {
+    if (event.target === modal1) {
+        toggleModal();
+    }
+}
+myBtn1.addEventListener("click", toggleModal1);
+closeButton1.addEventListener("click", toggleModal1);
+window.addEventListener("click", windowOnClick1);
+    </script>
+    @if (ViewBag.msg != null)
+    {
+        <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.msg");
+            };
+        </script>
+    }
+
+</body>
+
+</html>

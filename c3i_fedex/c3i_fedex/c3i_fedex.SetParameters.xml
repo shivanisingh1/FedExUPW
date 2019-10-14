@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="c3i_fedex" />
+  <setParameter name="C3_FedexCasedetailsEntities-Web.config Connection String" value="metadata=res://*/Models.ClientSystemModel.csdl|res://*/Models.ClientSystemModel.ssdl|res://*/Models.ClientSystemModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=10.11.198.213\Dev;initial catalog=C3_Fedex;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" />
+  <setParameter name="c3i_fedex.Models.Incedo_DEVEntities1-Web.config Connection String" value="c3i_fedex.Models.Incedo_DEVEntities1_ConnectionString" />
+</parameters>

@@ -1,0 +1,83 @@
+﻿1/25/2019 7:30:10 PM The type 'Edm.DateTime' of the member 'shipper_local_time' in the conceptual side type 'Incedo_DEVModel.case_details' does not match with the type 'System.String' of the member 'shipper_local_time' on the object side type 'c3i_fedex.Models.case_details'. 
+1/25/2019 7:31:13 PM The type 'Edm.DateTime' of the member 'shipper_local_time' in the conceptual side type 'Incedo_DEVModel.case_details' does not match with the type 'System.String' of the member 'shipper_local_time' on the object side type 'c3i_fedex.Models.case_details'. 
+1/25/2019 7:32:00 PM The type 'Edm.DateTime' of the member 'shipper_local_time' in the conceptual side type 'Incedo_DEVModel.case_details' does not match with the type 'System.String' of the member 'shipper_local_time' on the object side type 'c3i_fedex.Models.case_details'. 
+1/28/2019 3:09:41 PM The time zone ID 'Pacific standard time zone' was not found on the local computer. 
+1/28/2019 3:10:37 PM The time zone ID 'Pacific Standard Time Zone' was not found on the local computer. 
+1/28/2019 4:31:23 PM Column 'timezone' does not belong to table case_detai. 
+1/28/2019 4:35:13 PM Column 'timezone' does not belong to table case_detai. 
+1/28/2019 4:35:27 PM Column 'timezone' does not belong to table case_detai. 
+1/28/2019 6:07:14 PM The user name or password is incorrect.
+ 
+1/30/2019 3:19:45 PM Value cannot be null.
+Parameter name: id 
+1/30/2019 3:20:58 PM Value cannot be null.
+Parameter name: id 
+2/1/2019 2:25:15 PM Object reference not set to an instance of an object. 
+2/1/2019 4:44:31 PM Column 'name' does not belong to table case_detai. 
+2/5/2019 3:47:18 PM parsing "***" - Quantifier {x,y} following nothing. 
+2/5/2019 6:16:31 PM Column 'account_number' does not belong to table case_detai. 
+2/5/2019 6:16:50 PM Column 'account_number' does not belong to table case_detai. 
+2/5/2019 6:19:24 PM Column 'account_number' does not belong to table case_detai. 
+2/8/2019 12:55:27 PM Cannot insert the value NULL into column 'trigger_phone', table 'Incedo_Dev.dbo.add_case_notes'; column does not allow nulls. INSERT fails.
+The statement has been terminated. 
+2/8/2019 3:52:45 PM Cannot insert the value NULL into column 'trigger_phone', table 'Incedo_Dev.dbo.add_case_notes'; column does not allow nulls. INSERT fails.
+The statement has been terminated. 
+2/11/2019 1:11:52 PM Object reference not set to an instance of an object. 
+2/12/2019 3:13:40 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:16:14 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:22:15 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:28:52 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:29:58 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:30:44 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:33:02 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:43:07 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:44:32 PM String was not recognized as a valid DateTime. 
+2/12/2019 3:44:36 PM String was not recognized as a valid DateTime. 
+2/12/2019 4:15:12 PM String was not recognized as a valid DateTime. 
+2/12/2019 4:15:26 PM String was not recognized as a valid DateTime. 
+2/12/2019 7:14:18 PM Value cannot be null.
+Parameter name: id 
+2/12/2019 7:14:28 PM Value cannot be null.
+Parameter name: id 
+2/12/2019 7:22:08 PM Object reference not set to an instance of an object. 
+2/12/2019 7:43:45 PM Value cannot be null.
+Parameter name: id 
+2/13/2019 2:48:50 PM Value cannot be null.
+Parameter name: id 
+2/13/2019 2:54:32 PM String was not recognized as a valid DateTime. 
+2/13/2019 2:54:46 PM String was not recognized as a valid DateTime. 
+2/13/2019 6:54:38 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+2/13/2019 6:55:58 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+2/13/2019 6:56:10 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+2/13/2019 6:56:14 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+2/13/2019 6:56:32 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+2/13/2019 6:57:30 PM The specified type member 'Date' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported. 
+8/30/2019 2:02:45 PM The underlying provider failed on Open. System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+8/30/2019 2:02:45 PM The underlying provider failed on Open. System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20

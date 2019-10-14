@@ -1,0 +1,444 @@
+﻿USE [C3_Fedex]
+GO
+/****** Object:  Table [dbo].[add_case_notes]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[add_case_notes](
+	[case_id] [nvarchar](20) NOT NULL,
+	[trigger_phone] [nvarchar](15) NOT NULL,
+	[spoke_to] [nvarchar](max) NOT NULL,
+	[left_vmail] [nvarchar](max) NOT NULL,
+	[info_req] [nvarchar](max) NOT NULL,
+	[info_rec] [nvarchar](max) NOT NULL,
+	[tracking] [nvarchar](max) NOT NULL,
+	[deadline] [nvarchar](max) NOT NULL,
+	[attempts_made] [nvarchar](max) NULL,
+	[follow_up_date] [datetime] NULL,
+	[Remarks] [nvarchar](max) NOT NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [id_pk] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[agent_case_attempts_made]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[agent_case_attempts_made](
+	[case_id] [nvarchar](20) NOT NULL,
+	[agent_id] [nvarchar](20) NOT NULL,
+	[attempts_made] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[attempts_Date] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[agent_case_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[agent_case_details](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[case_id] [nvarchar](20) NOT NULL,
+	[agent_id] [nvarchar](20) NOT NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+ CONSTRAINT [PK_agent_case_details] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[agent_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[agent_details](
+	[name] [nvarchar](50) NULL,
+	[fedex_id] [nvarchar](20) NULL,
+	[date_assigned] [datetime] NULL,
+	[queue_type] [nvarchar](20) NOT NULL,
+	[loc_id] [nvarchar](20) NULL,
+	[alt_title] [nvarchar](max) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[login_id] [nvarchar](15) NULL,
+	[agent_id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[agent_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[case_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[case_details](
+	[case_id] [nvarchar](20) NOT NULL,
+	[alternate_title] [nvarchar](max) NULL,
+	[tracking] [nvarchar](50) NULL,
+	[title] [nvarchar](max) NULL,
+	[case_notes] [nvarchar](max) NULL,
+	[tracking_number] [nvarchar](50) NOT NULL,
+	[commitment_date] [date] NULL,
+	[status] [nvarchar](20) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[attempts_made] [int] NULL CONSTRAINT [DF_case_details_attempts_made]  DEFAULT ((0)),
+	[follow_up_date] [datetime] NULL,
+	[shipper_local_time] [datetime] NULL,
+	[assignment] [datetime] NULL,
+ CONSTRAINT [PK_Case] PRIMARY KEY CLUSTERED 
+(
+	[case_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[case_notes]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[case_notes](
+	[case_id] [nvarchar](20) NOT NULL,
+	[case_notes] [nvarchar](max) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[send_to] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[folder_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[folder_details](
+	[folder_id] [int] NOT NULL,
+	[folder_name] [nvarchar](50) NULL,
+	[folder_description] [nvarchar](50) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[description] [nvarchar](50) NULL,
+ CONSTRAINT [PK_folder_details] PRIMARY KEY CLUSTERED 
+(
+	[folder_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[folder_ids]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[folder_ids](
+	[case_id] [nvarchar](20) NOT NULL,
+	[folder_id] [int] NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[location_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[location_details](
+	[case_id] [nvarchar](20) NULL,
+	[loc_id] [nvarchar](30) NULL,
+	[loc_name] [nvarchar](50) NULL,
+	[local_time] [time](7) NULL,
+	[express_holidays_date] [date] NULL,
+	[local_date] [date] NULL,
+	[express_holidays_description] [nvarchar](max) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[location_type] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[login]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[login](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[user_name] [varchar](50) NOT NULL,
+	[user_id] [varchar](20) NOT NULL,
+	[flag] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[package_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[package_details](
+	[case_id] [nvarchar](20) NOT NULL,
+	[ship_date] [date] NULL,
+	[pieces] [decimal](7, 2) NULL,
+	[commitment] [date] NULL,
+	[commodity] [nvarchar](max) NULL,
+	[origin] [nvarchar](10) NULL,
+	[weight(KG)] [float] NULL,
+	[dest] [nvarchar](50) NULL,
+	[customs_value(USD)] [float] NULL,
+	[view_airbill] [nvarchar](10) NULL,
+	[declared_value] [int] NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[package_scan_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[package_scan_details](
+	[case_id] [nvarchar](20) NOT NULL,
+	[scan_code] [nvarchar](50) NULL,
+	[psd_date] [datetime] NULL,
+	[code_description] [nvarchar](100) NULL,
+	[psd_time] [time](7) NULL,
+	[location_id] [nvarchar](50) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[primary_case_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[primary_case_details](
+	[primary_rep_id] [nvarchar](20) NOT NULL,
+	[case_id] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[primary_rep_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[primary_rep_details](
+	[primary_rep_id] [nvarchar](20) NOT NULL,
+	[name] [nvarchar](50) NULL,
+	[fedex_id] [nvarchar](20) NULL,
+	[date_assigned] [datetime] NULL,
+	[queue_type] [nvarchar](20) NULL,
+	[loc_id] [nvarchar](20) NULL,
+	[email_id] [nvarchar](80) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[primary_rep_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[primary_requirements]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[primary_requirements](
+	[case_id] [nvarchar](20) NOT NULL,
+	[case_requirements] [nvarchar](max) NOT NULL,
+	[is_received] [bit] NOT NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[recipient_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[recipient_details](
+	[case_id] [nvarchar](20) NOT NULL,
+	[account_number] [nvarchar](30) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[address1] [nvarchar](max) NULL,
+	[address2] [nvarchar](max) NULL,
+	[company_name] [nvarchar](50) NOT NULL,
+	[city_state_prov] [nvarchar](50) NOT NULL,
+	[phone] [nvarchar](15) NOT NULL,
+	[postal_country] [nvarchar](30) NOT NULL,
+	[alternate_phone] [nvarchar](15) NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[shipper_details]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[shipper_details](
+	[case_id] [nvarchar](20) NOT NULL,
+	[account_number] [nvarchar](20) NULL,
+	[name] [nvarchar](50) NULL,
+	[address1] [nvarchar](max) NULL,
+	[address2] [nvarchar](max) NOT NULL,
+	[company_name] [nvarchar](max) NULL,
+	[city_state_prov] [nvarchar](max) NULL,
+	[phone] [nvarchar](15) NULL,
+	[postal_country] [nvarchar](30) NULL,
+	[alternate_phone] [nvarchar](15) NOT NULL,
+	[creation_date] [datetime] NULL,
+	[modification_date] [datetime] NULL,
+	[status] [nvarchar](20) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[us_holidays]    Script Date: 12/27/2018 3:45:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[us_holidays](
+	[date] [date] NULL,
+	[Holiday] [nvarchar](250) NULL,
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[add_case_notes]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[agent_case_attempts_made]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[agent_case_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[case_notes]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[folder_ids]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[folder_ids]  WITH CHECK ADD FOREIGN KEY([folder_id])
+REFERENCES [dbo].[folder_details] ([folder_id])
+GO
+ALTER TABLE [dbo].[location_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[package_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[package_scan_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[primary_case_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[primary_case_details]  WITH CHECK ADD FOREIGN KEY([primary_rep_id])
+REFERENCES [dbo].[primary_rep_details] ([primary_rep_id])
+GO
+ALTER TABLE [dbo].[primary_requirements]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[recipient_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+ALTER TABLE [dbo].[shipper_details]  WITH CHECK ADD FOREIGN KEY([case_id])
+REFERENCES [dbo].[case_details] ([case_id])
+GO
+
+insert into login (user_name,user_id,flag ) values('SARIPUTI.RAJA','c5005016',0)

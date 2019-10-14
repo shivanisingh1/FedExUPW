@@ -1,0 +1,810 @@
+﻿@model c3i_fedex.Models.ViewModel
+
+    @using c3i_fedex.Models
+
+
+    @{
+        ViewBag.Title = "Index";
+
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="/js/sorting.js"></script>
+        <script src="@Url.Content(" ~/js/Pagination.js")"></script>
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js" language="javascript"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+        <link rel="manifest" href="/images/site.webmanifest">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/css/site-examples.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
+        <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+        <style type="text/css">
+            .sel{
+                padding: 7px;
+            }
+            .grid {
+                border-spacing: 0px;
+                font-family: Arial;
+                font-size: 12px;
+            }
+
+                .grid th {
+                    background-color: gray;
+                    color: #ffffff;
+                    padding: 2px 10px;
+                }
+
+                .grid tr:nth-child(even) {
+                    background-color: #f5f5f5;
+                }
+
+                .grid tr:nth-child(odd) {
+                    background-color: #ccc;
+                }
+
+                .grid td {
+                    padding: 2px 10px;
+                }
+        </style>
+        <style type="text/css">
+            html {
+                margin: 0;
+                padding: 0;
+            }
+
+            td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding-left: 2px;
+                padding-bottom: 2px;
+                padding-top: 2px;
+                padding-right: 2px;
+            }
+
+            th {
+                border: 1px solid #dddddd;
+                text-align: center;
+                background-color: #d8d8d8;
+                padding-bottom: 2px;
+                padding-top: 2px;
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #F2F3F4;
+            }
+
+            tr:nth-child(odd) {
+                background-color: #FFFFFF;
+            }
+
+            .oval {
+                background: #d8d8d8;
+                border: 1px solid white;
+                border-radius: 20px;
+                 display: flex;
+                margin: 5px 10px;
+                
+            }
+
+                .oval.active {
+                    background-color: #ff9800;
+                    border-radius: 40px;
+                
+                }
+               
+            .pg-normal {
+                color: #000000;
+                font-size: 15px;
+                cursor: pointer;
+                background: #F7F7FF;
+                padding: 2px 4px 2px 4px;
+            }
+
+            .pg-selected {
+                color: blue;
+                font-size: 15px;
+                background: #DEDEFF;
+                padding: 2px 4px 2px 4px;
+            }
+
+            table.yui {
+                font-family: arial;
+                border-collapse: collapse;
+                border: solid 3px #7f7f7f;
+                font-size: small;
+            }
+
+                table.yui td {
+                    padding: 5px;
+                    border-right: solid 1px #7f7f7f;
+                }
+
+                table.yui .even {
+                    background-color: blue;
+                }
+
+                table.yui .odd {
+                    background-color: blue;
+                }
+
+                table.yui th {
+                    border: 1px solid #7f7f7f;
+                    padding: 5px;
+                    height: auto;
+                    background: #D0B389;
+                }
+
+                .badge
+                {
+                    color:red;
+                    font-size:22px;
+                
+                }
+                    table.yui th a {
+                        text-decoration: none;
+                        text-align: center;
+                        padding-right: 20px;
+                        font-weight: bold;
+                        white-space: nowrap;
+                    }
+
+                table.yui tfoot td {
+                    border-top: 1px solid #7f7f7f;
+                    background-color: blue;
+                }
+
+                table.yui thead td {
+                    vertical-align: middle;
+                    background-color: blue;
+                    border: none;
+                }
+
+                table.yui thead .tableHeader {
+                    font-size: larger;
+                    font-weight: bold;
+                }
+
+                table.yui thead .filter {
+                    text-align: right;
+                }
+
+                table.yui tfoot {
+                    background-color: blue;
+                    text-align: center;
+                }
+
+                table.yui .tablesorterPager {
+                    padding: 10px 0 10px 0;
+                }
+
+                    table.yui .tablesorterPager span {
+                        padding: 0 5px 0 5px;
+                    }
+
+                    table.yui .tablesorterPager input.prev {
+                        width: auto;
+                        margin-right: 10px;
+                    }
+
+                    table.yui .tablesorterPager input.next {
+                        width: auto;
+                        margin-left: 10px;
+                    }
+
+                table.yui .pagedisplay {
+                    font-size: 10pt;
+                    width: 30px;
+                    border: 0px;
+                    background-color: blue;
+                    text-align: center;
+                    vertical-align: top;
+                }
+
+            .btn-search {
+                background-color: #ff9800;
+            }
+
+            .fa-search {
+                color: white;
+            }
+            .nav-link
+{
+    /*border: 1px solid #d8d8d8;*/
+    border-radius: 10px;
+    
+    /*margin: 2px 5px;*/
+}
+            .nav-link.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 20px;
+  border-radius: 10%;
+  background-color: red;
+  color: red;
+}
+.nav-pills .nav-link.active,
+        /*.nav-pills .nav-item.show .nav-link{background-color:#ff9800;border: 1px solid #d8d8d8;border-radius: 40px;color:white;}*/
+        .nav-pills .nav-item.show .nav-link {
+            border-radius: 10px;
+            color: white;
+            background-color:#ff9800;
+            
+        }
+        </style>
+        <script language="javascript">
+        $(document).ready(function () {
+            $("#tablepaging td:nth-child(6)").each(function () {
+                var followupdate = new Date(($(this).text()));
+
+                var follwupday = followupdate.getDate();
+              //  alert(day);
+                //var followupdate = new Date(followup[2], followup[1] - 1, followup[0])
+
+
+                //alert(followupdate);
+               // var day = datet.getDate();
+               //alert(day);
+                var todaydatetim = new Date();
+                var today = todaydatetim.getDate();
+                //alert(day);
+                if (followupdate != null) {
+                   // alert("====");
+                    if (follwupday == today) {
+                        ///alert(followupdate);
+                        $(this).parent("tr").css("background-color", "#ffcb32");
+                    } else if (follwupday <= today) {
+                        ///alert("====");
+                        $(this).parent("tr").css("background-color", "#ff6666");
+                    }
+                }
+                else {
+                    alert("null");
+                   $(this).parent("tr").css("background-color", " ");
+                }
+            });
+        });
+        </script>
+        <script>
+            function myaccount_number() {
+                var x = document.getElementById("account_number").value;
+                window.location.href = "/c3_fedex/index?account_number=" + x;
+ // document.getElementById("demo").innerHTML = "You selected: " + x;
+}
+        </script><script>
+            function myshippername() {
+                var x = document.getElementById("shippername").value;
+                window.location.href = "/c3_fedex/index?shippername=" + x;
+ // document.getElementById("demo").innerHTML = "You selected: " + x;
+}
+</script>
+        <script type="text/javascript">
+            function Pager(tableName, itemsPerPage) {
+                this.tableName = tableName;
+                this.itemsPerPage = itemsPerPage;
+                this.currentPage = 1;
+                this.pages = 0;
+                this.inited = false;
+                this.showRecords = function (from, to) {
+                    var rows = document.getElementById(tableName).rows;
+                    for (var i = 1; i < rows.length; i++) {
+                        if (i < from || i > to)
+                            rows[i].style.display = 'none';
+                        else
+                            rows[i].style.display = '';
+                    }
+                }
+
+                this.showPage = function (pageNumber) {
+                    if (!this.inited) {
+                        alert("not inited");
+                        return;
+                    }
+
+                    var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                    oldPageAnchor.className = 'pg-normal';
+                    this.currentPage = pageNumber;
+                    var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                    newPageAnchor.className = 'pg-selected';
+                    var from = (pageNumber - 1) * itemsPerPage + 1;
+                    var to = from + itemsPerPage - 1;
+                    this.showRecords(from, to);
+                }
+
+                this.prev = function () {
+                    if (this.currentPage > 1)
+                        this.showPage(this.currentPage - 1);
+                }
+
+                this.next = function () {
+                    if (this.currentPage < this.pages) {
+                        this.showPage(this.currentPage + 1);
+                    }
+                }
+
+                this.init = function () {
+                    var rows = document.getElementById(tableName).rows;
+                    var records = (rows.length - 1);
+                    this.pages = Math.ceil(records / itemsPerPage);
+                    this.inited = true;
+                }
+
+                this.showPageNav = function (pagerName, positionId) {
+                    if (!this.inited) {
+                        alert("not inited");
+                        return;
+                    }
+
+                    var element = document.getElementById(positionId);
+                    var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal">  Prev </span> ';
+                    for (var page = 1; page <= this.pages; page++)
+                        pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> ';
+                    pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Next </span>';
+                    element.innerHTML = pagerHtml;
+                }
+            }
+        </script>
+        @*<link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="~/css/dataTables.bootstrap.min.css">*@
+        <style type="text/css" class="init">
+        </style>@*D:\workspace\c3i_fedex\c3i_fedex\css\bootstrap.css*@
+        <!--<script type="text/javascript" src="/media/js/site.js?_=5e8f232afab336abc1a1b65046a73460"></script>-->
+        <!--<script type="text/javascript" src="/media/js/dynamic.php?comments-page=examples%2Fstyling%2Fbootstrap.html" async></script>-->
+        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" language="javascript" src="~/js/jquery.dataTables.min.js" ></script>
+        <script type="text/javascript" language="javascript" src="~/js/dataTables.bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#example').dataTable({
+                "pageLength": 5,
+                "lengthChange": false,
+                "searching": false
+            });
+
+} );
+
+        </script>  
+        @*<script type="text/javascript">
+            function FillCity()
+{
+                    var result =confirm("Are you sure, you want to save the changes?")
+                url: '/c3_fedex/index'
+                    if (result) {
+                        return url;
+                    } else {
+                        return false;
+                    }
+}
+        </script>*@
+        <script>
+
+            //function FillCity() {
+
+            //    //  var result = alertify.confirm("Do your want to submit form?");
+            //    var result =confirm("Are you sure, you want to save the changes?")
+
+            //    if (result) {
+            //        return true;
+            //    } else {
+            //        return false;
+            //    }
+
+
+            function FillCity() {
+                var stateId = $('#filterdata1').val();
+                //success:function (stateId) {
+                    window.location.href = "/c3_fedex/index?FilterItems=" + stateId;
+    //}
+        
+      //var stateId = $('#FilterItems').val();
+      //$.ajax({
+      //    url: '/c3_fedex/index',
+      //    type: "GET",
+      //    dataType: "Html",
+      //    data: { FilterItems: stateId },
+
+      //    success: function (FilterItems) {
+      //        //alert("error1");
+      //        $("#tblbody").html("");               // clear before appending new list 
+      //         $.each(cities, function (i, city) 
+      //         {
+      //             $("#tblbody").load();
+      //             //$("#tblbody").append(
+      //           // $('<option></option>').val(city.CityId).html(city.CityName));
+      //           // alert("error2");
+      //        });
+      //    }
+      //});
+
+      //if (stateId) {
+      //    return true
+      //} else {
+      //    return false;
+      //}
+  }</script>  
+        </head>
+    <body>
+        <header class="header-container py-3">
+            <div class="breadcrumbs col-12 py-2">
+                <div class="row d-flex align-items-center justify-content-center justify-content-md-between text-center text-md-left">
+                    <div class="col-md-6 mb-2">
+                        <a class="logo" href="index"><img src="/images/logo.png" alt="C3i" width="80"  /></a>
+                    </div><!-- logo -->
+                    <div class="col-md-6 text-md-right mb-2">
+                        <div class="dropdown d-inline-block">
+                            <a href="javascript:void(0)" class="" data-toggle="dropdown">
+                                <img src="~/images/mark.png" alt="Mark Anthony" width="46" height="46" class="rounded-circle" /><span class="ml-2 welcome-message">@ViewData["userName"].ToString()</span></a>
+                                @*<input type="submit"  name="logout" class=" btn btn-secondary" value=" logout" />*@
+                               @*<input type="submit" name="btnsave" value="logout" formaction=@Url.Action("C3_Fedex//logout") formmethod="Get" class="btn btn-secondary" />*@
+                            <input  type="button" value="logout" class="btn btn-secondary"
+                                    onclick="location.href='@Url.Action("logout", "C3_Fedex")'"/>
+                                @*<button type="button" class="btn btn-default btn-sm" formaction="C3_Fedex/logot" onclick="location.href='<%: Url.Action("Action", "Controller") %>'" >
+            <span class="ml-2 welcome-message">logout</span></button>*@
+                                @*<img src="~/images/mark.png" alt="Mark Anthony" width="46" height="46" class="rounded-circle" /><span class="ml-2 welcome-message">Mark Anthony, 99999</span>*@
+
+                                <div class="dropdown-menu col-12">
+                                    <a class="dropdown-item1" href="#">My Account</a>
+                                    <a class="dropdown-item1" href="#">Logout</a>
+                                </div>
+</div><!-- drop down account-->
+                    </div>
+                </div>
+            </div>
+        </header><!--.header-container-->
+        <section class="content-container bglight-gray">
+            <div class="breadcrumbs col-12 py-2" style="background-color='#1D5288'">
+                <ul class="pl-0 mb-0"><li>Home</li></ul>
+            </div><!--breadcrumbs-->
+            <div class="main-content d-flex flex-wrap">
+                <div class="col-12 py-3 right-section">
+                    <h1 class="heading"><strong> </strong></h1>
+                    <div class="tab-section">
+                        <ul class="nav nav-pills mb-4">
+                            <li class="oval">
+                                @if (Model.allactive == "ALL" || Model.allactive == null)
+                                {
+                                    <a class="nav-link active" href="index" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true">All Cases(@Model.All)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true">All Cases(@Model.All)</a>
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.newactive == "New")
+                                {
+                                    <a class="nav-link active" href="index?folder=New" data-toggle="tab" role="tab" aria-controls="pane1" aria-selected="true">Newly Assigned(@Model.Newly_Assigned)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link " href="index?folder=New" data-toggle="tab" role="tab" aria-controls="pane1" aria-selected="true">Newly Assigned(@Model.Newly_Assigned)</a>
+
+                                }
+
+
+                            </li>
+                            <li class="oval">
+                                @if (Model.wipactive == "WIP")
+                                {
+
+                                    <a class="nav-link active " href="index?folder=WIP" data-toggle="tab" role="tab" aria-controls="pane2" aria-selected="true">WIP(@Model.WIP)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index?folder=WIP" data-toggle="tab" role="tab" aria-controls="pane2" aria-selected="true">WIP(@Model.WIP)</a>
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.utlactive == "UTL")
+                                {
+
+                                    <a class="nav-link active " href="index?folder=UTL" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">UTL(@Model.UTL)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index?folder=UTL" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">UTL(@Model.UTL)</a>
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.gedaactive == "GEDA")
+                                {
+
+                                    <span><a class="nav-link active " href="index?folder=GEDA" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Awaiting Documents in GEDA(@Model.GEDA)<span class="badge"><sup>@Model.gedanotificationcount</sup></span></a></span>
+
+                                }
+                                else
+                                {
+                                   <span> <a class="nav-link" href="index?folder=GEDA" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Awaiting Documents in GEDA(@Model.GEDA)<span class="badge"><sup>@Model.gedanotificationcount</sup></span></a></span>
+
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.undersupervisor == "Undersupervisor")
+                                {
+                                    <a class="nav-link active" href="index?folder=Undersupervisor" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Under Supervisor(@Model.supervisor)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index?folder=Undersupervisor" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Under Supervisor(@Model.supervisor)</a>
+                                }
+                            </li>
+                 <li class="oval">
+                @if (Model.blockedaccounts == "Blockedaccounts")
+                {
+                    <a class="nav-link active" href="index?folder=Blockedaccounts" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Blocked Accounts(@Model.accounts)</a>
+                }
+                else
+                {
+                    <a class="nav-link" href="index?folder=Blockedaccounts" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Blocked Accounts(@Model.accounts)</a>
+                }
+            </li>
+            <li class="oval">
+                @if (Model.hours24 == "24hours")
+                {
+                    <a class="nav-link active" href="index?folder=24hours" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">24 Hours(@Model.hours)</a>
+                }
+                else
+                {
+                    <a class="nav-link" href="index?folder=24hours" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">24 Hours(@Model.hours)</a>
+                }
+            </li>
+
+
+
+                        </ul><!-- nav-pills-->
+                        @*<ul class="nav nav-pills mb-4">
+                            <li class="oval">
+                                @if(Model.allactive =="ALL" || Model.allactive == null)
+                                {
+                                 <a class="nav-link active" href="index" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true">All Cases(@Model.All)</a>
+                                }
+                                else
+                                {
+                                <a class="nav-link" href="index" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true">All Cases(@Model.All)</a>
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.newactive == "New")
+                                {                                
+                                <a class="nav-link active" href="index?folder=New" data-toggle="tab" role="tab" aria-controls="pane1" aria-selected="true">Newly Assigned(@Model.Newly_Assigned)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link " href="index?folder=New" data-toggle="tab" role="tab" aria-controls="pane1" aria-selected="true">Newly Assigned(@Model.Newly_Assigned)</a>
+
+                                }
+
+
+                            </li>
+                            <li class="oval">
+@if (Model.wipactive == "WIP")
+{
+                               
+                                <a class="nav-link active " href="index?folder=WIP" data-toggle="tab" role="tab" aria-controls="pane2" aria-selected="true">WIP(@Model.WIP)</a>
+}
+else
+{
+    <a class="nav-link" href="index?folder=WIP" data-toggle="tab" role="tab" aria-controls="pane2" aria-selected="true">WIP(@Model.WIP)</a>
+}
+                            </li>
+                            <li class="oval">
+@if (Model.utlactive == "UTL")
+{
+
+                                <a class="nav-link active " href="index?folder=UTL" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">UTL(@Model.UTL)</a>
+}
+else
+{
+    <a class="nav-link" href="index?folder=UTL" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">UTL(@Model.UTL)</a>
+}
+                            </li>
+                            <li class="oval">
+@if (Model.gedaactive == "GEDA")
+{
+
+                                <a class="nav-link active " href="index?folder=GEDA" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Awaiting Documents in GEDA(@Model.GEDA)</a>
+}
+else
+{
+    <a class="nav-link" href="index?folder=GEDA" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Awaiting Documents in GEDA(@Model.GEDA)</a>
+}
+                            </li>
+                            <li class="oval">
+                               @if (Model.undersupervisor == "Undersupervisor")
+                               {
+                                <a class="nav-link active" href="index?folder=Undersupervisor" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Under Supervisor(@Model.supervisor)</a>
+                               }
+                               else
+                               {
+                                <a class="nav-link" href="index?folder=Undersupervisor" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Under Supervisor(@Model.supervisor)</a>
+                               }
+                            </li>
+                            <li class="oval">
+                                @if (Model.blockedaccounts == "Blockedaccounts")
+                                {
+                                    <a class="nav-link active" href="index?folder=Blockedaccounts" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Block Accounts(@Model.accounts)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index?folder=Blockedaccounts" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">Block Accounts(@Model.accounts)</a>
+                                }
+                            </li>
+                            <li class="oval">
+                                @if (Model.hours24 == "24hours")
+                                {
+                                    <a class="nav-link active" href="index?folder=24hours" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">24 Hours(@Model.hours)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="index?folder=24hours" data-toggle="tab" role="tab" aria-controls="pane3" aria-selected="true">24 Hours(@Model.hours)</a>
+                                }
+                            </li>
+                        </ul>*@<!-- nav-pills-->
+                                                @using (@Html.BeginForm("index", "C3_Fedex", FormMethod.Get))
+                                                {
+                                                    <div class="search d-flex flex-wrap">
+                                                        <div class="col-2 mb-3 pl-0">
+                                                            <div class="filter-sec ">
+
+                                                                @Html.DropDownListFor(m => m.filterdata1, new SelectList(Model.filterdata1), "-Filter by Attempts-",
+                            new { @class = "form-control", @onchange = "FillCity()" })
+                                                                @*@Html.DropDownList("FilterItems", new SelectList(Enum.GetValues(typeof(Filterdata))), "-Select Attempts-",
+                                                new { @placeholder = "Placeholder...",  @onchange = "FillCity()" })*@
+                                                                @*/*new { @class = "chzn-select", @style = "width:160px;",  })*/*@
+                                                            </div><!--filter-sec-->
+                                                        </div>
+                                                        <div class="input-group col-4 mb-3 pr-0">
+
+                                                            @Html.DropDownList("SelectData", new SelectList(Enum.GetValues(typeof(SelectId))), "-Search Options-",
+                            new { @class = "form-control" })
+                                                            @if (Request.QueryString["folder"] != null)
+                                                            {
+                                                                <input type="hidden" name="folder" value="@Request.QueryString["folder"]">
+                                                            }
+                                                            <input type="text" class="form-control" placeholder="Search" name="txtSearch">
+                                                            <div class="input-group-append">
+
+                                                                <button type="submit" value="Search" class="btn btn-search"><i class="fas fa-search"></i></button>
+                                                            </div>
+                                                            @*@Html.DropDownListFor(m => m.shippersname, new SelectList(Model.shippersname), "-Filter by Attempts-",
+                                            new { @class = "form-control", @onchange = "FillCity()" })*@
+                                                        </div>
+                                                        <div class="col-6 mb-3 pr-0">
+                                                            @*<div class="filter-sec ">*@
+                                                                <select name="shippername" id="shippername" onchange="myshippername()" class="sel">
+                                                                    <option value="" disabled selected>Select Shipper's Name</option>
+                                                                   @if (Model.indexmodel != null)
+                                                                   {
+                                                                       foreach (var item in Model.indexmodel.ToList())
+                                                                       {
+                                                                        <option value="@item.shippername">@item.shippername</option>
+                                                                     }
+                                                                   }
+                                                                </select>
+                                                        
+                                                            @*<div class="filter-sec ">*@
+                                                            <select name="account_number" id="account_number" onchange="myaccount_number()" class="sel">
+                                                                <option value="" disabled selected>Select Account Number</option>
+
+                                                              @if (Model.indexmodel != null)
+                                                              {
+                                                                  foreach (var item in Model.indexmodel.ToList())
+                                                                  {
+                                                                    <option value="@item.accountnumber">@item.accountnumber</option>
+                                                                  }
+                                                              }
+                                                            </select>
+                                                       
+                            <button type="submit" href="index" class="btn btn-search" > Clear</button>
+                        </div>
+
+                                                        @*</dev>*@
+                                                    </div><!--search-->
+                        }
+
+                        <div class="table-responsive">
+                            
+                            <table id="tablepaging" class="sortable" style="table-layout:fixed;width: 100%;">
+
+                                <thead>
+                                    <tr>
+                                        @*<th>Select</th>*@
+                                        <th>Case ID</th>
+                                        <th>Tracking #</th>
+                                        <th>Title</th>
+                                        <th>Alternate Title</th>
+                                        <th>Commitment Date</th>
+                                        <th>Follow-Up Date and Time</th>
+                                        <th>Shipper's Local Time</th>
+                                        <th>Attempts Made</th>
+@if (Model.allactive == "ALL" || Model.allactive == null)
+{
+                                        <th>Folder name</th>
+}
+
+                                    </tr>
+                                </thead>
+@if (Model.indexmodel != null)
+{
+                                <tbody id="tblbody">
+                                    
+                                    @foreach (var item in @Model.indexmodel.ToList())
+                                    {
+                                        <tr>
+                                            @*<td> <input type="checkbox" name="departments" value="@item.case_id" /></td>*@
+                                            <td> @Html.ActionLink(@item.case_id, "caseview", new { @item.case_id })</td>
+                                            @*<td>@item.case_id  </td>*@
+                                            <td>@item.tracking  </td>
+                                            <td>@item.title  </td>
+                                            <td>@item.alternate_title  </td>
+                                            <td>@item.commitment_date.ToString("MM/dd/yyyy")  </td>
+                                            <td>@item.follow_up_date </td>
+                                            <td>@item.shippers_local_time.ToString("hh:mm tt") </td>
+                                            <td>@item.attempts_made </td>
+@if (Model.allactive == "ALL" || Model.allactive == null)
+{
+                                            <td>@item.foldername </td>
+}
+
+                                        </tr>
+                                    }
+                                   
+
+                                </tbody>
+}
+else
+{
+    <lable> No Records Found </lable>
+}
+                            </table>
+                            <div id="pageNavPosition" style="padding-top: 20px" align="center">
+                            </div>
+                            <script type="text/javascript">
+                                var pager = new Pager('tablepaging', 10);
+                                pager.init();
+                                pager.showPageNav('pager', 'pageNavPosition');
+                                pager.showPage(1);
+                            </script>
+                        </div><!--all--> 
+                       
+                    </div><!--tab-section-->
+                </div><!--right-section-->
+            </div><!-- main-content-->
+        </section><!--.content-container-->
+        <!--js files-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            jQuery('.toggle').on('click', function () {
+                jQuery('.fixed-sidebar').toggleClass('close')
+                jQuery('.main-container').toggleClass('full').toggleClass('col-9')
+            })
+        </script>        
+        </body>
+</html>
+
+
+
+
+
+
+
+
+
+

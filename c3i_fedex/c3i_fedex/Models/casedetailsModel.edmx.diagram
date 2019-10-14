@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc9d88018fa74b959a0588051b76e9bf" Name="Diagram1">
+        <EntityTypeShape EntityType="C3_FedexModel1.add_case_notes" Width="1.5" PointX="3" PointY="49" />
+        <EntityTypeShape EntityType="C3_FedexModel1.agent_case_attempts_made" Width="1.5" PointX="3" PointY="31.5" />
+        <EntityTypeShape EntityType="C3_FedexModel1.agent_case_details" Width="1.5" PointX="3" PointY="20" />
+        <EntityTypeShape EntityType="C3_FedexModel1.agent_details" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.alternate_phone_numbers" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.bot_trigger" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.case_notes" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="C3_FedexModel1.folder_details" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.folder_ids" Width="1.5" PointX="3" PointY="41.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.login" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.package_details" Width="1.625" PointX="3" PointY="15.375" />
+        <EntityTypeShape EntityType="C3_FedexModel1.package_scan_details" Width="2.375" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="C3_FedexModel1.primary_case_details" Width="1.5" PointX="3" PointY="34.625" />
+        <EntityTypeShape EntityType="C3_FedexModel1.primary_rep_details" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.primary_requirements" Width="1.5" PointX="3" PointY="28.125" />
+        <EntityTypeShape EntityType="C3_FedexModel1.recipient_details" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="C3_FedexModel1.shipper_details" Width="1.5" PointX="3" PointY="44.375" />
+        <EntityTypeShape EntityType="C3_FedexModel1.status" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.status_case_details" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.case_details" Width="1.875" PointX="0.875" PointY="25.25" />
+        <AssociationConnector Association="C3_FedexModel1.FK__add_case___case___36470DEF" />
+        <AssociationConnector Association="C3_FedexModel1.FK__agent_cas__case___373B3228" />
+        <AssociationConnector Association="C3_FedexModel1.FK__agent_cas__case___382F5661" />
+        <AssociationConnector Association="C3_FedexModel1.FK__case_note__case___39237A9A" />
+        <AssociationConnector Association="C3_FedexModel1.FK__folder_id__case___3A179ED3" />
+        <AssociationConnector Association="C3_FedexModel1.FK__package_d__case___3CF40B7E" />
+        <AssociationConnector Association="C3_FedexModel1.FK__package_s__case___3DE82FB7" />
+        <AssociationConnector Association="C3_FedexModel1.FK__primary_c__case___3EDC53F0" />
+        <AssociationConnector Association="C3_FedexModel1.FK__primary_r__case___3FD07829" />
+        <AssociationConnector Association="C3_FedexModel1.FK__recipient__case___40C49C62" />
+        <AssociationConnector Association="C3_FedexModel1.FK__shipper_d__case___41B8C09B" />
+        <EntityTypeShape EntityType="C3_FedexModel1.time_zone_codes" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.location_details_dest" Width="1.5" PointX="3" PointY="54.125" />
+        <EntityTypeShape EntityType="C3_FedexModel1.location_details_origion" Width="1.5" PointX="3" PointY="58.75" />
+        <AssociationConnector Association="C3_FedexModel1.FK__location___case___3B0BC30C" />
+        <AssociationConnector Association="C3_FedexModel1.FK__location___case___3BFFE745" />
+        <AssociationConnector Association="C3_FedexModel1.FK__location___case___42ACE4D4" />
+        <EntityTypeShape EntityType="C3_FedexModel1.send_template" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.geda_notifications" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.currency_codes" Width="1.5" PointX="6.375" PointY="11.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.send_temp" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.bot_password" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="C3_FedexModel1.update_bot_password" Width="1.5" PointX="12.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

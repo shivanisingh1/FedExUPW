@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1fcc297455db4e29aabe1ce38a6482b0" Name="Diagram1">
+        <EntityTypeShape EntityType="Incedo_DEVModel1.add_case_notes" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.agent_case_attempts_made" Width="1.5" PointX="6" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.agent_case_details" Width="1.5" PointX="6" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.agent_details" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.case_details" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.case_notes" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.folder_details" Width="1.5" PointX="3.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.folder_ids" Width="1.5" PointX="6" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.location_details" Width="1.5" PointX="3" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.package_details" Width="1.5" PointX="3" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.package_scan_details" Width="1.5" PointX="3" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.primary_case_details" Width="1.5" PointX="9" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.primary_rep_details" Width="1.5" PointX="6.75" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.primary_requirements" Width="1.5" PointX="3" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.recipient_details" Width="1.5" PointX="3" PointY="45.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Incedo_DEVModel1.shipper_details" Width="1.5" PointX="3" PointY="50" IsExpanded="true" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__add_case___case___3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__agent_cas__agent__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__agent_cas__case___3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__agent_cas__agent__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__agent_cas__case___3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__case_note__case___3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__folder_id__case___403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__location___case___4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__package_d__case___4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__package_s__case___440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__primary_c__case___44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__primary_r__case___46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__recipient__case___47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__shipper_d__case___48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__folder_id__folde__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Incedo_DEVModel1.FK__primary_c__prima__45F365D3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
