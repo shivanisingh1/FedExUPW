@@ -1,0 +1,1644 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="DataExtraction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>909,1345</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>DataExtraction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="23">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="DataExtraction" sap:VirtualizedContainerService.HintSize="889,1285" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="CaseID" />
+      <Variable x:TypeArguments="x:String" Name="TrackingNo" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="CaseNotes" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="CaseIdSelector" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="countRow" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="DTRowsCount" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="PrimaryInformtionName" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="FedexIdPrimaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="DateAssingedPrimaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="LocationIDPrimaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="QueueTypePrimaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="SecondaryInformationName" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="DateAssignedSecondaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="FedexIdSecondaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="LocIdSecondaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="QueueTypeSecondaryInformation" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="WIPBIN" />
+      <Variable x:TypeArguments="x:String" Name="folderID" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart sap:VirtualizedContainerService.HintSize="847,1102" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+      <Flowchart.Variables>
+        <Variable x:TypeArguments="ui:DatabaseConnection" Name="db" />
+      </Flowchart.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+          <av:Size x:Key="ShapeSize">60,75</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,137.5</av:PointCollection>
+          <x:Double x:Key="Height">1065.5</x:Double>
+          <x:Double x:Key="Width">813</x:Double>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Flowchart.StartNode>
+        <x:Reference>__ReferenceID8</x:Reference>
+      </Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,434.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,66</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,500.5 300,534.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Sequence DisplayName="Fetching Case Details" sap:VirtualizedContainerService.HintSize="376,1593" sap2010:WorkflowViewState.IdRef="Sequence_14">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="TrackingNoSelector" />
+            <Variable x:TypeArguments="x:String" Name="CaseNotesSelector" />
+            <Variable x:TypeArguments="x:String" Name="TitleSelector" />
+            <Variable x:TypeArguments="x:String" Name="Title" />
+            <Variable x:TypeArguments="x:String" Name="AlternateTitleSelector" />
+            <Variable x:TypeArguments="x:String" Name="AlternateTitle" />
+            <Variable x:TypeArguments="ui:GenericValue" Name="Name" />
+            <Variable x:TypeArguments="ui:DatabaseConnection" Name="SQLFEDEX" />
+            <Variable x:TypeArguments="x:Int32" Name="affectedrows" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Fetching Case Details started.&quot;]" />
+          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_44">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[CaseID]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem("Case ID").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_33" Text="[&quot;CaseID: -&quot;+ CaseID]" />
+          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_45">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[TrackingNo]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem("Tracking #").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_34" Text="[TrackingNo]" />
+          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[CaseNotesSelector]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='Case Notes' role='scroll pane' idx='1' /&gt;"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:GetFullText DisplayName="Fetching Case Notes" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetFullText_3" IgnoreHidden="False">
+            <ui:GetFullText.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="c36c876a108ed5017ccb3bd2d3ad13b0" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java name='Case Notes' role='scroll pane' /&gt;&lt;java role='text' /&gt;" WaitForReady="INTERACTIVE">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
+            </ui:GetFullText.Target>
+            <ui:GetFullText.Text>
+              <OutArgument x:TypeArguments="ui:GenericValue">[CaseNotes]</OutArgument>
+            </ui:GetFullText.Text>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:GetFullText>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_35" Text="[CaseNotes + &quot;Badal&quot;  +CaseID]" />
+          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_46">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Title]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem("Title").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_36" Text="[Title]" />
+          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_47">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[AlternateTitle]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem("Alternate Title").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_37" Text="[AlternateTitle]" />
+          <ui:ExecuteNonQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[affectedrows]" CommandType="Text" DisplayName="Execute Non Query - Case Details" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" ProviderName="System.Data.SqlClient" Sql="INSERT [dbo].[case_details] ([case_id], [alternate_title], [title], [case_notes], [tracking_number], [creation_date], [modification_date], [assignment]) VALUES (@Val1,  @Val2,  @Val3,  @Val4,  @Val5,  @Val6, @Val7, @Val8)" ConnectionString="Data Source=FEDEXSQL;Initial Catalog=Incedo_DEV;Integrated Security=True">
+            <ui:ExecuteNonQuery.Parameters>
+              <InArgument x:TypeArguments="x:String" x:Key="Val1">[CaseID]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Val2">[AlternateTitle]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Val3">[Title]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Val4">[CaseNotes]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Val5">[TrackingNo]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="Val6">[DateTime.Now]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[DateTime.Now]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="Val8">[DateTime.Now]</InArgument>
+            </ui:ExecuteNonQuery.Parameters>
+          </ui:ExecuteNonQuery>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Fetching Case Details ended.&quot;]" />
+        </Sequence>
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <av:Point x:Key="ShapeLocation">200,534.5</av:Point>
+                <av:Size x:Key="ShapeSize">200,66</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">300,600.5 300,634.5</av:PointCollection>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Sequence DisplayName="Primary Information" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="sd:DataTable" Name="dt" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Primary Information started.&quot;]" />
+              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'page tab  Ownership'" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e42b7e03532d6306d5cc3d4d33728950" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="Delay_4" />
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Primary Information Name" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_36">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="df591dd1951fdc0414ba41c296acf080" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='1' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[PrimaryInformtionName]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_38" Text="[PrimaryInformtionName]" />
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching FedEX ID#" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_37">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="ea46d516b0a1b95364646bc2ec5a455a" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='2' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[FedexIdPrimaryInformation]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_39" Text="[FedexIdPrimaryInformation]" />
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Date Assigned" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_38">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f9627dbb96be4acab8014671a2f2a8cc" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='3' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[DateAssingedPrimaryInformation]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_40" Text="[DateAssingedPrimaryInformation]" />
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching LocID" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_39">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="942765a7a6c752541cb261d8d7dd5fef" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='4' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[LocationIDPrimaryInformation]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_41" Text="[LocationIDPrimaryInformation]" />
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Queue Type" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_40">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3d2c8784a4985ae1da841c73c445d245" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='5' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[QueueTypePrimaryInformation]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_42" Text="[QueueTypePrimaryInformation]" />
+              <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt]" DisplayName="Execute Query - FedExID Check" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="484,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="select fedex_id from primary_rep_details  where fedex_id = @Var1">
+                <ui:ExecuteQuery.Parameters>
+                  <InArgument x:TypeArguments="x:String" x:Key="Var1">[FedexIdPrimaryInformation]</InArgument>
+                </ui:ExecuteQuery.Parameters>
+              </ui:ExecuteQuery>
+              <If Condition="[dt.Rows.Count=0]" sap:VirtualizedContainerService.HintSize="484,236" sap2010:WorkflowViewState.IdRef="If_5">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Primary Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" Sql="Insert Into [dbo].[primary_rep_details] ([name], [fedex_id], [date_assigned], [queue_type], [loc_id], [creation_date], [modification_date]) values (@Val2, @Val3, @Val4, @Val5, @Val6, @Val7, @Val8)">
+                    <ui:ExecuteNonQuery.Parameters>
+                      <InArgument x:TypeArguments="x:String" x:Key="Val2">[PrimaryInformtionName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Val3">[FedexIdPrimaryInformation]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Val4">[DateAssingedPrimaryInformation]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Val5">[QueueTypePrimaryInformation]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Val6">[LocationIDPrimaryInformation]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[Date.Now]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="Val8">[Date.Now]</InArgument>
+                    </ui:ExecuteNonQuery.Parameters>
+                  </ui:ExecuteNonQuery>
+                </If.Then>
+              </If>
+              <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Primary Case Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="484,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_9" Sql="INSERT INTO [dbo].[primary_case_details] ([primary_rep_id] ,[case_id]) VALUES(@Var1,@Var2)">
+                <ui:ExecuteNonQuery.Parameters>
+                  <InArgument x:TypeArguments="x:String" x:Key="Var1">[FedexIdPrimaryInformation]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Var2">[CaseID]</InArgument>
+                </ui:ExecuteNonQuery.Parameters>
+              </ui:ExecuteNonQuery>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Primary Information ended.&quot;]" />
+            </Sequence>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <av:Point x:Key="ShapeLocation">200,634.5</av:Point>
+                    <av:Size x:Key="ShapeSize">200,66</av:Size>
+                    <av:PointCollection x:Key="ConnectorLocation">300,700.5 300,735.5</av:PointCollection>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="Secondary Information" sap:VirtualizedContainerService.HintSize="1532,3026" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="ui:GenericValue" Name="fullWIPBIN" />
+                    <Variable x:TypeArguments="x:Int32" Name="agentcase" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1490,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Secondary Information started.&quot;]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Name" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_41">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="af2646a4488102693c0996a364795c6b" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='1' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[SecondaryInformationName]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_43" Text="[SecondaryInformationName]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetchinf FedexID#" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_42">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="891221f148881c7552cf3dbc7bc5b223" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='2' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[FedexIdSecondaryInformation]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_44" Text="[FedexIdSecondaryInformation]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Date Assigned" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_43">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="110011ed8393a2562cf78276c7a5e1a1" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='3' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[DateAssignedSecondaryInformation]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_45" Text="[DateAssignedSecondaryInformation]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Loc ID" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_44">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="64aa0310fec45b2aa067142766e610bf" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='4' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[LocIdSecondaryInformation]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_46" Text="[LocIdSecondaryInformation]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Queue Type" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_45">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3c7a028cc645a8b3cff30779faeb8a63" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='5' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[QueueTypeSecondaryInformation]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Folder details" sap:VirtualizedContainerService.HintSize="1490,106" sap2010:WorkflowViewState.IdRef="GetValue_46">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="af24cc0e219d5006c70fb9a923f78068" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='8' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[WIPBIN]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_47" Text="[WIPBIN]" />
+                  <Assign sap:VirtualizedContainerService.HintSize="1490,60" sap2010:WorkflowViewState.IdRef="Assign_49">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[fullWIPBIN]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="ui:GenericValue">[WIPBIN.Trim.ToLower]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1490,51" sap2010:WorkflowViewState.IdRef="CommentOut_16">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="564,553" sap2010:WorkflowViewState.IdRef="Sequence_45">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="522,461" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <TryCatch.Try>
+                            <If Condition="[string.IsNullOrEmpty(FedexIdSecondaryInformation.Trim) or string.IsNullOrEmpty(QueueTypeSecondaryInformation.Trim) or string.IsNullOrEmpty(WIPBIN.Trim)]" sap:VirtualizedContainerService.HintSize="484,234" sap2010:WorkflowViewState.IdRef="If_11">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SendEmail workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataScrapping\SendEmail.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="In_EmailPort">[Convert.ToInt32(in_Config("EmailPort"))]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_EmailServer">[in_Config("EmailServer").ToString]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_EmailFrom">[in_Config("EmailFrom").ToString]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_EmailTo">[in_Config("EmailTo").ToString]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_EmailCC">[in_Config("EmailCC").ToString]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_EmailBody">[in_Config("WIPBIN_Body").ToString]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="In_Subject">[in_Config("WIPBIN_Subject").ToString+" "+CaseID]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                            </If>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="488,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <If Condition="[fullWIPBIN.Equals(&quot;wip&quot;)]" DisplayName="If - folder ID" sap:VirtualizedContainerService.HintSize="1490,652" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_27">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">1</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                    <If.Else>
+                      <If Condition="[fullWIPBIN.Equals(&quot;new work&quot;)]" sap:VirtualizedContainerService.HintSize="1183,504" sap2010:WorkflowViewState.IdRef="If_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">2</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <If Condition="[fullWIPBIN.Equals(&quot;all&quot;)]" sap:VirtualizedContainerService.HintSize="876,356" sap2010:WorkflowViewState.IdRef="If_3">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">3</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <If Condition="[fullWIPBIN.Equals(&quot;utl&quot;)]" sap:VirtualizedContainerService.HintSize="569,208" sap2010:WorkflowViewState.IdRef="If_2">
+                                <If.Then>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_30">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">4</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </If.Then>
+                                <If.Else>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_48">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">3</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </If.Else>
+                              </If>
+                            </If.Else>
+                          </If>
+                        </If.Else>
+                      </If>
+                    </If.Else>
+                  </If>
+                  <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[agentcase]" CommandType="Text" DisplayName="Execute Non Query - Agent Case Detail" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="1490,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_7" Sql="Insert into agent_case_details (case_id ,agent_id,creation_date,modification_date) values(@Var1,@Var2,@Var3,@Var4)">
+                    <ui:ExecuteNonQuery.Parameters>
+                      <InArgument x:TypeArguments="x:String" x:Key="Var1">[CaseID]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Var2">[FedexIdSecondaryInformation]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="Var3">[Date.Now]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="Var4">[Date.Now]</InArgument>
+                    </ui:ExecuteNonQuery.Parameters>
+                  </ui:ExecuteNonQuery>
+                  <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Folder id" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="1490,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_8" Sql="insert into folder_ids (case_id ,folder_id ) values(@Var1,@Var2)">
+                    <ui:ExecuteNonQuery.Parameters>
+                      <InArgument x:TypeArguments="x:String" x:Key="Var1">[CaseID]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Var2">[folderID]</InArgument>
+                    </ui:ExecuteNonQuery.Parameters>
+                  </ui:ExecuteNonQuery>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1490,61" sap2010:WorkflowViewState.IdRef="WriteLine_48" Text="[QueueTypeSecondaryInformation]" />
+                  <ui:CommentOut DisplayName="Comment Out - Agent Details" sap:VirtualizedContainerService.HintSize="1490,51" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - C3 Agent Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" Sql="INSERT [dbo].[agent_details] ( [name], [fedex_id], [date_assigned], [queue_type], [loc_id], [creation_date], [modification_date]) VALUES (@Val1, @Val2, @Val3, @Val4, @Val5, @Val6, @Val7)">
+                          <ui:ExecuteNonQuery.Parameters>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val1">[SecondaryInformationName]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val2">[FedexIdSecondaryInformation]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val3">[DateAssignedSecondaryInformation]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val4">[QueueTypeSecondaryInformation]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val5">[LocIdSecondaryInformation]</InArgument>
+                            <InArgument x:TypeArguments="s:DateTime" x:Key="Val6">[Date.Now]</InArgument>
+                            <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[Date.Now]</InArgument>
+                          </ui:ExecuteNonQuery.Parameters>
+                        </ui:ExecuteNonQuery>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1490,91" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Secondary Information ended.&quot;]" />
+                </Sequence>
+                <FlowStep.Next>
+                  <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_10">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <av:Point x:Key="ShapeLocation">200,735.5</av:Point>
+                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                        <av:PointCollection x:Key="ConnectorLocation">300,786.5 300,939</av:PointCollection>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke 1SourceDataExtraction workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="DataScrapping\1SourceDataExtraction.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="PrimaryFedexId">[FedexIdPrimaryInformation]</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ACommitmentDate_Out" />
+                        <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="db">[db]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="CaseId">[CaseID]</InArgument>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:InvokeWorkflowFile>
+                    <FlowStep.Next>
+                      <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_14">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <av:Point x:Key="ShapeLocation">200,939</av:Point>
+                            <av:Size x:Key="ShapeSize">200,22</av:Size>
+                            <av:PointCollection x:Key="ConnectorLocation">300,961 300,1011</av:PointCollection>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:DatabaseDisconnect DatabaseConnection="[db]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:DatabaseDisconnect>
+                        <FlowStep.Next>
+                          <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_25">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <av:Point x:Key="ShapeLocation">200,1011</av:Point>
+                                <av:Size x:Key="ShapeSize">200,51</av:Size>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Data Extraction ended.&quot;]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                          </FlowStep>
+                        </FlowStep.Next>
+                      </FlowStep>
+                    </FlowStep.Next>
+                  </FlowStep>
+                </FlowStep.Next>
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+      <x:Reference>__ReferenceID0</x:Reference>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
+      <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_13">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,344.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,395.5 300,434.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:DatabaseConnect DatabaseConnection="[db]" DisplayName="DB Connect" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=FEDEXSQL;Initial Catalog=Incedo_DEV;User ID=_UIPath;Password=C3connect2o18!" />
+        <FlowStep.Next>
+          <x:Reference>__ReferenceID3</x:Reference>
+        </FlowStep.Next>
+      </FlowStep>
+      <x:Reference>__ReferenceID4</x:Reference>
+      <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_15">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,237.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,288.5 300,344.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke MyConsole_SelectCaseID workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="DataScrapping\MyConsole_SelectCaseID.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="In_CaseId">[in_TransactionItem("Case ID").ToString]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeWorkflowFile>
+        <FlowStep.Next>
+          <x:Reference>__ReferenceID5</x:Reference>
+        </FlowStep.Next>
+      </FlowStep>
+      <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_24">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,137.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,188.5 300,237.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Data Extraction started.&quot;]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:LogMessage>
+        <FlowStep.Next>
+          <x:Reference>__ReferenceID6</x:Reference>
+        </FlowStep.Next>
+      </FlowStep>
+      <x:Reference>__ReferenceID7</x:Reference>
+    </Flowchart>
+    <ui:CommentOut DisplayName="Old Code" sap:VirtualizedContainerService.HintSize="847,51" sap2010:WorkflowViewState.IdRef="CommentOut_15">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_44">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Flowchart sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+            <Flowchart.Variables>
+              <Variable x:TypeArguments="ui:DatabaseConnection" Name="db" />
+            </Flowchart.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+                <av:Size x:Key="ShapeSize">60,75</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.5</av:PointCollection>
+                <x:Double x:Key="Height">1065.5</x:Double>
+                <x:Double x:Key="Width">813</x:Double>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Flowchart.StartNode>
+              <x:Reference>__ReferenceID17</x:Reference>
+            </Flowchart.StartNode>
+            <FlowDecision x:Name="__ReferenceID9" Condition="[countRow&lt;DTRowsCount]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <av:Point x:Key="ShapeLocation">260.5,226.5</av:Point>
+                  <av:Size x:Key="ShapeSize">79,87</av:Size>
+                  <av:PointCollection x:Key="TrueConnector">260.5,270 150,270 150,334.5</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <FlowDecision.True>
+                <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_22">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">50,334.5</av:Point>
+                      <av:Size x:Key="ShapeSize">200,51</av:Size>
+                      <av:PointCollection x:Key="ConnectorLocation">150,385.5 150,424.5</av:PointCollection>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:DatabaseConnect DatabaseConnection="[db]" DisplayName="DB Connect" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="DatabaseConnect_2" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=FEDEXSQL;Initial Catalog=Incedo_DEV;User ID=_UIPath;Password=C3connect2o18!" />
+                  <FlowStep.Next>
+                    <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_21">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <av:Point x:Key="ShapeLocation">50,424.5</av:Point>
+                          <av:Size x:Key="ShapeSize">200,66</av:Size>
+                          <av:PointCollection x:Key="ConnectorLocation">150,490.5 150,524.5</av:PointCollection>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Sequence DisplayName="Fetching Case Details" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="TrackingNoSelector" />
+                          <Variable x:TypeArguments="x:String" Name="CaseNotesSelector" />
+                          <Variable x:TypeArguments="x:String" Name="TitleSelector" />
+                          <Variable x:TypeArguments="ui:GenericValue" Name="Title" />
+                          <Variable x:TypeArguments="x:String" Name="AlternateTitleSelector" />
+                          <Variable x:TypeArguments="ui:GenericValue" Name="AlternateTitle" />
+                          <Variable x:TypeArguments="ui:GenericValue" Name="Name" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[CaseIdSelector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="ui:GenericValue">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='2' tableRow='"+countRow.tostring+"' colName='Case ID' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching CaseId" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_47">
+                          <ui:GetValue.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5af3ab923f8a7049de9dff7aa28a137a" Selector="[CaseIdSelector]" WaitForReady="INTERACTIVE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:GetValue.Target>
+                          <ui:GetValue.Value>
+                            <OutArgument x:TypeArguments="x:String">[CaseID]</OutArgument>
+                          </ui:GetValue.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:GetValue>
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CommentOut>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_49" Text="[&quot;CaseID: -&quot;+ CaseID]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_34">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[TrackingNoSelector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='4' tableRow='"+countRow.ToString+"' colName='Tracking #' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Tracking#" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_48">
+                          <ui:GetValue.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fef1efb5b95f4cb93a244d1831bb7e53" Selector="[TrackingNoSelector]" WaitForReady="INTERACTIVE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:GetValue.Target>
+                          <ui:GetValue.Value>
+                            <OutArgument x:TypeArguments="x:String">[TrackingNo]</OutArgument>
+                          </ui:GetValue.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:GetValue>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_50" Text="[TrackingNo]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="314,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[CaseNotesSelector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='Case Notes' role='scroll pane' idx='1' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:GetFullText DisplayName="Fetching Case Notes" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetFullText_4" IgnoreHidden="False">
+                          <ui:GetFullText.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="c36c876a108ed5017ccb3bd2d3ad13b0" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java role='page tab list' idx='1' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java name='Case Notes' role='scroll pane' /&gt;" WaitForReady="INTERACTIVE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:GetFullText.Target>
+                          <ui:GetFullText.Text>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[CaseNotes]</OutArgument>
+                          </ui:GetFullText.Text>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:GetFullText>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_51" Text="[CaseNotes]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="314,60" sap2010:WorkflowViewState.IdRef="Assign_36">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[TitleSelector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='6' tableRow='"+countRow.ToString+"' colName='Title' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Title" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_49">
+                          <ui:GetValue.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="31fc93bed6cb7e755dc760a8f531ee0c" Selector="[TitleSelector]" WaitForReady="INTERACTIVE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:GetValue.Target>
+                          <ui:GetValue.Value>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[Title]</OutArgument>
+                          </ui:GetValue.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:GetValue>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_52" Text="[Title]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="314,60" sap2010:WorkflowViewState.IdRef="Assign_37">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[AlternateTitleSelector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='3' tableRow='"+countRow.ToString+"' colName='Alternate Title' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Alternate Title" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_50">
+                          <ui:GetValue.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="6518f42e11325beeb2e2a386a429ef49" Selector="[AlternateTitleSelector]" WaitForReady="INTERACTIVE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:GetValue.Target>
+                          <ui:GetValue.Value>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[AlternateTitle]</OutArgument>
+                          </ui:GetValue.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:GetValue>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_53" Text="[AlternateTitle]" />
+                        <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Case Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="314,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_10" Sql="INSERT [dbo].[case_details] ([case_id], [alternate_title], [title], [case_notes], [tracking_number], [creation_date], [modification_date], [assignment]) VALUES (@Val1,  @Val2,  @Val3,  @Val4,  @Val5,  @Val6, @Val7, @Val8)">
+                          <ui:ExecuteNonQuery.Parameters>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val1">[CaseID]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val2">[AlternateTitle]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val3">[Title]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val4">[CaseNotes]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Val5">[TrackingNo]</InArgument>
+                            <InArgument x:TypeArguments="s:DateTime" x:Key="Val6">[DateTime.Now]</InArgument>
+                            <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[DateTime.Now]</InArgument>
+                            <InArgument x:TypeArguments="s:DateTime" x:Key="Val8">[DateTime.Now]</InArgument>
+                          </ui:ExecuteNonQuery.Parameters>
+                        </ui:ExecuteNonQuery>
+                      </Sequence>
+                      <FlowStep.Next>
+                        <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_20">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <av:Point x:Key="ShapeLocation">50,524.5</av:Point>
+                              <av:Size x:Key="ShapeSize">200,66</av:Size>
+                              <av:PointCollection x:Key="ConnectorLocation">150,590.5 150,624.5</av:PointCollection>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Primary Information" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="sd:DataTable" Name="dt" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'page tab  Ownership'" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e42b7e03532d6306d5cc3d4d33728950" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="Delay_5" />
+                            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Primary Information Name" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_51">
+                              <ui:GetValue.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="df591dd1951fdc0414ba41c296acf080" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='1' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:GetValue.Target>
+                              <ui:GetValue.Value>
+                                <OutArgument x:TypeArguments="ui:GenericValue">[PrimaryInformtionName]</OutArgument>
+                              </ui:GetValue.Value>
+                            </ui:GetValue>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_54" Text="[PrimaryInformtionName]" />
+                            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching FedEX ID#" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_52">
+                              <ui:GetValue.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="ea46d516b0a1b95364646bc2ec5a455a" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='2' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:GetValue.Target>
+                              <ui:GetValue.Value>
+                                <OutArgument x:TypeArguments="ui:GenericValue">[FedexIdPrimaryInformation]</OutArgument>
+                              </ui:GetValue.Value>
+                            </ui:GetValue>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_55" Text="[FedexIdPrimaryInformation]" />
+                            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Date Assigned" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_53">
+                              <ui:GetValue.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f9627dbb96be4acab8014671a2f2a8cc" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='3' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:GetValue.Target>
+                              <ui:GetValue.Value>
+                                <OutArgument x:TypeArguments="ui:GenericValue">[DateAssingedPrimaryInformation]</OutArgument>
+                              </ui:GetValue.Value>
+                            </ui:GetValue>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_56" Text="[DateAssingedPrimaryInformation]" />
+                            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching LocID" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_54">
+                              <ui:GetValue.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="942765a7a6c752541cb261d8d7dd5fef" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='4' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:GetValue.Target>
+                              <ui:GetValue.Value>
+                                <OutArgument x:TypeArguments="ui:GenericValue">[LocationIDPrimaryInformation]</OutArgument>
+                              </ui:GetValue.Value>
+                            </ui:GetValue>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_57" Text="[LocationIDPrimaryInformation]" />
+                            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Queue Type" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="GetValue_55">
+                              <ui:GetValue.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3d2c8784a4985ae1da841c73c445d245" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Primary Information' role='panel' /&gt;&lt;java idx='5' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:GetValue.Target>
+                              <ui:GetValue.Value>
+                                <OutArgument x:TypeArguments="ui:GenericValue">[QueueTypePrimaryInformation]</OutArgument>
+                              </ui:GetValue.Value>
+                            </ui:GetValue>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="314,61" sap2010:WorkflowViewState.IdRef="WriteLine_58" Text="[QueueTypePrimaryInformation]" />
+                            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt]" DisplayName="Execute Query - FedExID Check" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="314,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="select fedex_id from primary_rep_details  where fedex_id = @Var1">
+                              <ui:ExecuteQuery.Parameters>
+                                <InArgument x:TypeArguments="x:String" x:Key="Var1">[FedexIdPrimaryInformation]</InArgument>
+                              </ui:ExecuteQuery.Parameters>
+                            </ui:ExecuteQuery>
+                            <If Condition="[dt.Rows.Count=0]" sap:VirtualizedContainerService.HintSize="314,51" sap2010:WorkflowViewState.IdRef="If_6">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Primary Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="314,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_11" Sql="Insert Into [dbo].[primary_rep_details] ([name], [fedex_id], [date_assigned], [queue_type], [loc_id], [creation_date], [modification_date]) values (@Val2, @Val3, @Val4, @Val5, @Val6, @Val7, @Val8)">
+                                  <ui:ExecuteNonQuery.Parameters>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Val2">[PrimaryInformtionName]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Val3">[FedexIdPrimaryInformation]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Val4">[DateAssingedPrimaryInformation]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Val5">[QueueTypePrimaryInformation]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Val6">[LocationIDPrimaryInformation]</InArgument>
+                                    <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[Date.Now]</InArgument>
+                                    <InArgument x:TypeArguments="s:DateTime" x:Key="Val8">[Date.Now]</InArgument>
+                                  </ui:ExecuteNonQuery.Parameters>
+                                </ui:ExecuteNonQuery>
+                              </If.Then>
+                            </If>
+                            <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Primary Case Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="314,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_12" Sql="INSERT INTO [dbo].[primary_case_details] ([primary_rep_id] ,[case_id]) VALUES(@Var1,@Var2)">
+                              <ui:ExecuteNonQuery.Parameters>
+                                <InArgument x:TypeArguments="x:String" x:Key="Var1">[FedexIdPrimaryInformation]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="Var2">[CaseID]</InArgument>
+                              </ui:ExecuteNonQuery.Parameters>
+                            </ui:ExecuteNonQuery>
+                          </Sequence>
+                          <FlowStep.Next>
+                            <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_19">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">50,624.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">150,690.5 150,744.5</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence DisplayName="SecondaryInformation" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Name" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_56">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="af2646a4488102693c0996a364795c6b" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='1' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[SecondaryInformationName]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_59" Text="[SecondaryInformationName]" />
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetchinf FedexID#" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_57">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="891221f148881c7552cf3dbc7bc5b223" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='2' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[FedexIdSecondaryInformation]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_60" Text="[FedexIdSecondaryInformation]" />
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Date Assigned" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_58">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="110011ed8393a2562cf78276c7a5e1a1" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='3' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[DateAssignedSecondaryInformation]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_61" Text="[DateAssignedSecondaryInformation]" />
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Loc ID" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_59">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="64aa0310fec45b2aa067142766e610bf" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='4' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[LocIdSecondaryInformation]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_62" Text="[LocIdSecondaryInformation]" />
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Queue Type" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_60">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3c7a028cc645a8b3cff30779faeb8a63" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='5' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[QueueTypeSecondaryInformation]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Fetching Folder details" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_61">
+                                  <ui:GetValue.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="af24cc0e219d5006c70fb9a923f78068" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Ownership' role='page tab' /&gt;&lt;java name='Secondary information' role='panel' /&gt;&lt;java idx='8' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetValue.Target>
+                                  <ui:GetValue.Value>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[WIPBIN]</OutArgument>
+                                  </ui:GetValue.Value>
+                                </ui:GetValue>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_63" Text="[WIPBIN]" />
+                                <If Condition="[WIPBIN.ToLower.Equals(&quot;wip&quot;)]" DisplayName="If - folder ID" sap:VirtualizedContainerService.HintSize="436,51" sap2010:WorkflowViewState.IdRef="If_10">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <If.Then>
+                                    <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_38">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">1</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </If.Then>
+                                  <If.Else>
+                                    <If Condition="[WIPBIN.ToLower.Equals(&quot;new work&quot;)]" sap:VirtualizedContainerService.HintSize="998,504" sap2010:WorkflowViewState.IdRef="If_9">
+                                      <If.Then>
+                                        <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_39">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">2</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </If.Then>
+                                      <If.Else>
+                                        <If Condition="[WIPBIN.ToLower.Equals(&quot;all&quot;)]" sap:VirtualizedContainerService.HintSize="731,356" sap2010:WorkflowViewState.IdRef="If_8">
+                                          <If.Then>
+                                            <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_40">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:String">3</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                          </If.Then>
+                                          <If.Else>
+                                            <If Condition="[WIPBIN.ToLower.Equals(&quot;utl&quot;)]" sap:VirtualizedContainerService.HintSize="464,208" sap2010:WorkflowViewState.IdRef="If_7">
+                                              <If.Then>
+                                                <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_41">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[folderID]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">4</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </If.Then>
+                                            </If>
+                                          </If.Else>
+                                        </If>
+                                      </If.Else>
+                                    </If>
+                                  </If.Else>
+                                </If>
+                                <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Agent Case Detail" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="436,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_13" Sql="Insert into agent_case_details (case_id ,agent_id,creation_date,modification_date) values(@Var1,@Var2,@Var3,@Var4)">
+                                  <ui:ExecuteNonQuery.Parameters>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Var1">[CaseID]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Var2">[FedexIdSecondaryInformation]</InArgument>
+                                    <InArgument x:TypeArguments="s:DateTime" x:Key="Var3">[Date.Now]</InArgument>
+                                    <InArgument x:TypeArguments="s:DateTime" x:Key="Var4">[Date.Now]</InArgument>
+                                  </ui:ExecuteNonQuery.Parameters>
+                                </ui:ExecuteNonQuery>
+                                <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - Folder id" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="436,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_14" Sql="insert into folder_ids (case_id ,folder_id ) values(@Var1,@Var2)">
+                                  <ui:ExecuteNonQuery.Parameters>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Var1">[CaseID]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Var2">[folderID]</InArgument>
+                                  </ui:ExecuteNonQuery.Parameters>
+                                </ui:ExecuteNonQuery>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="WriteLine_64" Text="[QueueTypeSecondaryInformation]" />
+                                <ui:CommentOut DisplayName="Comment Out - Agent Details" sap:VirtualizedContainerService.HintSize="436,258" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+                                  <ui:CommentOut.Body>
+                                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query - C3 Agent Details" ExistingDbConnection="[db]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_15" Sql="INSERT [dbo].[agent_details] ( [name], [fedex_id], [date_assigned], [queue_type], [loc_id], [creation_date], [modification_date]) VALUES (@Val1, @Val2, @Val3, @Val4, @Val5, @Val6, @Val7)">
+                                        <ui:ExecuteNonQuery.Parameters>
+                                          <InArgument x:TypeArguments="x:String" x:Key="Val1">[SecondaryInformationName]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="Val2">[FedexIdSecondaryInformation]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="Val3">[DateAssignedSecondaryInformation]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="Val4">[QueueTypeSecondaryInformation]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="Val5">[LocIdSecondaryInformation]</InArgument>
+                                          <InArgument x:TypeArguments="s:DateTime" x:Key="Val6">[Date.Now]</InArgument>
+                                          <InArgument x:TypeArguments="s:DateTime" x:Key="Val7">[Date.Now]</InArgument>
+                                        </ui:ExecuteNonQuery.Parameters>
+                                      </ui:ExecuteNonQuery>
+                                    </Sequence>
+                                  </ui:CommentOut.Body>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:CommentOut>
+                              </Sequence>
+                              <FlowStep.Next>
+                                <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_18">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <av:Point x:Key="ShapeLocation">50,744.5</av:Point>
+                                      <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                      <av:PointCollection x:Key="ConnectorLocation">250,770 290,770</av:PointCollection>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke 1SourceDataExtraction workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="DataScrapping\1SourceDataExtraction.xaml">
+                                    <ui:InvokeWorkflowFile.Arguments>
+                                      <InArgument x:TypeArguments="x:String" x:Key="PrimaryFedexId">[FedexIdPrimaryInformation]</InArgument>
+                                      <OutArgument x:TypeArguments="x:String" x:Key="ACommitmentDate_Out" />
+                                      <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="db">[db]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="CaseId">[CaseID]</InArgument>
+                                    </ui:InvokeWorkflowFile.Arguments>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:InvokeWorkflowFile>
+                                  <FlowStep.Next>
+                                    <FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_17">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">290,759</av:Point>
+                                          <av:Size x:Key="ShapeSize">200,22</av:Size>
+                                          <av:PointCollection x:Key="ConnectorLocation">490,770 520,770 520,777.5</av:PointCollection>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:DatabaseDisconnect DatabaseConnection="[db]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_2">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:DatabaseDisconnect>
+                                      <FlowStep.Next>
+                                        <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_16">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <av:Point x:Key="ShapeLocation">520,744.5</av:Point>
+                                              <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                              <av:PointCollection x:Key="ConnectorLocation">620,744.5 620,714.5 300,714.5 300,313.5</av:PointCollection>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Sequence DisplayName="Increase count for next iteration" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Send Hotkey 'label  20181211048565'" EmptyField="False" sap:VirtualizedContainerService.HintSize="314,154" sap2010:WorkflowViewState.IdRef="SendHotkey_9" Key="down" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                                              <ui:SendHotkey.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="76e9c2e1c3f27a36f2dc2a49ae77a4ad" Selector="[CaseIdSelector]" WaitForReady="INTERACTIVE">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                </ui:Target>
+                                              </ui:SendHotkey.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:SendHotkey>
+                                            <Assign sap:VirtualizedContainerService.HintSize="314,60" sap2010:WorkflowViewState.IdRef="Assign_42">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="ui:GenericValue">[countRow]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="ui:GenericValue">[countRow+1]</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="314,51" sap2010:WorkflowViewState.IdRef="CommentOut_13">
+                                              <ui:CommentOut.Body>
+                                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="264,184" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_43">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="ui:GenericValue">[CaseIdSelector]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="ui:GenericValue">["&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='2' tableRow='"+countRow.tostring+"' colName='Case ID' /&gt;"]</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                </Sequence>
+                                              </ui:CommentOut.Body>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:CommentOut>
+                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'page tab'" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="0b9b681c543f49b93de7cff3257e9b41" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='*' role='page tab' /&gt;&lt;java role='page tab list' /&gt;&lt;java name='Shipment Details' role='page tab' /&gt;" WaitForReady="INTERACTIVE">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                </ui:Target>
+                                              </ui:Click.Target>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:Click>
+                                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="314,51" sap2010:WorkflowViewState.IdRef="CommentOut_14">
+                                              <ui:CommentOut.Body>
+                                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="336,230" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'label  20181211048566'" sap:VirtualizedContainerService.HintSize="314,106" sap2010:WorkflowViewState.IdRef="Click_19" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                                                    <ui:Click.CursorPosition>
+                                                      <ui:CursorPosition Position="Center">
+                                                        <ui:CursorPosition.OffsetX>
+                                                          <InArgument x:TypeArguments="x:Int32" />
+                                                        </ui:CursorPosition.OffsetX>
+                                                        <ui:CursorPosition.OffsetY>
+                                                          <InArgument x:TypeArguments="x:Int32" />
+                                                        </ui:CursorPosition.OffsetY>
+                                                      </ui:CursorPosition>
+                                                    </ui:Click.CursorPosition>
+                                                    <ui:Click.Target>
+                                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5af3ab923f8a7049de9dff7aa28a137a" Selector="[CaseIdSelector]" WaitForReady="INTERACTIVE">
+                                                        <ui:Target.TimeoutMS>
+                                                          <InArgument x:TypeArguments="x:Int32" />
+                                                        </ui:Target.TimeoutMS>
+                                                      </ui:Target>
+                                                    </ui:Click.Target>
+                                                  </ui:Click>
+                                                </Sequence>
+                                              </ui:CommentOut.Body>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:CommentOut>
+                                          </Sequence>
+                                          <FlowStep.Next>
+                                            <x:Reference>__ReferenceID9</x:Reference>
+                                          </FlowStep.Next>
+                                        </FlowStep>
+                                      </FlowStep.Next>
+                                    </FlowStep>
+                                  </FlowStep.Next>
+                                </FlowStep>
+                              </FlowStep.Next>
+                            </FlowStep>
+                          </FlowStep.Next>
+                        </FlowStep>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowStep.Next>
+                </FlowStep>
+              </FlowDecision.True>
+            </FlowDecision>
+            <x:Reference>__ReferenceID10</x:Reference>
+            <x:Reference>__ReferenceID11</x:Reference>
+            <x:Reference>__ReferenceID12</x:Reference>
+            <x:Reference>__ReferenceID13</x:Reference>
+            <x:Reference>__ReferenceID14</x:Reference>
+            <FlowStep x:Name="__ReferenceID17" sap2010:WorkflowViewState.IdRef="FlowStep_23">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
+                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">300,193.5 300,226.5</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Sequence sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="TableExtract" sap:VirtualizedContainerService.HintSize="518,528" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="476,436" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'MyConsole Sunawtfra'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="WindowScope_4" InformativeScreenshot="1450621f1a4f6c279beed192aa5b6ef0" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;">
+                      <ui:WindowScope.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExtractData NextLinkSelector="{x:Null}" SimulateClick="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DelayBetweenPagesMS="300" DisplayName="Extract Structured Data 'table'" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' /&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_4" MaxNumberOfResults="0">
+                              <ui:ExtractData.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="8b27e6c28cbbd6b9f153fa2e89fe38ff" Selector="&lt;java idx='1' role='table' /&gt;" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:ExtractData.Target>
+                            </ui:ExtractData>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:WindowScope.Body>
+                    </ui:WindowScope>
+                  </Sequence>
+                </Sequence>
+                <Assign sap:VirtualizedContainerService.HintSize="518,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="ui:GenericValue">[DTRowsCount]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="ui:GenericValue">[ExtractDataTable.Rows.Count]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign sap:VirtualizedContainerService.HintSize="518,60" sap2010:WorkflowViewState.IdRef="Assign_32">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="ui:GenericValue">[countRow]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="ui:GenericValue">[0]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey 'scroll pane'" EmptyField="False" sap:VirtualizedContainerService.HintSize="518,154" sap2010:WorkflowViewState.IdRef="SendHotkey_8" Key="home" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="True">
+                  <ui:SendHotkey.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b423c56e34c794ea9d7f8f1aabca6993" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='2' role='scroll pane' /&gt;" WaitForReady="INTERACTIVE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:SendHotkey.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:SendHotkey>
+                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'label  20181211048566'" sap:VirtualizedContainerService.HintSize="518,106" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="9764c88b469665718d14ea4eb288a99a" Selector="&lt;wnd app='launcher.exe' cls='SunAwtFrame' title='MyConsole' /&gt;&lt;java idx='1' role='table' /&gt;&lt;java role='label' tableCol='2' tableRow='0' colName='Case ID' /&gt;" WaitForReady="INTERACTIVE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+              </Sequence>
+              <FlowStep.Next>
+                <x:Reference>__ReferenceID9</x:Reference>
+              </FlowStep.Next>
+            </FlowStep>
+            <x:Reference>__ReferenceID15</x:Reference>
+            <x:Reference>__ReferenceID16</x:Reference>
+          </Flowchart>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+  </Sequence>
+</Activity>
