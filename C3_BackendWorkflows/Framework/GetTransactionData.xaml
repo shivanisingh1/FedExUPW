@@ -11,10 +11,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>673.714285714286,1649.71428571429</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>546.857142857143,1256</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="23">
+    <scg:List x:TypeArguments="x:String" Capacity="46">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -38,10 +38,11 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>Microsoft.Activities</x:String>
       <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="25">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="50">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -67,9 +68,10 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Description: Get data from spreadsheets, databases, email, web API or UiPath server queues. If no new data, set out_TransactionItem to Nothing. &#xA;&#xA;For a linear process (not repetitive), set out_TransactionItem only for in_TransactionNumber 1 - first and only transaction. &#xA;&#xA;If the process is repeatable, set io_TransactionData once for in_TransactionNumber 1, then assign a new out_TransactionItem by using the in_TransactionNumber to index io_TransactionData. Be aware that, at the end of the io_TransactionData collection, it is your responsibility to set out_TransactionItem to Nothing, thus ending the process." DisplayName="GetTransactionData" sap:VirtualizedContainerService.HintSize="653.714285714286,1549.71428571429" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Description: Get data from spreadsheets, databases, email, web API or UiPath server queues. If no new data, set out_TransactionItem to Nothing. &#xA;&#xA;For a linear process (not repetitive), set out_TransactionItem only for in_TransactionNumber 1 - first and only transaction. &#xA;&#xA;If the process is repeatable, set io_TransactionData once for in_TransactionNumber 1, then assign a new out_TransactionItem by using the in_TransactionNumber to index io_TransactionData. Be aware that, at the end of the io_TransactionData collection, it is your responsibility to set out_TransactionItem to Nothing, thus ending the process." DisplayName="GetTransactionData" sap:VirtualizedContainerService.HintSize="526.857142857143,1156" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:DatabaseConnection" Name="ConnectionString" />
       <Variable x:TypeArguments="sd:DataTable" Name="CredentialsTable" />
@@ -81,7 +83,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut DisplayName="Required for queue" sap:VirtualizedContainerService.HintSize="611.428571428571,52.5714285714286" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Required for queue" sap:VirtualizedContainerService.HintSize="484.571428571429,52.5714285714286" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="526.857142857143,205.714285714286" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
@@ -142,23 +144,43 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:DatabaseConnect DatabaseConnection="[ConnectionString]" DisplayName="Connect to DB" sap:VirtualizedContainerService.HintSize="611.428571428571,58.2857142857143" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=FEDEXSQL;Initial Catalog=Incedo_DEV;User ID=_UIPath;Password=C3connect2o18!" />
-    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[CredentialsTable]" DisplayName="Execute Query - Get CaseIDs" ExistingDbConnection="[ConnectionString]" sap:VirtualizedContainerService.HintSize="611.428571428571,86.8571428571429" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="sp_get_usercredentials">
+    <ui:DatabaseConnect DatabaseConnection="[ConnectionString]" DisplayName="Connect to DB" sap:VirtualizedContainerService.HintSize="484.571428571429,58.2857142857143" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=FEDEXSQL;Initial Catalog=Incedo_DEV;User ID=_UIPath;Password=C3connect2o18!" />
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[CredentialsTable]" DisplayName="Execute Query - Get CaseIDs" ExistingDbConnection="[ConnectionString]" sap:VirtualizedContainerService.HintSize="484.571428571429,86.8571428571429" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="sp_get_TransactionData">
       <ui:ExecuteQuery.Parameters>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:ExecuteQuery.Parameters>
     </ui:ExecuteQuery>
-    <ui:WriteRange AddHeaders="True" DataTable="[CredentialsTable]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="611.428571428571,114.285714285714" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="C:\Users\PTalluri\Desktop\samplw.xlsx" />
-    <ui:OutputDataTable DataTable="[CredentialsTable]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="611.428571428571,21.7142857142857" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[output1]" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="611.428571428571,62.8571428571429" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[output1]" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="611.428571428571,62.8571428571429" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[CredentialsTable.Rows(0).Item(&quot;OneSource_UserName&quot;).ToString]" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="611.428571428571,62.8571428571429" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[CredentialsTable.Rows(0).Item(&quot;oneSource_Password&quot;).ToString]" />
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke 1SourceLaunchAndLogin workflow" sap:VirtualizedContainerService.HintSize="611.428571428571,86.2857142857143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\1SourceLaunchAndLogin.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="In_Config">[in_Config]</InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <If Condition="[in_TransactionNumber&lt;io_TransactionData.Rows.Count]" sap:VirtualizedContainerService.HintSize="611.428571428571,306.285714285714" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:OutputDataTable DataTable="[CredentialsTable]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="484.571428571429,21.7142857142857" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[output1]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484.571428571429,62.8571428571429" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[output1]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484.571428571429,52.5714285714286" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376.571428571429,177.714285714286" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke 1SourceLaunchAndLogin workflow" sap:VirtualizedContainerService.HintSize="334.285714285714,86.2857142857143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\1SourceLaunchAndLogin.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="In_Config">[in_Config]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <If Condition="[CredentialsTable.Rows.Count &gt;0]" sap:VirtualizedContainerService.HintSize="484.571428571429,306.285714285714" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="304,152.571428571429" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
@@ -171,21 +193,11 @@
               <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.Rows(in_TransactionNumber)]</InArgument>
+              <InArgument x:TypeArguments="sd:DataRow">[CredentialsTable.Rows(0)]</InArgument>
             </Assign.Value>
           </Assign>
         </Sequence>
       </If.Then>
-      <If.Else>
-        <Assign sap:VirtualizedContainerService.HintSize="261.714285714286,61.1428571428571" sap2010:WorkflowViewState.IdRef="Assign_6">
-          <Assign.To>
-            <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="sd:DataRow">[nothing]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </If.Else>
     </If>
   </Sequence>
 </Activity>
