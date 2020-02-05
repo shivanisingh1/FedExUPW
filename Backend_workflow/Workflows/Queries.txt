@@ -1,0 +1,71 @@
+
+1.Query to update table in db at each workflow end:
+
+update bot_trigger SET flag='1' WHERE case_id='' AND bot_trigger=''
+
+2. LOG Case Notes (string format)
+
+**Creation Date**AgentID*********
+
+TriggerPhone :
+SpokeTo :
+LeftVMail :
+InfoReq :
+InfoRec :
+Tracking :
+AttemptsMade :
+FollowUpDate :
+Remarks :
+Reassigned:
+
+3. Log Case note Starting query
+
+SELECT top 1
+      a.[trigger_phone]
+      ,a.[spoke_to]
+      ,a.[left_vmail]
+      ,a.[info_req]
+      ,a.[info_rec]
+      ,a.[tracking]
+      ,a.[attempts_made]
+      ,a.[follow_up_date]
+      ,a.[Remarks]
+      ,a.[creation_date]
+      ,a.[Reassigned]
+      ,b.agent_id
+  FROM [Incedo_Dev].[dbo].[add_case_notes] as a ,[Incedo_Dev].[dbo].agent_case_details  as b 
+	where a.case_id = '' 
+    order by a.id desc
+
+
+4. Send Template query:
+
+select top 1 emp_name,company_name,select_form,email from send_template 
+where case_id=''
+order by id desc
+
+5. Reverse Rate last query:
+
+Update package_details SET reverse_rate='' WHERE case_id=''
+
+
+6. Select tracking_number from case_details where case_id=''
+
+7. GEDA:
+
+INSERT INTO [dbo].[geda_notifications]
+           ([case_id]
+           ,[notifications]
+           ,[creation_date]
+           ,[modification_date]
+           ,[retrieveurl])
+     VALUES
+           (<case_id, nvarchar(20),>
+           ,<notifications, nvarchar(max),>
+           ,<creation_date, datetime,>
+           ,<modification_date, datetime,>
+           ,<retrieveurl, nvarchar(max),>)
+
+8.
+
+select alternate_title  from case_details  where case_id =''
